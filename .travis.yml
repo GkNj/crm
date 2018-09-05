@@ -1,0 +1,15 @@
+# jdk
+
+language: java
+
+jdk:
+  - oraclejdk8
+
+before_script:
+  - chmod +x gradlew
+
+script:
+  - ./gradlew check
+#  - ./gradlew codeCoverageReport
+
+
