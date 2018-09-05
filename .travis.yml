@@ -5,11 +5,15 @@ language: java
 jdk:
   - oraclejdk8
 
+services: mysql
+
+before_install:
+  - mysql -u root --password="" < ci.sql
+
 before_script:
   - chmod +x gradlew
 
 script:
   - ./gradlew check
-#  - ./gradlew codeCoverageReport
 
 
