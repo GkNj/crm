@@ -1,0 +1,4 @@
+-- Create DB
+CREATE DATABASE IF NOT EXISTS crm DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+use crm;
+
