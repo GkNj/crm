@@ -1,16 +1,24 @@
 spring:
   datasource:
     username: root
+<<<<<<< Updated upstream
     password: 1234
+=======
+    password: lilu19970327
+>>>>>>> Stashed changes
     url: jdbc:mysql://localhost:3306/crm
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
+<<<<<<< Updated upstream
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+=======
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+>>>>>>> Stashed changes
 
   thymeleaf:
     suffix: .html
