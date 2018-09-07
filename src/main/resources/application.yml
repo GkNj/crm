@@ -2,19 +2,24 @@ spring:
   datasource:
     username: root
 
+
     password:
+
     url: jdbc:mysql://localhost:3306/crm
     driver-class-name: com.mysql.jdbc.Driver
+
   jpa:
     hibernate:
-      ddl-auto: update
+     ddl-auto: update
     show-sql: false
-
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 
+
   thymeleaf:
     suffix: .html
     mode: HTML
+    cache: false
+

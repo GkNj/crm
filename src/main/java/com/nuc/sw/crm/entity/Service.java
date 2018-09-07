@@ -2,6 +2,7 @@ package com.nuc.sw.crm.entity;
 
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -112,6 +113,8 @@ public class Service {
     private int uId;
     private Date sCreateDate;
     private int cId;
+
+
 
 
 }
