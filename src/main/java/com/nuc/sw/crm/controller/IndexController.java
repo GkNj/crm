@@ -20,9 +20,11 @@ public class IndexController {
         return "service/"+path;
     }
 
-//    @RequestMapping("/{path}")
-//    public String path2Html(@PathVariable("path")String path){
-//        return path;
-//    }
+    @RequestMapping("/{path}")
+    public String path2Html(@PathVariable("path")String path){
+        return path;
+    }
+
+
 
 }

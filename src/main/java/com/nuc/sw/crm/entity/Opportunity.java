@@ -9,37 +9,82 @@ import javax.persistence.Id;
 public class Opportunity {
     @Id
     @GeneratedValue
+    //机会id
+
     private int id;
+    @Column(nullable = false)
+    //机会编号
+
+    private int num;
+    //机会来源
+
     private String resource;
+    //机会状态
+
     private String state;
+    //客户id
 
     @Column(nullable = false)
     private int cId;
+    //客户姓名
+
+    @Column(nullable = false)
+    private String username;
+    //成功几率
 
     @Column(nullable = false)
     private int successPercent;
+    //机会概要
 
     @Column(nullable = false)
     private String summary;
+    //联系人姓名
 
     private String lName;
+    //联系人电话
 
     private String lPhone;
+    //机会描述
 
     @Column(nullable = false)
-    private String opDescription;
+    private String cComment;
+    //创建人
 
     @Column(nullable = false)
     private String sId;
+    //创建时间
 
     @Column(nullable = false)
     private String startDate;
+    //指派人
 
     @Column(nullable = false)
     private String pUsername;
+    //指派人id
 
     @Column(nullable = false)
     private String pId;
+    //指派时间
+
+    @Column(nullable = false)
+    private String pDate;
+    public String getpDate() {
+        return pDate;
+    }
+
+    public void setpDate(String pDate) {
+        this.pDate = pDate;
+    }
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getState() {
         return state;
@@ -55,6 +100,15 @@ public class Opportunity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getResource() {
@@ -109,12 +163,12 @@ public class Opportunity {
         this.lPhone = lPhone;
     }
 
-    public String getOpDescription() {
-        return opDescription;
+    public String getcComment() {
+        return cComment;
     }
 
-    public void setOpDescription(String opDescription) {
-        this.opDescription = opDescription;
+    public void setcComment(String cComment) {
+        this.cComment = cComment;
     }
 
     public String getsId() {
