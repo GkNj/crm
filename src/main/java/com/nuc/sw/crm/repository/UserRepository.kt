@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository
  */
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
+
+    /**
+     * 通过登录用户名查找用户
+     * @param username 登录用户名
+     * @return user 实体对象
+     */
     fun findUserByUsername(username: String): User
 
 }

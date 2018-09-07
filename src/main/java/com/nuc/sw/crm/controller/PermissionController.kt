@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping("/permission")
 class PermissionController {
 
-    @Autowired
-    lateinit var userRepository: UserRepository
-
-    @Autowired
-    lateinit var roleRepository: RoleRepository
+//    @Autowired
+//    lateinit var userRepository: UserRepository
+//
+//    @Autowired
+//    lateinit var roleRepository: RoleRepository
 
 
 //    @RequestMapping("/add")
