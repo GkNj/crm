@@ -16,8 +16,9 @@ public class OpportunityController {
 
 
     @RequestMapping(value = "/add")
-    @ResponseBody
-    public void createOpportunity(Opportunity opportunity) {
+    public String createOpportunity(Opportunity opportunity) {
+        System.out.println("ooooo");
         opportunityServiceImpl.createOpportunity(opportunity);
+        return "index";
     }
 }

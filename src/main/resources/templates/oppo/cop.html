@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-
     <title>素材火www.sucaihuo.com - 空白页</title>
-    <link th:href="@{css/bootstrap.min.css?v=3.4.0}" rel="stylesheet">
-    <link th:href="@{font-awesome/css/font-awesome.css?v=4.3.0}" rel="stylesheet">
-    <link th:href="@{css/plugins/iCheck/custom.css}" rel="stylesheet">
-    <link th:href="@{css/animate.css}" rel="stylesheet">
-    <link th:href="@{css/style.css?v=2.2.0}" rel="stylesheet">
+    <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{../font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{../css/plugins/iCheck/custom.css}" rel="stylesheet">
+    <link th:href="@{../css/animate.css}" rel="stylesheet">
+    <link th:href="@{../css/style.css}" rel="stylesheet">
 
 </head>
 
@@ -27,7 +24,7 @@
                     <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="/img/profile_small.jpg"/>
                              </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{index.html#}">
+                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{../index.html#}">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
                                         class="font-bold">Beaut-zihan</strong>
                              </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
@@ -42,7 +39,7 @@
                             <li><a th:href="@{/mailbox.html}">信箱</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a th:href="@{/login.html}">安全退出</a>
+                            <li><a th:href="@{/templates/login.html}">安全退出</a>
                             </li>
                         </ul>
                     </div>
@@ -52,8 +49,9 @@
 
                 </li>
                 <li class="active">
-                    <a th:href="@{index.html}"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                            class="fa arrow"></span></a>
+                    <a th:href="@{../index.html}"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span>
+                        <span
+                                class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
                         <li><a th:href="@{/opptunitymanage.html}">营销机会管理</a>
@@ -65,39 +63,40 @@
                 </li>
 
                 <li>
-                    <a th:href="@{index.html#}"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                    <a th:href="@{../index.html#}"><i class="fa fa fa-globe"></i> <span
+                            class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
-                        <li><a th:href="@{customer/customerinfo.html}">客户信息管理</a>
+                        <li><a th:href="@{../customer/customerinfo.html}">客户信息管理</a>
                         </li>
-                        <li><a th:href="@{customer/customerlost.html}">客户流失管理</a>
+                        <li><a th:href="@{../customer/customerlost.html}">客户流失管理</a>
 
 
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a th:href="@{index.html#}"><i class="fa fa-bar-chart-o"></i> <span
+                    <a th:href="@{../index.html#}"><i class="fa fa-bar-chart-o"></i> <span
                             class="nav-label">服务管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
-                        <li><a th:href="@{service/create.html}">服务创建</a>
+                        <li><a th:href="@{../service/create.html}">服务创建</a>
                         </li>
-                        <li><a th:href="@{service/distribute.html}">服务分配</a>
+                        <li><a th:href="@{../service/distribute.html}">服务分配</a>
                         </li>
-                        <li><a th:href="@{service/handle.html}">服务处理</a>
+                        <li><a th:href="@{../service/handle.html}">服务处理</a>
                         </li>
-                        <li><a th:href="@{service/feedback.html}">服务反馈</a>
+                        <li><a th:href="@{../service/feedback.html}">服务反馈</a>
                         </li>
-                        <li><a th:href="@{service/ok.html}">服务归档</a>
+                        <li><a th:href="@{../service/ok.html}">服务归档</a>
 
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a th:href="@{index.html#}"><i class="fa fa-bar-chart-o"></i> <span
+                    <a th:href="@{../index.html#}"><i class="fa fa-bar-chart-o"></i> <span
                             class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -127,7 +126,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a th:href="@{/permission.html}"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
+                    <a th:href="@{/templates/permission.html}"><i class="fa fa-cogs"></i> <span
+                            class="nav-label">权限管理</span></a>
                 </li>
 
             </ul>
@@ -149,11 +149,11 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message"><a th:href="@{index.html}" title="返回首页"><i
+                        <span class="m-r-sm text-muted welcome-message"><a th:href="@{../index.html}" title="返回首页"><i
                                 class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" th:href="@{index.html#}">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" th:href="@{../index.html#}">
                             <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
@@ -195,7 +195,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" th:href="@{index.html#}">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" th:href="@{../index.html#}">
                             <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
@@ -230,7 +230,7 @@
 
 
                     <li>
-                        <a th:href="@{login.html}">
+                        <a th:href="@{/templates/login.html}">
                             <i class="fa fa-sign-out"></i> 退出
                         </a>
                     </li>
@@ -243,7 +243,7 @@
                 <h2>营销管理</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a th:href="@{/index.html}">销售机会管理</a>
+                        <a th:href="@{/templates/index.html}">销售机会管理</a>
                     </li>
                 </ol>
             </div>
@@ -266,9 +266,9 @@
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a th:href="@{form_basic.html#}">选项1</a>
+                                <li><a th:href="@{form_basic.html}">选项1</a>
                                 </li>
-                                <li><a th:href="@{form_basic.html#}">选项2</a>
+                                <li><a th:href="@{form_basic.html}">选项2</a>
                                 </li>
                             </ul>
                             <a class="close-link">
@@ -277,7 +277,8 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form th:action="@{opportunity/add}" method="post" class="form-horizontal  m-t">
+
+                        <form th:action="@{/test}">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">编号</label>
 
@@ -285,6 +286,20 @@
                                     <input type="text" name="num" class="form-control" value="">
                                 </div>
                             </div>
+                            <input type="text">
+                            <input type="submit" value="登录">
+                        </form>
+
+                        <!--有问题-->
+                        <form method="post" class="form-horizontal" action="/opportunity/add">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">编号</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="num" class="form-control" value="">
+                                </div>
+                            </div>
+
                             <div class="hr-line-dashed"></div>
 
                             <div class="form-group">
@@ -419,6 +434,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
