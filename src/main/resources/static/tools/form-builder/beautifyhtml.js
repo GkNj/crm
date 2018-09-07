@@ -93,7 +93,7 @@
 
         this.Utils = { //Uilities made available to the various functions
           whitespace: "\n\r\t ".split(''),
-          single_token: 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,param,img,isindex,?xml,embed,?php,?,?='.split(','), //all the single tags for HTML
+          single_token: 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,Param,img,isindex,?xml,embed,?php,?,?='.split(','), //all the single tags for HTML
           extra_liners: 'head,body,/html'.split(','), //for tags that need a line of whitespace before them
           in_array: function (what, arr) {
             for (var i=0; i<arr.length; i++) {

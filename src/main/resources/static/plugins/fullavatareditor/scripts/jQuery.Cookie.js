@@ -21,9 +21,9 @@
  * @desc Delete a Cookie by passing null as value. Keep in mind that you have to use the same path and domain
  *       used when the Cookie was set.
  *
- * @param String name The name of the Cookie.
- * @param String value The value of the Cookie.
- * @param Object options An object literal containing key/value pairs to provide optional Cookie attributes.
+ * @Param String name The name of the Cookie.
+ * @Param String value The value of the Cookie.
+ * @Param Object options An object literal containing key/value pairs to provide optional Cookie attributes.
  * @option Number|Date expires Either an integer specifying the expiration date from now on in days or a Date object.
  *                             If a negative value is specified (e.g. a date in the past), the Cookie will be deleted.
  *                             If set to null or omitted, the Cookie will be a session Cookie and will not be retained
@@ -45,7 +45,7 @@
  * @example $.Cookie('the_cookie');
  * @desc Get the value of a Cookie.
  *
- * @param String name The name of the Cookie.
+ * @Param String name The name of the Cookie.
  * @return The value of the Cookie.
  * @type String
  *

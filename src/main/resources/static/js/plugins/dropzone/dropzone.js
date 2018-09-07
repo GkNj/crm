@@ -4,7 +4,7 @@
     /**
      * Require the module at `name`.
      *
-     * @param {String} name
+     * @Param {String} name
      * @return {Object} exports
      * @api public
      */
@@ -31,8 +31,8 @@
     /**
      * Register module at `name` with callback `definition`.
      *
-     * @param {String} name
-     * @param {Function} definition
+     * @Param {String} name
+     * @Param {Function} definition
      * @api private
      */
 
@@ -45,8 +45,8 @@
     /**
      * Define a module's exports immediately with `exports`.
      *
-     * @param {String} name
-     * @param {Generic} exports
+     * @Param {String} name
+     * @Param {Generic} exports
      * @api private
      */
 
@@ -76,7 +76,7 @@
         /**
          * Mixin the emitter properties.
          *
-         * @param {Object} obj
+         * @Param {Object} obj
          * @return {Object}
          * @api private
          */
@@ -91,8 +91,8 @@
         /**
          * Listen on the given `event` with `fn`.
          *
-         * @param {String} event
-         * @param {Function} fn
+         * @Param {String} event
+         * @Param {Function} fn
          * @return {Emitter}
          * @api public
          */
@@ -109,8 +109,8 @@
          * Adds an `event` listener that will be invoked a single
          * time then automatically removed.
          *
-         * @param {String} event
-         * @param {Function} fn
+         * @Param {String} event
+         * @Param {Function} fn
          * @return {Emitter}
          * @api public
          */
@@ -133,8 +133,8 @@
          * Remove the given callback for `event` or all
          * registered callbacks.
          *
-         * @param {String} event
-         * @param {Function} fn
+         * @Param {String} event
+         * @Param {Function} fn
          * @return {Emitter}
          * @api public
          */
@@ -176,8 +176,8 @@
         /**
          * Emit `event` with the given args.
          *
-         * @param {String} event
-         * @param {Mixed} ...
+         * @Param {String} event
+         * @Param {Mixed} ...
          * @return {Emitter}
          */
 
@@ -199,7 +199,7 @@
         /**
          * Return array of callbacks for `event`.
          *
-         * @param {String} event
+         * @Param {String} event
          * @return {Array}
          * @api public
          */
@@ -212,7 +212,7 @@
         /**
          * Check if this emitter has `event` handlers.
          *
-         * @param {String} event
+         * @Param {String} event
          * @return {Boolean}
          * @api public
          */

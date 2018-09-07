@@ -1121,11 +1121,11 @@
 				break;
 
 				case 'swf':
-					content = '<object id="fancybox-swf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><param name="movie" value="' + href + '"></param>';
+					content = '<object id="fancybox-swf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"><Param name="movie" value="' + href + '"></Param>';
 					embed   = '';
 
 					$.each(current.swf, function(name, val) {
-						content += '<param name="' + name + '" value="' + val + '"></param>';
+						content += '<Param name="' + name + '" value="' + val + '"></Param>';
 						embed   += ' ' + name + '="' + val + '"';
 					});
 
