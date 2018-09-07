@@ -1,25 +1,29 @@
-package com.nuc.sw.crm.entity;
-
+package com.nuc.sw.crm.Param;
 
 
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-public class Service {
+public class ServiceParm {
 
     @Id
     @GeneratedValue
     private int sId;
+
     private String sType;
+    @NotNull(message = "概要不能为空")
     private String sDetail;
+
     private String sState;
+    @NotNull(message = "请求不能为空")
     private String sRequest;
 
-    public Service() {
+    public ServiceParm() {
     }
 
     @Override
@@ -36,7 +40,7 @@ public class Service {
                 '}';
     }
 
-    public Service(String sType, String sDetail, String sState, String sRequest, int uId, Date sCreateDate, int cId) {
+    public ServiceParm(String sType, String sDetail, String sState, String sRequest, int uId, Date sCreateDate, int cId) {
         this.sType = sType;
         this.sDetail = sDetail;
         this.sState = sState;
@@ -110,11 +114,10 @@ public class Service {
         this.cId = cId;
     }
 
+
     private int uId;
     private Date sCreateDate;
     private int cId;
-
-
 
 
 }

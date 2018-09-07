@@ -2,9 +2,9 @@ spring:
   datasource:
     username: root
 
-    ## driver-class-name: com.mysql.cj.jdbc.Driver
 
-    password: 1234
+    password:
+
     url: jdbc:mysql://localhost:3306/crm
     driver-class-name: com.mysql.jdbc.Driver
 
