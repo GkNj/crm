@@ -6,5 +6,4 @@
 
 ## 说明
 
-
-123
+下载gradle kotlin依赖 使用 teacher-soft 网络

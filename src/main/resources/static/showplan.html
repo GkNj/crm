@@ -1,34 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-
-    <title>素材火www.sucaihuo.com - 空白页</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
+    <meta charset="UTF-8">
     <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="../../static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
     <link href="../../static/css/animate.css" rel="stylesheet">
     <link href="../../static/css/style.css" rel="stylesheet">
+    <title>Title</title>
 
     <style>
-        .form_center {
-            margin-left: 130px;
-        }
-
-        .form_margin {
-            margin: 10px;
+        .fontsize{
+            font-weight: bold;
         }
     </style>
-
 </head>
-
 <body>
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -63,12 +49,12 @@
                     </div>
 
                 </li>
-                <li >
+                <li class="active">
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/opptunitymanage.html">营销机会管理</a>
+                        <li><a href="index_1.html">营销机会管理</a>
                         </li>
-                        <li><a href="../../static/createplan.html">客户开发计划</a>
+                        <li><a href="index_2.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -76,24 +62,24 @@
                 <li>
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../customer/customerinfo.html">客户信息管理</a>
+                        <li><a href="customerinfo.html">客户信息管理</a>
                         </li>
-                        <li><a href="../customer/customerlost.html">客户流失管理</a>
+                        <li><a href="nestable_list.html">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li>
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="distribute.html">服务分配</a>
+                        <li><a href="graph_flot.html">服务分配</a>
                         </li>
-                        <li><a href="handle.html">服务处理</a>
+                        <li><a href="graph_morris.html">服务处理</a>
                         </li>
-                        <li><a href="feedback.html">服务反馈</a>
+                        <li><a href="graph_rickshaw.html">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a href="graph_peity.html">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -102,13 +88,13 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/classify.html">客户贡献分析</a>
+                        <li><a href="create.html">客户贡献分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户构成分析</a>
+                        <li><a href="graph_flot.html">客户构成分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户服务分析</a>
+                        <li><a href="graph_morris.html">客户服务分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户流失分析</a>
+                        <li><a href="graph_rickshaw.html">客户流失分析</a>
                         </li>
                     </ul>
                 </li>
@@ -116,17 +102,15 @@
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/dictionary.html">数据字典管理</a>
+                        <li><a href="mailbox.html">数据字典管理</a>
                         </li>
-                        <li><a href="../../static/product.html">查询产品信息</a>
+                        <li><a href="mail_detail.html">查询产品信息</a>
                         </li>
-                        <li><a href="../../static/stock.html">查询库存</a>
+                        <li><a href="mail_compose.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
-                <li >
-                    <a href="../permission.html"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
-                </li>
+
             </ul>
         </div>
     </nav>
@@ -135,29 +119,26 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="create.html#"><i
-                            class="fa fa-bars"></i> </a>
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="empty_page.html#"><i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
-                                   id="top-search">
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
-                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="img/a7.jpg">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
@@ -171,7 +152,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="img/a4.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
@@ -185,7 +166,7 @@
                             <li>
                                 <div class="text-center link-block">
                                     <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                        <i class="fa fa-envelope"></i>  <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
                             </li>
@@ -193,7 +174,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
@@ -235,169 +216,153 @@
 
             </nav>
         </div>
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-sm-4">
-                <h2>服务分配</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">服务</a>
-                    </li>
-                    <li>
-                        <strong>服务分配</strong>
-                    </li>
-                </ol>
+
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <!--<span class="label label-info pull-right">全年</span>-->
+                            <i class="fa fa-user" style="color: #0a6aa1;float: right"></i>
+                            <h5 style="color: #0a6aa1">正在执行计划</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">327</h1>
+                            <!--<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>-->
+                            <!--</div>-->
+                            <small>件</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <!--<span class="label label-primary pull-right">今天</span>-->
+                            <i class="fa fa-paper-plane" style="color:#3c763d;float: right"></i>
+                            <h5 style="color:#3c763d">交往记录</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">106,120</h1>
+                            <!--<div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>-->
+                            <!--</div>-->
+                            <small>总记录</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <!--<span class="label label-info pull-right">全年</span>-->
+                            <i class="fa fa-file-text-o" style="color:#00b7ee;float: right"></i>
+                            <h5 style="color:#00b7ee">历史订单</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">275,800</h1>
+                            <!--<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>-->
+                            <!--</div>-->
+                            <small>订单总数</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="col-lg-3">-->
+                <!--<div class="ibox float-e-margins">-->
+                <!--<div class="ibox-title">-->
+                <!--<span class="label label-danger pull-right">最近一个月</span>-->
+                <!--<h5>活跃用户</h5>-->
+                <!--</div>-->
+                <!--<div class="ibox-content">-->
+                <!--<h1 class="no-margins">80,600</h1>-->
+                <!--<div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>-->
+                <!--</div>-->
+                <!--<small>12月</small>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
             </div>
-            <div class="col-sm-8">
-                <div class="title-action">
-                    <a href="create.html" class="btn btn-primary">活动区域</a>
+            <br><br>
+            <table class="table table-striped" style="text-align: center;">
+                <caption style="text-align: center;font-size: 16px;font-weight: bold">订单详细信息</caption>
+                <br>
+                <tbody style="font-size: 14px;">
+                <tr>
+                    <td class="fontsize">订单编号</td>
+                    <td>1</td>
+                    <td class="fontsize">日期</td>
+                    <td>2018-02-12</td>
+                </tr>
+                <tr>
+                    <td class="fontsize">送货地址</td>
+                    <td>北京市朝阳区</td>
+                    <td class="fontsize">订单状态</td>
+                    <td>已发货</td>
+                </tr>
+                <tr>
+                    <td class="fontsize">总金额</td>
+                    <td>55200</td>
+                    <td colspan="2"></td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped" style="text-align: center;">
+                <br>
+                <thead style="background-color:#c8c8c8">
+                <tr>
+                    <th style="text-align: center;width: 150px">商品</th>
+                    <th style="text-align: center">数量</th>
+                    <th style="text-align: center">单位</th>
+                    <th style="text-align: center">单价（元）</th>
+                    <th style="text-align: center">金额（元）</th>
+                </tr>
+                </thead>
+                <tbody style="font-size: 14px;">
+                <tr>
+                    <td>笔记本电脑</td>
+                    <td>2</td>
+                    <td>台</td>
+                    <td>10800</td>
+                    <td>21600</td>
+                </tr>
+                <tr>
+                    <td>笔记本电脑</td>
+                    <td>2</td>
+                    <td>台</td>
+                    <td>16800</td>
+                    <td>33600</td>
+                </tr>
+
+                </tbody>
+
+
+
+            </table>
+
+
+
+
+            <div class="footer">
+                <div class="pull-right">
+                    By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+                </div>
+                <div>
+                    <strong>Copyright</strong> H+ &copy; 2014
                 </div>
             </div>
-        </div>
 
-
-
-
-        <table class="table table-striped table-bordered table-hover " id="editable">
-            <thead>
-            <tr>
-                <th>编号</th>
-                <th>客户</th>
-                <th>概要</th>
-                <th>服务类型</th>
-                <th>创建人</th>
-                <th>创建日期</th>
-                <th>分配给</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>
-                    <select name="" id="">
-                        <option value="小明">小明</option>
-                        <option value="小花">小花</option>
-                        <option value="大明">大明</option>
-                    </select>
-                    <button type="submit" class="badge-info"><a href="">分配</a></button>
-                </td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-times text-navy"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>
-                    <select name="" id="">
-                        <option value="小明">小明</option>
-                        <option value="小花">小花</option>
-                        <option value="大明">大明</option>
-                    </select>
-                    <button type="submit" class="badge-warning"><a href="">分配</a></button>
-                </td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-times text-navy"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>
-                    <select name="" id="">
-                        <option value="小明">小明</option>
-                        <option value="小花">小花</option>
-                        <option value="大明">大明</option>
-                    </select>
-                    <button type="submit" class="badge-danger"><a href="">分配</a></button>
-                </td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-times text-navy"></i></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-
-
-        <div class="footer">
-            <div class="pull-right">
-                By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
-            </div>
-            <div>
-                <strong>Copyright</strong> H+ &copy; 2014
-            </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Mainly scripts -->
 <script src="../../static/js/jquery-2.1.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
 <script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<script src="../../static/js/plugins/jeditable/jquery.jeditable.js"></script>
-
-<!-- Data Tables -->
-<script src="../../static/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="../../static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
 <!-- Custom and plugin javascript -->
-<script src="../../static/js/hplus.js?v=2.2.0"></script>
+<script src="../../static/js/hplus.js"></script>
 <script src="../../static/js/plugins/pace/pace.min.js"></script>
-
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function () {
-        $('.dataTables-example').dataTable();
-
-        /* Init DataTables */
-        var oTable = $('#editable').dataTable();
-
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        });
-
-
-    });
-
-    function fnClickAddRow() {
-        $('#editable').dataTable().fnAddData([
-            "Custom row",
-            "New row",
-            "New row",
-            "New row",
-            "New row"]);
-
-    }
-</script>
-
-
 </body>
-
 </html>
