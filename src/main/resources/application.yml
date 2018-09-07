@@ -1,9 +1,13 @@
 spring:
   datasource:
     username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/crm?serverTimezone=GMT%2B8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    ## driver-class-name: com.mysql.cj.jdbc.Driver
+
+    password: 1234
+    url: jdbc:mysql://localhost:3306/crm
+    driver-class-name: com.mysql.jdbc.Driver
+
   jpa:
     hibernate:
      ddl-auto: update
@@ -17,3 +21,5 @@ spring:
   thymeleaf:
     suffix: .html
     mode: HTML
+    cache: false
+
