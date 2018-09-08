@@ -18,3 +18,4 @@
 *.ipr
 /out/
 
+**/**/application.yml
