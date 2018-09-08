@@ -2129,7 +2129,7 @@ Simditor = (function(_super) {
     this.textarea = $(this.opts.textarea);
     this.opts.placeholder = this.opts.placeholder || this.textarea.attr('placeholder');
     if (!this.textarea.length) {
-      throw new Error('simditor: param textarea is required.');
+      throw new Error('simditor: Param textarea is required.');
       return;
     }
     editor = this.textarea.data('simditor');
@@ -4586,25 +4586,25 @@ TableButton = (function(_super) {
   TableButton.prototype._initShortcuts = function() {
     this.editor.inputManager.addShortcut('ctrl+alt+up', (function(_this) {
       return function(e) {
-        _this.editMenu.find('.menu-item[data-param=insertRowAbove]').click();
+        _this.editMenu.find('.menu-item[data-Param=insertRowAbove]').click();
         return false;
       };
     })(this));
     this.editor.inputManager.addShortcut('ctrl+alt+down', (function(_this) {
       return function(e) {
-        _this.editMenu.find('.menu-item[data-param=insertRowBelow]').click();
+        _this.editMenu.find('.menu-item[data-Param=insertRowBelow]').click();
         return false;
       };
     })(this));
     this.editor.inputManager.addShortcut('ctrl+alt+left', (function(_this) {
       return function(e) {
-        _this.editMenu.find('.menu-item[data-param=insertColLeft]').click();
+        _this.editMenu.find('.menu-item[data-Param=insertColLeft]').click();
         return false;
       };
     })(this));
     return this.editor.inputManager.addShortcut('ctrl+alt+right', (function(_this) {
       return function(e) {
-        _this.editMenu.find('.menu-item[data-param=insertColRight]').click();
+        _this.editMenu.find('.menu-item[data-Param=insertColRight]').click();
         return false;
       };
     })(this));
@@ -4627,7 +4627,7 @@ TableButton = (function(_super) {
   };
 
   TableButton.prototype.renderMenu = function() {
-    $("<div class=\"menu-create-table\">\n</div>\n<div class=\"menu-edit-table\">\n  <ul>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"deleteRow\"><span>" + (this._t('deleteRow')) + " ( Ctrl + Alt + → )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"insertRowAbove\"><span>" + (this._t('insertRowAbove')) + " ( Ctrl + Alt + ↑ )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"insertRowBelow\"><span>" + (this._t('insertRowBelow')) + " ( Ctrl + Alt + ↓ )</span></a></li>\n    <li><span class=\"separator\"></span></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"deleteCol\"><span>" + (this._t('deleteColumn')) + "</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"insertColLeft\"><span>" + (this._t('insertColumnLeft')) + " ( Ctrl + Alt + ← )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"insertColRight\"><span>" + (this._t('insertColumnRight')) + " ( Ctrl + Alt + → )</span></a></li>\n    <li><span class=\"separator\"></span></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-param=\"deleteTable\"><span>" + (this._t('deleteTable')) + "</span></a></li>\n  </ul>\n</div>").appendTo(this.menuWrapper);
+    $("<div class=\"menu-create-table\">\n</div>\n<div class=\"menu-edit-table\">\n  <ul>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"deleteRow\"><span>" + (this._t('deleteRow')) + " ( Ctrl + Alt + → )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"insertRowAbove\"><span>" + (this._t('insertRowAbove')) + " ( Ctrl + Alt + ↑ )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"insertRowBelow\"><span>" + (this._t('insertRowBelow')) + " ( Ctrl + Alt + ↓ )</span></a></li>\n    <li><span class=\"separator\"></span></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"deleteCol\"><span>" + (this._t('deleteColumn')) + "</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"insertColLeft\"><span>" + (this._t('insertColumnLeft')) + " ( Ctrl + Alt + ← )</span></a></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"insertColRight\"><span>" + (this._t('insertColumnRight')) + " ( Ctrl + Alt + → )</span></a></li>\n    <li><span class=\"separator\"></span></li>\n    <li><a tabindex=\"-1\" unselectable=\"on\" class=\"menu-item\" href=\"javascript:;\" data-Param=\"deleteTable\"><span>" + (this._t('deleteTable')) + "</span></a></li>\n  </ul>\n</div>").appendTo(this.menuWrapper);
     this.createMenu = this.menuWrapper.find('.menu-create-table');
     this.editMenu = this.menuWrapper.find('.menu-edit-table');
     this.createTable(6, 6).appendTo(this.createMenu);

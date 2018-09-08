@@ -21,8 +21,8 @@
 
     /**
      * Renderer to render the chart on a canvas object
-     * @param {DOMElement} el      DOM element to host the canvas (root of the plugin)
-     * @param {object}     options options object of the plugin
+     * @Param {DOMElement} el      DOM element to host the canvas (root of the plugin)
+     * @Param {object}     options options object of the plugin
      */
     var CanvasRenderer = function(el, options) {
         var cachedBackground;
@@ -65,9 +65,9 @@
 
         /**
          * Draw a circle around the center of the canvas
-         * @param {strong} color     Valid CSS color string
-         * @param {number} lineWidth Width of the line in px
-         * @param {number} percent   Percentage to draw (float between -1 and 1)
+         * @Param {strong} color     Valid CSS color string
+         * @Param {number} lineWidth Width of the line in px
+         * @Param {number} percent   Percentage to draw (float between -1 and 1)
          */
         var drawCircle = function(color, lineWidth, percent) {
             percent = Math.min(Math.max(-1, percent || 0), 1);
@@ -151,7 +151,7 @@
 
         /**
          * Draw the complete chart
-         * @param {number} percent Percent shown by the chart between -100 and 100
+         * @Param {number} percent Percent shown by the chart between -100 and 100
          */
         this.draw = function(percent) {
             // do we need to render a background
@@ -188,8 +188,8 @@
 
         /**
          * Animate from some percent to some other percentage
-         * @param {number} from Starting percentage
-         * @param {number} to   Final percentage
+         * @Param {number} from Starting percentage
+         * @Param {number} to   Final percentage
          */
         this.animate = function(from, to) {
             var startTime = Date.now();
@@ -309,7 +309,7 @@
 
         /**
          * Update the value of the chart
-         * @param  {number} newValue Number between 0 and 100
+         * @Param  {number} newValue Number between 0 and 100
          * @return {object}          Instance of the plugin for method chaining
          */
         this.update = function(newValue) {

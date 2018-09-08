@@ -3925,7 +3925,7 @@
   // right), unit can be "char", "column" (like char, but doesn't
   // cross line boundaries), "word" (across next word), or "group" (to
   // the start of next group of word or non-word-non-whitespace
-  // chars). The visually param controls whether, in right-to-left
+  // chars). The visually Param controls whether, in right-to-left
   // text, direction 1 means to move towards the next index in the
   // string, or towards the character to the right of the current
   // position. The resulting position will have a hitSide=true
