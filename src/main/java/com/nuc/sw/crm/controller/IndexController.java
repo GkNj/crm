@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-
 public class IndexController {
 
     @RequestMapping({"/", "/index"})
@@ -18,6 +17,7 @@ public class IndexController {
         return "service/" + path;
     }
 
+
     /**
      * 登录视图转跳
      *
@@ -26,6 +26,14 @@ public class IndexController {
     @RequestMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @RequestMapping("opportunity/{path}")
+    public String opportunity(@PathVariable("path")String path){
+        System.out.println("执行");
+
+        return "opportunity/"+path;
+
     }
 
 }
