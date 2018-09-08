@@ -1,6 +1,7 @@
 package com.nuc.sw.crm.service.serviceImpl;
 
 import com.nuc.sw.crm.entity.Dictionary;
+import com.nuc.sw.crm.entity.Product;
 import com.nuc.sw.crm.entity.Stock;
 import com.nuc.sw.crm.repository.DictionaryRepository;
 import com.nuc.sw.crm.repository.StockRepository;
@@ -16,12 +17,10 @@ public class DictionaryServiceImpl implements DictionaryService {
     DictionaryRepository dictionaryRepository;
     @Autowired
     StockRepository stockRepository;
+    @Autowired
+
     // Dict  d = new Dic
-    @Override
-    public int addDictionary(Dictionary dictionary) {
-        dictionaryRepository.save(dictionary);
-        return 1;
-    }
+
 
     @Override
     public List<Dictionary> findAllDictionary() {
@@ -31,6 +30,11 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Override
     public List<Stock> findAllStock() {
         return stockRepository.findAll();
+    }
+
+    @Override
+    public List<Product> findAllProduct() {
+        return  null;
     }
 
     @Override
@@ -49,5 +53,10 @@ public class DictionaryServiceImpl implements DictionaryService {
     public int deleteDictionary(int id) {
         int i=deleteDictionary(id);
         return i;
+    }
+
+    @Override
+    public int addDictionary(Dictionary dictionary) {
+        return 0;
     }
 }
