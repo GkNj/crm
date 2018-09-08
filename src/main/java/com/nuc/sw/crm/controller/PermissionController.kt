@@ -4,6 +4,7 @@ import com.nuc.sw.crm.repository.RoleRepository
 import com.nuc.sw.crm.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 
 /**
@@ -13,6 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/permission")
 class PermissionController {
+
+    @RequestMapping("{path}")
+    fun toHtml(@PathVariable("path") path: String): String {
+        return "permission/$path"
+
+    }
+
 
 //    @Autowired
 //    lateinit var userRepository: UserRepository
