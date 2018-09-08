@@ -9,5 +9,9 @@ import java.util.List;
 public interface CustomerService {
     List<Customer> queryCustomerByUid(int uId);
 
+    Customer queryCustomerByCid(int cId);
+
+
     List<Customer> queryAll();
+
 }
