@@ -37,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
+        // 允许跨域请求
+        http.cors().disable();
+        http.csrf().disable();
         // 所有的访问必须登录
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
@@ -49,11 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successForwardUrl("/index")
                 .failureForwardUrl("/login");
 
         // 登出配置
-        http.logout().logoutSuccessUrl("/login");
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
         // 自动登录配置
         http.rememberMe();

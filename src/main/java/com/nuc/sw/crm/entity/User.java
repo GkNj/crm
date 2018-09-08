@@ -54,7 +54,7 @@ public class User implements Serializable, UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_roles",
+            name = "user_role",
             joinColumns = {
                     @JoinColumn(name = "ur_user_id")
             },

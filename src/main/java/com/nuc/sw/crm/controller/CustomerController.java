@@ -1,4 +1,4 @@
-package com.nuc.sw.crm.controller.customer;
+package com.nuc.sw.crm.controller;
 
 import com.nuc.sw.crm.entity.Customer;
 import com.nuc.sw.crm.service.serviceImpl.CustomerServiceImpl;
@@ -16,12 +16,12 @@ public class CustomerController {
     private CustomerServiceImpl customerService;
 
     @RequestMapping("/queryCustomerByUId")
-    public List<Customer> queryCustomerByUId(ModelMap map){
+    public String queryCustomerByUId(ModelMap map){
 
         List<Customer> list = customerService.queryCustomerByUid(1);
         map.addAttribute("list",list);
 
-        return list;
+        return "/customer/customerinfo";
 
     }
 
