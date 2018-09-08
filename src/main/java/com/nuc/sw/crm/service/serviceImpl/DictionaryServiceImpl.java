@@ -4,6 +4,7 @@ import com.nuc.sw.crm.entity.Dictionary;
 import com.nuc.sw.crm.entity.Product;
 import com.nuc.sw.crm.entity.Stock;
 import com.nuc.sw.crm.repository.DictionaryRepository;
+import com.nuc.sw.crm.repository.ProductRepository;
 import com.nuc.sw.crm.repository.StockRepository;
 import com.nuc.sw.crm.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     @Autowired
     StockRepository stockRepository;
     @Autowired
+    ProductRepository productRepository;
 
     // Dict  d = new Dic
 
@@ -34,7 +36,7 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public List<Product> findAllProduct() {
-        return  null;
+        return  productRepository.findAll();
     }
 
     @Override
