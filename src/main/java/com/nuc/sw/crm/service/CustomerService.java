@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface CustomerService {
     List<Customer> queryCustomerByUid(int uId);
+    Customer queryCustomerByCid(int cId);
 }

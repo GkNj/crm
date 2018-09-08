@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -20,9 +21,17 @@ public class CustomerController {
 
         List<Customer> list = customerService.queryCustomerByUid(1);
         map.addAttribute("list",list);
+        System.out.println(list);
+        return "customer/customerinfo";
 
-        return "/customer/customerinfo";
+    }
 
+    @RequestMapping("/queryCustomerByCId")
+    public String queryCustomerByCId(ModelMap map, HttpServletRequest request){
+        int id = (Integer.parseInt(request.getParameter("id"))) ;
+        Customer customer = customerService.queryCustomerByCid(id);
+        map.addAttribute("customer",customer);
+        return "customer/linkman";
     }
 
 
