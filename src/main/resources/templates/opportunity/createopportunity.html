@@ -54,7 +54,7 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
-                        <li><a th:href="@{/opptunitymanage.html}">营销机会管理</a>
+                        <li><a th:href="@{/templates/opportunity/opportunitymanage.html}">营销机会管理</a>
                         </li>
                         <li><a th:href="@{/createplan.html}">客户开发计划</a>
 
@@ -278,19 +278,6 @@
                     </div>
                     <div class="ibox-content">
 
-                        <!--<form th:action="@{/test}">-->
-                            <!--<div class="form-group">-->
-                                <!--<label class="col-sm-2 control-label">编号</label>-->
-
-                                <!--<div class="col-sm-10">-->
-                                    <!--<input type="text" name="num" class="form-control" value="">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<input type="text">-->
-                            <!--<input type="submit" value="登录">-->
-                        <!--</form>-->
-
-                        <!--有问题-->
                         <form method="post" class="form-horizontal" action="/opportunity/add">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">编号</label>
@@ -373,7 +360,7 @@
                                 </label>
 
                                 <div class="col-sm-10">
-                                    <textarea id="cComment" cols="50" rows="4" name="comment" class="form-control error"
+                                    <textarea id="cComment" cols="50" rows="4" name="cComment" class="form-control error"
                                               required="" aria-required="true" aria-invalid="true"></textarea>
 
                                 </div>
@@ -387,18 +374,18 @@
                                 </label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control error" value="" required=""
+                                    <input type="text" name="sName" class="form-control error" value="" required=""
                                            aria-required="true" aria-invalid="true">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">创建时间</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="startDate" class="form-control error" id="shijian" value=""
-                                           required="" aria-required="true" aria-invalid="true">
-                                </div>
+                            <label class="col-sm-2 control-label">创建时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="startDate" class="form-control error" id="shijian" value="1111"
+                                       required="" aria-required="true" aria-invalid="true">
+                            </div>
                             </div>
                             <div class="hr-line-dashed"></div>
 
@@ -408,11 +395,11 @@
                                 <div class="col-lg-10">
                                     <div class="form-group">
                                         <div class="col-sm-10">
-                                            <select class="form-control m-b" name="account" disabled="">
-                                                <option>张三</option>
-                                                <option>李四</option>
-                                                <option>王五</option>
-                                                <option>赵六</option>
+                                            <select class="form-control m-b" name="pUsername" disabled="">
+                                                <option value="1">张三</option>
+                                                <option value="2">李四</option>
+                                                <option value="3">王五</option>
+                                                <option value="4">赵六</option>
                                             </select>
                                         </div>
                                     </div>
@@ -423,7 +410,7 @@
                                 <label class="col-lg-2 control-label">指派时间</label>
 
                                 <div class="col-lg-10">
-                                    <input type="text" id="shijian2" class="form-control" value="23333" disabled="">
+                                    <input type="text" name="pDate" id="shijian2" class="form-control" value="" disabled="">
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -453,18 +440,18 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="../../static/js/jquery-2.1.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js?v=3.4.0"></script>
-<script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="../../static/js/hplus.js"></script>
-<script src="../../static/js/plugins/pace/pace.min.js"></script>
+<script src="../js/hplus.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 
 <!-- jQuery Validation plugin javascript-->
-<script src="../../static/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="../../static/js/plugins/validate/messages_zh.min.js"></script>
+<script src="../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../js/plugins/validate/messages_zh.min.js"></script>
 
 
 <script>

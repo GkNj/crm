@@ -12,7 +12,7 @@ public class Opportunity {
     //机会id
 
     private int id;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     //机会编号
 
     private int num;
@@ -24,19 +24,19 @@ public class Opportunity {
     private String state;
     //客户id
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int cId;
     //客户姓名
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String username;
     //成功几率
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int successPercent;
     //机会概要
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String summary;
     //联系人姓名
 
@@ -46,28 +46,28 @@ public class Opportunity {
     private String lPhone;
     //机会描述
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String cComment;
     //创建人
 
-    @Column(nullable = false)
-    private String sId;
+//    @Column(nullable = false)
+    private String sName;
     //创建时间
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String startDate;
     //指派人
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String pUsername;
     //指派人id
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String pId;
     //指派时间
 
-    @Column(nullable = false)
     private String pDate;
+
     public String getpDate() {
         return pDate;
     }
@@ -171,12 +171,12 @@ public class Opportunity {
         this.cComment = cComment;
     }
 
-    public String getsId() {
-        return sId;
+    public String getsName() {
+        return sName;
     }
 
-    public void setsId(String sId) {
-        this.sId = sId;
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
     public String getStartDate() {
@@ -197,5 +197,28 @@ public class Opportunity {
 
     public void setpId(String pId) {
         this.pId = pId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Opportunity{" +
+                "id=" + id +
+                ", num=" + num +
+                ", resource='" + resource + '\'' +
+                ", state='" + state + '\'' +
+                ", cId=" + cId +
+                ", username='" + username + '\'' +
+                ", successPercent=" + successPercent +
+                ", summary='" + summary + '\'' +
+                ", lName='" + lName + '\'' +
+                ", lPhone='" + lPhone + '\'' +
+                ", cComment='" + cComment + '\'' +
+                ", sName='" + sName + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", pUsername='" + pUsername + '\'' +
+                ", pId='" + pId + '\'' +
+                ", pDate='" + pDate + '\'' +
+                '}';
     }
 }

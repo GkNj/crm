@@ -6,8 +6,10 @@ import com.nuc.sw.crm.service.serviceImpl.OpportunityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,14 +24,23 @@ public class OpportunityController {
 
     @RequestMapping(value = "/add")
     public String createOpportunity(Opportunity opportunity) {
-        System.out.println("ooooo");
+
         opportunityServiceImpl.createOpportunity(opportunity);
-        return "index";
+        return "opportunity/createopportunity";
     }
+
     @RequestMapping(value = "/findAll")
-    @ResponseBody
     public List<Opportunity> findAllOppotuntiy(){
-        return dao.findAll();
+        List<Opportunity> list=new ArrayList<>();
+        list=opportunityServiceImpl.findAllOpportunity();
+        return list;
+    }
+
+    @RequestMapping("/delete")
+    public int deleteOpportunity(int id){
+
+        opportunityServiceImpl.deleteOpportunity(id);
+        return 0;
     }
 
 }

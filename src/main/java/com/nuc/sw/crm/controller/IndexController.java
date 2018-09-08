@@ -22,7 +22,7 @@ public class IndexController {
 
     @RequestMapping("oppo/{path}")
     public String opportunity(@PathVariable("path")String path){
-        return "oppo/"+path;
+        return "opportunity/"+path;
     }
 
 

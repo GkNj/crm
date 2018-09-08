@@ -5,7 +5,6 @@ import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 public interface OpportunityService {
     /**
      * 创建销售机会
@@ -13,7 +12,7 @@ public interface OpportunityService {
      * @param opportunity
      * @return
      */
-    int createOpportunity(Opportunity opportunity);
+    void createOpportunity(Opportunity opportunity);
 
     /**
      * 编辑销售机会
@@ -35,7 +34,7 @@ public interface OpportunityService {
      *查询所有未指派的销售机会
      * @return
      */
-    List<Opportunity> selectOpportunity();
+    List<Opportunity> findAllOpportunity();
 
     /**
      * 查询单个未指派的销售机会

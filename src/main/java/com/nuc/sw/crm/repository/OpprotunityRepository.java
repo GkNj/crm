@@ -13,6 +13,8 @@ public interface OpprotunityRepository extends JpaRepository<Opportunity,Integer
 
     List<Opportunity> findOpportunityById(int id);
 
+    List<Opportunity> findOpportunitiesByState(String state);
+
     int deleteOpportunityById(int id);
 
 }
