@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -256,6 +257,17 @@
 
             </nav>
         </div>
+
+
+      <!--div  <div th:each="l:${oppoList}">-->
+            <!--xx-->
+            <!--<div th:text="${l.username}">-->
+
+
+                <!--qweasdzx-->
+            <!--</div>-->
+        <!--</div>-->
+
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-9">
                 <h2>营销机会管理</h2>
@@ -267,112 +279,119 @@
 
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="contact-box">
-                        <a href="customerdetail.html">
-                            <div class="col-sm-4">
-                                <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
-                                         style="margin-top: 25px">
-                                    <!--<div class="m-t-xs font-bold">CTO</div>-->
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3><strong>睿智数码1</strong></h3>
-                                <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
-                                <address>
-                                    <abbr title="Phone">Tel:</abbr> (123) 456-7890
-                                    <p></p>
-                                    <p>创建时间:2018-09-04</p>
-                                </address>
-                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                    aria-hidden="true"></i>编辑</a>
-                                <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
-                                <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-times lay"
-                                                                                     aria-hidden="true"
-                                                                                     onclick="showModal(1)">删除</i></span>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel">删除</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                你确定要删除吗?
-                                                <input id="t_id" hidden="hidden">
-                                                <div class="progress progress-striped active" id="progress_del"
-                                                     hidden="hidden">
-                                                    <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="90" role="progressbar"
-                                                         class="progress-bar progress-bar-success">
-                                                    </div>
-                                                </div>
-                                                <br>
-
-                                                <input type="text" readonly="readonly" hidden="hidden"
-                                                       id="error_text" class="has-error">
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary"
-                                                        onclick="deleteTable()">是
-                                                </button>
-                                                <button type="button" class="btn  btn-default" data-dismiss="modal">否
-                                                </button>
-                                            </div>
-
-                                            <script>
-
-                                                function showModal(_id) {
-                                                    document.getElementById("t_id").value = _id
-                                                }
-
-                                                function deleteTable() {
-                                                    var t_id = document.getElementById("t_id").value;
-                                                    var progress = document.getElementById("progress_del");
-                                                    var err = document.getElementById("error_text")
-                                                    progress.hidden = false
-                                                    // ajax
-                                                    axios.get('http://loaclhost:8080/xxxx/xxxx', {
-                                                        params: {
-                                                            id: t_id
-                                                        }
-                                                    })
-                                                        .then(function (response) {
-                                                            console.log(response);
-                                                            // 成功
-                                                            $("#myModal").modal({show: false});
-                                                            progress.hidden = true;
-                                                            // 刷新页面
-                                                            location.reload()
-
-                                                        })
-                                                        .catch(function (error) {
-                                                            // 失败
-                                                            err.value = error;
-                                                            err.hidden = false;
-                                                            progress.hidden = true;
-                                                            console.log(error);
-                                                        });
-                                                }
-                                            </script>
-
-                                        </div>
+            <!--/*@thymesVar id="list" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+            <div class="row" >
+                <div th:each="l:${oppoList}">
+                    <div class="col-lg-4">
+                        <div class="contact-box">
+                            <a href="customerdetail.html">
+                                <div class="col-sm-4">
+                                    <div class="text-center">
+                                        <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
+                                             style="margin-top: 25px">
+                                        <!--<div class="m-t-xs font-bold">CTO</div>-->
                                     </div>
                                 </div>
 
 
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
+                                <div class="col-sm-8">
+                                    <h3><!--/*@thymesVar id="username" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                        <strong th:text="${l.username}">睿智数码1</strong></h3>
+                                    <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
+                                    <address>
+                                        <abbr title="Phone">Tel:</abbr> (123) 456-7890
+                                        <p></p>
+                                        <p>创建时间:2018-09-04</p>
+                                    </address>
+                                    <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                        aria-hidden="true"></i>编辑</a>
+                                    <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
+                                    <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-times lay"
+                                                                                         aria-hidden="true"
+                                                                                         onclick="showModal(1)">删除</i></span>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">删除</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    你确定要删除吗?
+                                                    <input id="t_id" hidden="hidden">
+                                                    <div class="progress progress-striped active" id="progress_del"
+                                                         hidden="hidden">
+                                                        <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
+                                                             aria-valuenow="90" role="progressbar"
+                                                             class="progress-bar progress-bar-success">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+
+                                                    <input type="text" readonly="readonly" hidden="hidden"
+                                                           id="error_text" class="has-error">
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="deleteTable()">是
+                                                    </button>
+                                                    <button type="button" class="btn  btn-default" data-dismiss="modal">否
+                                                    </button>
+                                                </div>
+
+                                                <script>
+
+                                                    function showModal(_id) {
+                                                        document.getElementById("t_id").value = _id
+                                                    }
+
+                                                    function deleteTable() {
+                                                        var t_id = document.getElementById("t_id").value;
+                                                        var progress = document.getElementById("progress_del");
+                                                        var err = document.getElementById("error_text")
+                                                        progress.hidden = false
+                                                        // ajax
+                                                        axios.get('http://loaclhost:8080/xxxx/xxxx', {
+                                                            params: {
+                                                                id: t_id
+                                                            }
+                                                        })
+                                                            .then(function (response) {
+                                                                console.log(response);
+                                                                // 成功
+                                                                $("#myModal").modal({show: false});
+                                                                progress.hidden = true;
+                                                                // 刷新页面
+                                                                location.reload()
+
+                                                            })
+                                                            .catch(function (error) {
+                                                                // 失败
+                                                                err.value = error;
+                                                                err.hidden = false;
+                                                                progress.hidden = true;
+                                                                console.log(error);
+                                                            });
+                                                    }
+                                                </script>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="contact-box">
                         <a href="profile.html">
@@ -406,11 +425,10 @@
                                 <div class="text-center">
                                     <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
                                          style="margin-top: 35px">
-                                    <!--<div class="m-t-xs font-bold">Marketing manager</div>-->
                                 </div>
                             </div>
                             <div class="col-sm-8">
-                                <h3><strong>睿智数码</strong></h3>
+                                <h3><strong th:text="${}">睿智数码</strong></h3>
                                 <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
                                 <address>
                                     <abbr title="Phone">Tel:</abbr> (123) 456-7890

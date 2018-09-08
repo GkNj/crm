@@ -26,7 +26,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../../static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -275,7 +275,142 @@
                         </div>
                     </div>
                     <div class="ibox-content">
+                        <form method="post" class="form-horizontal" action="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">编号</label>
 
+                                <div class="col-sm-10">
+                                    <input type="text" name="num" class="form-control" value="11" disabled="">
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">机会来源</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="resource" class="form-control" value="333" disabled="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red" style="color: red"> *</span>
+                                    成功机率
+                                </label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="successPercent" class="form-control error" value="333"
+                                           disabled="" required="" aria-required="true" aria-invalid="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red" style="color: red"> *</span>
+                                    客户名称
+                                </label>
+
+                                <div class="col-sm-10">
+                                    <input id="username" name="username" class="form-control" value="222" required=""
+                                           disabled="" aria-required="true" aria-invalid="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red" style="color: red"> *</span>
+                                    概要
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="summary" class="form-control error" value="555" required=""
+                                           disabled="" aria-required="true" aria-invalid="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">联系人</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="lName" class="form-control" value="666" disabled="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">联系人电话</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="lPhone" class="form-control" value="13243546" disabled="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red" style="color: red"> *</span>
+                                    机会描述
+                                </label>
+
+                                <div class="col-sm-10">
+                                    <textarea id="cComment" cols="50" rows="4" name="cComment" class="form-control error"
+                                              disabled="" required="" aria-required="true" aria-invalid="true">666666</textarea>
+
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    <span class="red" style="color: red"> *</span>
+                                    创建人
+                                </label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="sName" class="form-control error" value="7898" required=""
+                                           disabled="" aria-required="true" aria-invalid="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">创建时间</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="startDate" class="form-control error" id="shijian" value="1111"
+                                           disabled="" required="" aria-required="true" aria-invalid="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">指派给</label>
+
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <div class="col-sm-10">
+                                            <select class="form-control m-b" name="pUsername" disabled="">
+                                                <option value="1">张三</option>
+                                                <option value="2">李四</option>
+                                                <option value="3">王五</option>
+                                                <option value="4">赵六</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">指派时间</label>
+
+                                <div class="col-lg-10">
+                                    <input type="text" name="pDate" disabled="" id="shijian2" class="form-control" value="">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

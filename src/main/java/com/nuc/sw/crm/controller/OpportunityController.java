@@ -5,9 +5,10 @@ import com.nuc.sw.crm.repository.OpprotunityRepository;
 import com.nuc.sw.crm.service.serviceImpl.OpportunityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,6 @@ public class OpportunityController {
 
     @Autowired
     private OpportunityServiceImpl opportunityServiceImpl;
-    @Autowired
-    private OpprotunityRepository dao;
-
 
     @RequestMapping(value = "/add")
     public String createOpportunity(Opportunity opportunity) {
@@ -30,10 +28,12 @@ public class OpportunityController {
     }
 
     @RequestMapping(value = "/findAll")
-    public List<Opportunity> findAllOppotuntiy(){
+    public String findAllOppotuntiy(ModelMap map){
         List<Opportunity> list=new ArrayList<>();
         list=opportunityServiceImpl.findAllOpportunity();
-        return list;
+        list.forEach(System.out::println);
+        map.addAttribute("oppoList",list);
+        return "opportunity/opportunitymanage";
     }
 
     @RequestMapping("/delete")
@@ -42,5 +42,6 @@ public class OpportunityController {
         opportunityServiceImpl.deleteOpportunity(id);
         return 0;
     }
+
 
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.websocket.server.PathParam;
 
 @Controller
-
 public class IndexController {
 
     @RequestMapping("/")
@@ -20,11 +19,11 @@ public class IndexController {
         return "service/"+path;
     }
 
-    @RequestMapping("oppo/{path}")
+    @RequestMapping("opportunity/{path}")
     public String opportunity(@PathVariable("path")String path){
+        System.out.println("执行");
+
         return "opportunity/"+path;
     }
-
-
 
 }
