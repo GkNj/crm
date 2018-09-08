@@ -19,4 +19,11 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerRepository.findCustomersByUId(uId);
     }
+
+    @Override
+    public List<Customer> queryAll() {
+        return customerRepository.findAll();
+    }
+
+
 }

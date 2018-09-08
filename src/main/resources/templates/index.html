@@ -27,15 +27,7 @@
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
           crossorigin="anonymous">
 
-    <!--<script type="text/css">-->
-    <!--#111{-->
 
-    <!--background-position: center;-->
-    <!--background-image: url("../static/img/chinamobile.png");-->
-    <!--background-repeat: no-repeat;-->
-    <!--}-->
-
-    <!--</script>-->
 </head>
 
 <body>
@@ -46,7 +38,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="../static/img/profile_small.jpg"/>
+                                <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -98,7 +90,7 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/service/create.html">服务创建</a>
+                        <li><a th:href="@{/service/show}">服务创建</a>
                         </li>
                         <li><a href="../templates/service/distribute.html">服务分配</a>
                         </li>
@@ -249,28 +241,10 @@
 
             </nav>
         </div>
-        <!--<div class="row wrapper border-bottom white-bg page-heading">-->
-        <!--<div class="col-sm-4">-->
-        <!--<h2>标题</h2>-->
-        <!--<ol class="breadcrumb">-->
-        <!--<li>-->
-        <!--<a href="index.html">主页</a>-->
-        <!--</li>-->
-        <!--<li>-->
-        <!--<strong>包屑导航</strong>-->
-        <!--</li>-->
-        <!--</ol>-->
-        <!--</div>-->
-        <!--<div class="col-sm-8">-->
-        <!--<div class="title-action">-->
-        <!--<a href="empty_page.html" class="btn btn-primary">活动区域</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+
 
         <div id="111">
-            <img src="index.jpg" alt="" style="width: 1120px;height: 1050px">
-
+            <img src="img/index.jpg" alt="" style="width: 1120px;height: 1050px">
         </div>
 
 
