@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface CustomerService {
     List<Customer> queryCustomerByUid(int uId);
+
+    List<Customer> queryAll();
 }
