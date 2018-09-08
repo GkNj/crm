@@ -1,8 +1,7 @@
 spring:
   datasource:
     username: root
-
-    password:
+    password: lilu19970327
     url: jdbc:mysql://localhost:3306/crm
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
