@@ -1,9 +1,12 @@
 spring:
   datasource:
     username: root
-    password:
-    url: jdbc:mysql://localhost:3306/crm
-    driver-class-name: com.mysql.jdbc.Driver
+
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    password: root
+    url: jdbc:mysql://localhost:3306/crm?serverTimezone=GMT%2B8
+#    driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
     hibernate:
@@ -19,3 +22,4 @@ spring:
     suffix: .html
     mode: HTML
     cache: false
+

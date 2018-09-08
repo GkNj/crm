@@ -23,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer queryCustomerByCid(int cId) {
         return customerRepository.getOne(cId);
+    }
 
     public List<Customer> queryAll() {
         return customerRepository.findAll();
