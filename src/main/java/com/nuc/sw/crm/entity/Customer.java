@@ -1,5 +1,6 @@
 package com.nuc.sw.crm.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,9 @@ public class Customer {
     private String cName;
     private String cAddress;
     private String cClass;
+    @Column(name="c_satisfaction",columnDefinition = "int default -1")
     private int cSatisfaction;
+    @Column(name="c_credit",columnDefinition = "int default -1")
     private int cCredit;
     private String cPost;
     private String cWebsite;

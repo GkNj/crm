@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,21 +10,21 @@
 
     <title>素材火www.sucaihuo.com - 空白页</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="js/hplus.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="../js/hplus.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
 
 
     <!--axios-->
@@ -38,7 +39,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -68,7 +69,7 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="opptunitymanage.html">营销机会管理</a>
+                        <li><a href="opportunitymanage.html">营销机会管理</a>
                         </li>
                         <li><a href="createplan.html">客户开发计划</a>
 
@@ -79,9 +80,9 @@
                 <li>
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/customer/customerinfo.html">客户信息管理</a>
+                        <li><a href="../customer/customerinfo.html">客户信息管理</a>
                         </li>
-                        <li><a href="../templates/customer/customerlost.html">客户流失管理</a>
+                        <li><a href="../customer/customerlost.html">客户流失管理</a>
 
                         </li>
                     </ul>
@@ -90,15 +91,15 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/service/create.html">服务创建</a>
+                        <li><a href="../service/create.html">服务创建</a>
                         </li>
-                        <li><a href="../templates/service/distribute.html">服务分配</a>
+                        <li><a href="../service/distribute.html">服务分配</a>
                         </li>
-                        <li><a href="../templates/service/handle.html">服务处理</a>
+                        <li><a href="../service/handle.html">服务处理</a>
                         </li>
-                        <li><a href="../templates/service/feedback.html">服务反馈</a>
+                        <li><a href="../service/feedback.html">服务反馈</a>
                         </li>
-                        <li><a href="../templates/service/ok.html">服务归档</a>
+                        <li><a href="../service/ok.html">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -123,17 +124,25 @@
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
 
-                        <li><a href="dictionary.html">数据字典管理</a>
+                        <li><a href="../dictionary.html">数据字典管理</a>
                         </li>
-                        <li><a href="product.html">查询产品信息</a>
+                        <li><a href="../product.html">查询产品信息</a>
                         </li>
+<<<<<<< HEAD:src/main/resources/static/opptunitymanage.html
                         <li><a href="../templates/basic/stock.html">查询库存</a>
+=======
+                        <li><a href="../stock.html">查询库存</a>
+>>>>>>> master:src/main/resources/templates/opportunity/opportunitymanage.html
                         </li>
                     </ul>
                 </li>
                 <li>
+<<<<<<< HEAD:src/main/resources/static/opptunitymanage.html
                     <a href="../templates/permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
+=======
+                    <a href="../permission.html"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
+>>>>>>> lzl:src/main/resources/templates/opportunity/opportunitymanage.html
                 </li>
 
             </ul>
@@ -257,6 +266,17 @@
 
             </nav>
         </div>
+
+
+      <!--div  <div th:each="l:${oppoList}">-->
+            <!--xx-->
+            <!--<div th:text="${l.username}">-->
+
+
+                <!--qweasdzx-->
+            <!--</div>-->
+        <!--</div>-->
+
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-9">
                 <h2>营销机会管理</h2>
@@ -268,118 +288,125 @@
 
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="contact-box">
-                        <a href="customerdetail.html">
-                            <div class="col-sm-4">
-                                <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/better.jpg"
-                                         style="margin-top: 25px">
-                                    <!--<div class="m-t-xs font-bold">CTO</div>-->
-                                </div>
-                            </div>
-                            <div class="col-sm-8">
-                                <h3><strong>睿智数码1</strong></h3>
-                                <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
-                                <address>
-                                    <abbr title="Phone">Tel:</abbr> (123) 456-7890
-                                    <p></p>
-                                    <p>创建时间:2018-09-04</p>
-                                </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
-                                <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
-                                <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-times lay"
-                                                                                     aria-hidden="true"
-                                                                                     onclick="showModal(1)">删除</i></span>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-hidden="true">&times;
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel">删除</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                你确定要删除吗?
-                                                <input id="t_id" hidden="hidden">
-                                                <div class="progress progress-striped active" id="progress_del"
-                                                     hidden="hidden">
-                                                    <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="90" role="progressbar"
-                                                         class="progress-bar progress-bar-success">
-                                                    </div>
-                                                </div>
-                                                <br>
-
-                                                <input type="text" readonly="readonly" hidden="hidden"
-                                                       id="error_text" class="has-error">
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary"
-                                                        onclick="deleteTable()">是
-                                                </button>
-                                                <button type="button" class="btn  btn-default" data-dismiss="modal">否
-                                                </button>
-                                            </div>
-
-                                            <script>
-
-                                                function showModal(_id) {
-                                                    document.getElementById("t_id").value = _id
-                                                }
-
-                                                function deleteTable() {
-                                                    var t_id = document.getElementById("t_id").value;
-                                                    var progress = document.getElementById("progress_del");
-                                                    var err = document.getElementById("error_text")
-                                                    progress.hidden = false
-                                                    // ajax
-                                                    axios.get('http://loaclhost:8080/xxxx/xxxx', {
-                                                        params: {
-                                                            id: t_id
-                                                        }
-                                                    })
-                                                        .then(function (response) {
-                                                            console.log(response);
-                                                            // 成功
-                                                            $("#myModal").modal({show: false});
-                                                            progress.hidden = true;
-                                                            // 刷新页面
-                                                            location.reload()
-
-                                                        })
-                                                        .catch(function (error) {
-                                                            // 失败
-                                                            err.value = error;
-                                                            err.hidden = false;
-                                                            progress.hidden = true;
-                                                            console.log(error);
-                                                        });
-                                                }
-                                            </script>
-
-                                        </div>
+            <!--/*@thymesVar id="list" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+            <div class="row" >
+                <div th:each="l:${oppoList}">
+                    <div class="col-lg-4">
+                        <div class="contact-box">
+                            <a href="customerdetail.html">
+                                <div class="col-sm-4">
+                                    <div class="text-center">
+                                        <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
+                                             style="margin-top: 25px">
+                                        <!--<div class="m-t-xs font-bold">CTO</div>-->
                                     </div>
                                 </div>
 
 
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
+                                <div class="col-sm-8">
+                                    <h3><!--/*@thymesVar id="username" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                        <strong th:text="${l.username}">睿智数码1</strong></h3>
+                                    <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
+                                    <address>
+                                        <abbr title="Phone">Tel:</abbr> (123) 456-7890
+                                        <p></p>
+                                        <p>创建时间:2018-09-04</p>
+                                    </address>
+                                    <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                        aria-hidden="true"></i>编辑</a>
+                                    <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
+                                    <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-times lay"
+                                                                                         aria-hidden="true"
+                                                                                         onclick="showModal(1)">删除</i></span>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;
+                                                    </button>
+                                                    <h4 class="modal-title" id="myModalLabel">删除</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    你确定要删除吗?
+                                                    <input id="t_id" hidden="hidden">
+                                                    <div class="progress progress-striped active" id="progress_del"
+                                                         hidden="hidden">
+                                                        <div style="width: 100%" aria-valuemax="100" aria-valuemin="0"
+                                                             aria-valuenow="90" role="progressbar"
+                                                             class="progress-bar progress-bar-success">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+
+                                                    <input type="text" readonly="readonly" hidden="hidden"
+                                                           id="error_text" class="has-error">
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="deleteTable()">是
+                                                    </button>
+                                                    <button type="button" class="btn  btn-default" data-dismiss="modal">否
+                                                    </button>
+                                                </div>
+
+                                                <script>
+
+                                                    function showModal(_id) {
+                                                        document.getElementById("t_id").value = _id
+                                                    }
+
+                                                    function deleteTable() {
+                                                        var t_id = document.getElementById("t_id").value;
+                                                        var progress = document.getElementById("progress_del");
+                                                        var err = document.getElementById("error_text")
+                                                        progress.hidden = false
+                                                        // ajax
+                                                        axios.get('http://loaclhost:8080/xxxx/xxxx', {
+                                                            params: {
+                                                                id: t_id
+                                                            }
+                                                        })
+                                                            .then(function (response) {
+                                                                console.log(response);
+                                                                // 成功
+                                                                $("#myModal").modal({show: false});
+                                                                progress.hidden = true;
+                                                                // 刷新页面
+                                                                location.reload()
+
+                                                            })
+                                                            .catch(function (error) {
+                                                                // 失败
+                                                                err.value = error;
+                                                                err.hidden = false;
+                                                                progress.hidden = true;
+                                                                console.log(error);
+                                                            });
+                                                    }
+                                                </script>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="contact-box">
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/better.jpg"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
                                          style="margin-top: 35px">
                                     <!--<div class="m-t-xs font-bold">营销总监</div>-->
                                 </div>
@@ -392,8 +419,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -405,21 +432,20 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/better.jpg"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/better.jpg"
                                          style="margin-top: 35px">
-                                    <!--<div class="m-t-xs font-bold">Marketing manager</div>-->
                                 </div>
                             </div>
                             <div class="col-sm-8">
-                                <h3><strong>睿智数码</strong></h3>
+                                <h3><strong th:text="${}">睿智数码</strong></h3>
                                 <p><i class="fa fa-child" aria-hidden="true"></i>刘先生</p>
                                 <address>
                                     <abbr title="Phone">Tel:</abbr> (123) 456-7890
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -431,7 +457,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 25px">
                                     <!--<div class="m-t-xs font-bold">CTO</div>-->
                                 </div>
@@ -444,8 +470,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -457,7 +483,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 35px">
                                     <!--<div class="m-t-xs font-bold">营销总监</div>-->
                                 </div>
@@ -470,8 +496,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -483,7 +509,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 35px">
                                     <!--<div class="m-t-xs font-bold">Marketing manager</div>-->
                                 </div>
@@ -496,8 +522,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -509,7 +535,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 25px">
                                     <!--<div class="m-t-xs font-bold">CTO</div>-->
                                 </div>
@@ -522,8 +548,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -535,7 +561,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 35px">
                                     <!--<div class="m-t-xs font-bold">营销总监</div>-->
                                 </div>
@@ -548,8 +574,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>
@@ -561,7 +587,7 @@
                         <a href="profile.html">
                             <div class="col-sm-4">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="img/old.JPG"
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/old.JPG"
                                          style="margin-top: 35px">
                                     <!--<div class="m-t-xs font-bold">Marketing manager</div>-->
                                 </div>
@@ -574,8 +600,8 @@
                                     <p></p>
                                     <p>创建时间:2018-09-04</p>
                                 </address>
-                                <a href="oppportunityeditor.html"><i class="fa fa-pencil-square-o"
-                                                                     aria-hidden="true"></i>编辑</a>
+                                <a href="opportunityeditor.html"><i class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"></i>编辑</a>
                                 <a href="#"><i class="fa fa-times" aria-hidden="true"></i>删除</a>
                             </div>
                             <div class="clearfix"></div>

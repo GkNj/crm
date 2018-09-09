@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="../../static/css/animate.css" rel="stylesheet">
-    <link href="../../static/css/style.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <title>Title</title>
 
     <style>
@@ -23,7 +23,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../../static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -53,9 +53,15 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/opptunitymanage.html">营销机会管理</a>
+
+                        <li><a href="../opptunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="../../static/createplan.html">客户开发计划</a>
+                        <li><a href="../createplan.html">客户开发计划</a>
+
+                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
+                        </li>
+                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
+
                         </li>
                     </ul>
                 </li>
@@ -91,13 +97,13 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/classify.html">客户贡献分析</a>
+                        <li><a href="../classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户构成分析</a>
+                        <li><a href="../classify.html">客户构成分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户服务分析</a>
+                        <li><a href="../classify.html">客户服务分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户流失分析</a>
+                        <li><a href="../classify.html">客户流失分析</a>
                         </li>
                     </ul>
                 </li>
@@ -105,11 +111,13 @@
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/dictionary.html">数据字典管理</a>
+                        <li><a href="../dictionary.html">数据字典管理</a>
                         </li>
-                        <li><a href="../../static/product.html">查询产品信息</a>
+                        <li><a href="../product.html">查询产品信息</a>
                         </li>
+
                         <li><a href="../basic/stock.html">查询库存</a>
+
                         </li>
                     </ul>
                 </li>
@@ -236,7 +244,7 @@
                                 <h5 style="color: #bd7168">客户详细信息</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">1</h1>
+                                <h1 class="no-margins" th:text="${customer.cId}"></h1>
                                 <!--<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>-->
                                 <!--</div>-->
                                 <small>客户编号</small>
@@ -300,27 +308,38 @@
                         <tbody style="font-size: 14px;">
                         <tr>
                             <td class="fontsize">客户编号</td>
-                            <td>1</td>
+                            <td th:text="${customer.cId}"></td>
                             <td class="fontsize">客户名称</td>
-                            <td>无限极(中国)有限公司</td>
+                            <td th:text="${customer.cName}"></td>
                         </tr>
                         <tr>
                             <td class="fontsize">地区</td>
-                            <td>广州</td>
+                            <td th:text="${customer.cAddress}"></td>
                             <td class="fontsize">客户等级</td>
-                            <td>战略合作伙伴</td>
+                            <td th:text="${customer.cClass}"></td>
                         </tr>
                         <tr>
                             <td class="fontsize">客户满意度</td>
-                            <td>⭐⭐⭐⭐</td>
+                            <td th:if="${customer.cSatisfaction==-1}"></td>
+                            <td th:if="${customer.cSatisfaction==1}">⭐</td>
+                            <td th:if="${customer.cSatisfaction==2}">⭐⭐</td>
+                            <td th:if="${customer.cSatisfaction==3}">⭐⭐⭐</td>
+                            <td th:if="${customer.cSatisfaction==4}">⭐⭐⭐⭐</td>
+                            <td th:if="${customer.cSatisfaction==5}">⭐⭐⭐⭐⭐</td>
+
                             <td class="fontsize">客户信誉度</td>
-                            <td>⭐⭐⭐</td>
+                            <td th:if="${customer.cCredit==-1}"></td>
+                            <td th:if="${customer.cCredit==1}">⭐</td>
+                            <td th:if="${customer.cCredit==2}">⭐⭐</td>
+                            <td th:if="${customer.cCredit==3}">⭐⭐⭐</td>
+                            <td th:if="${customer.cCredit==4}">⭐⭐⭐⭐</td>
+                            <td th:if="${customer.cCredit==5}">⭐⭐⭐⭐⭐</td>
                         </tr>
                         <tr>
-                            <td class="fontsize">公司邮箱</td>
-                            <td>12306656@163.com</td>
+                            <td class="fontsize">公司邮政编码</td>
+                            <td th:text="${customer.cPost}"></td>
                             <td class="fontsize">公司网址</td>
-                            <td>http://www.infinitus.com/</td>
+                            <td th:text="${customer.cWebsite}"></td>
                         </tr>
                         <tr style="height: 50px"></tr>
                         <tr>
@@ -974,14 +993,14 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="../../static/js/jquery-2.1.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
-<script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="../../static/js/hplus.js"></script>
-<script src="../../static/js/plugins/pace/pace.min.js"></script>
+<script src="../js/hplus.js"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 <script type="text/javascript">
     window.onload = function(){
         var nowDate = new Date();
