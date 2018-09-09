@@ -42,8 +42,8 @@ public class ServiceController {
         return "service/create.html";
     }
 
-    @RequestMapping("/show")
-    public  String show(){
-        return "service/create";
-    }
+//    @RequestMapping("/show")
+//    public  String show(){
+//        return "service/create";
+//    }
 }
