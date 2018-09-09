@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -7,22 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>查询库存信息</title>
+    <title>查询产品信息</title>
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="../css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
     <!-- Morris -->
-    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="../js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=2.2.0" rel="stylesheet">
 
 </head>
 
@@ -64,9 +64,9 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/opportunity/opportunitymanage.html">营销机会管理</a>
+                        <li><a href="opptunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="../templates/opportunity/createplan.html">客户开发计划</a>
+                        <li><a href="createplan.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -120,7 +120,7 @@
                         </li>
                         <li><a href="product.html">查询产品信息</a>
                         </li>
-                        <li><a href="stock.html">查询库存</a>
+                        <li><a href="../templates/basic/stock.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
@@ -239,13 +239,13 @@
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>库存信息</h2>
+                <h2>产品信息</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="index.html">主页</a>
                     </li>
                     <li>
-                        <strong>库存信息</strong>
+                        <strong>产品信息</strong>
                     </li>
                 </ol>
             </div>
@@ -259,91 +259,10 @@
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content">
                     <div class="row">
-                        <div class="col-lg-4 ui-sortable">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content ">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="chart easypiechart inline" data-percent="61"><span
-                                                    class="easypie-text">61%</span></div>
-                                        </div>
-                                        <div class="col-lg-3"></div>
-                                        <div class="col-lg-5">
-                                            <div class="row"></div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h1 style=" font-weight: 500; color: #f8ac59">
-                                                    1445</h1></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h4 style="color: #949494"> 本部总仓库存</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="chart2 easypiechart inline" data-percent="45"><span
-                                                    class="easypie-text">45%</span></div>
-                                        </div>
-                                        <div class="col-lg-3"></div>
-                                        <div class="col-lg-5">
-                                            <div class="row"></div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h1 style=" font-weight: 500; color: #1c84c6">
-                                                    683</h1></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h4 style="color: #949494"> 西南商城库存</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="chart3 easypiechart inline" data-percent="78"><span
-                                                    class="easypie-text">78%</span></div>
-                                        </div>
-                                        <div class="col-lg-3"></div>
-                                        <div class="col-lg-5">
-                                            <div class="row"></div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h1 style=" font-weight: 500; color: #23c6c8">
-                                                    1248</h1></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-2"></div>
-                                                <div class="col-lg-10"><h4 style="color: #949494"> 华北商城库存</h4></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>库存信息</h5>
+                                    <h5>产品信息</h5>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
                                             <i class="fa fa-chevron-up"></i>
@@ -352,7 +271,7 @@
                                             <i class="fa fa-wrench"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="stock.html#">刷新</a>
+                                            <li><a href="/basic/findAllProduct">刷新</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -360,46 +279,33 @@
                                 <div class="ibox-content">
                                     <div class="dataTables_wrapper form-inline">
                                         <table class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>产品</th>
-                                                <th>仓库</th>
-                                                <th>货位</th>
-                                                <th>件数</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>联想Z5</td>
-                                                <td><span style="color: #1c84c6">西南商城</span></td>
-                                                <td>3—1</td>
-                                                <td>100</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>联想Z5</td>
-                                                <td><span  style="color: #f8ac59">本部总仓</span></td>
-                                                <td>5—9</td>
-                                                <td>1200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>联想️Z5</td>
-                                                <td><span style="color: #23c6c8">华北商城</span></td>
-                                                <td>3—7</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>联想️Z5</td>
-                                                <td><span style="color: #f8ac59">本部总仓</span></td>
-                                                <td>6—1</td>
-                                                <td>100</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>名称</th>
+                                            <th>单位</th>
+                                            <th>单价</th>
+                                            <th>价格浮动</th>
+                                            <th>件数</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="product: ${productList}">
+                                            <td th:text="${product.pId}">#</td>
+                                            <td th:text="${product.pName}">名称</td>
+                                            <td th:text="${product.pNum}" >单位</td>
+                                            <td th:text="${product.pUnit}">单价</td>
+                                            <td class="text-navy" th:if="${product.fluctuation>0}"></th:if>
+                                                <i class='fa fa-level-up' th:text="'&nbsp;'+${product.fluctuation*100.0}+'%'"/>
+                                            </td>
+                                            <td class="text-warning" th:if="${product.fluctuation<0}"  >
+                                                <i class="fa fa-level-down" th:text="'&nbsp;'+${product.fluctuation*100.0}+'%'"/>
+                                            </td>
+                                            <!--<td th:text="${product.fluctuation}">价格浮动</td>-->
+                                            <td th:text="${product.pPrice}">件数</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="dataTables_info" id="DataTables_Table_0_info" role="alert"
@@ -442,45 +348,44 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 </div>
 
 <!-- Mainly scripts -->
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/bootstrap.min.js?v=3.4.0"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="js/hplus.js?v=2.2.0"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="../js/hplus.js?v=2.2.0"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 <!-- Flot -->
-<script src="js/plugins/flot/jquery.flot.js"></script>
-<script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-<script src="js/plugins/flot/jquery.flot.spline.js"></script>
-<script src="js/plugins/flot/jquery.flot.resize.js"></script>
-<script src="js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="../js/plugins/flot/jquery.flot.js"></script>
+<script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="../js/plugins/flot/jquery.flot.pie.js"></script>
 
 <!-- Peity -->
-<script src="js/plugins/peity/jquery.peity.min.js"></script>
-<script src="js/demo/peity-demo.js"></script>
+<script src="../js/plugins/peity/jquery.peity.min.js"></script>
+<script src="../js/demo/peity-demo.js"></script>
 
 <!-- jQuery UI -->
-<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- GITTER -->
-<script src="js/plugins/gritter/jquery.gritter.min.js"></script>
+<script src="../js/plugins/gritter/jquery.gritter.min.js"></script>
 
 <!-- EayPIE -->
-<script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+<script src="../js/plugins/easypiechart/jquery.easypiechart.js"></script>
 
 <!-- Sparkline -->
-<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="../js/plugins/sparkline/jquery.sparkline.min.js"></script>
 
 <!-- Sparkline demo data  -->
-<script src="js/demo/sparkline-demo.js"></script>
+<script src="../js/demo/sparkline-demo.js"></script>
 
 
 <script type="text/javascript">

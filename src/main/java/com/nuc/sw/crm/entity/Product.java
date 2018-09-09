@@ -16,6 +16,16 @@ public class Product {
     private double pPrice;
     private int oId;
 
+    public double getFluctuation() {
+        return fluctuation;
+    }
+
+    public void setFluctuation(double fluctuation) {
+        this.fluctuation = fluctuation;
+    }
+
+    private double fluctuation;
+
     public Product() {
     }
 
