@@ -33,7 +33,7 @@ public interface DictionaryService {
      * @param dictionary
      * @return list
      */
-    List<Dictionary> updateDictionary(Dictionary dictionary);
+    Dictionary updateDictionary(Dictionary dictionary);
 
     /**
      * 删除数据字典信息
@@ -46,7 +46,7 @@ public interface DictionaryService {
      * @param dictionary
      * @return
      */
-    int addDictionary(Dictionary dictionary);
+    Dictionary addDictionary(Dictionary dictionary);
 
     /**
      * 查询所有字典数据

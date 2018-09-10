@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Dictionary {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "type_key")
     private String typeKey;
@@ -79,4 +79,6 @@ public class Dictionary {
                 ", editable=" + editable +
                 '}';
     }
+
+
 }
