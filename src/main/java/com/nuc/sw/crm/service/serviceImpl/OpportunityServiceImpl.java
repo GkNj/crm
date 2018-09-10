@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author superzhaolu
+ */
 @Service
 public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
@@ -26,34 +29,31 @@ public class OpportunityServiceImpl implements OpportunityService {
     }
 
     @Override
-    public List<Opportunity> modifyOpportunity(int id) {
-        List<Opportunity> list=new ArrayList<>();
-        list=opprotunityRepository.findOpportunityById(id);
-        return null;
+    public Opportunity modifyOpportunity(Opportunity opportunity) {
+        opportunity.setState("未分配");
+        opportunity.setpUsername("无");
+        opportunity.setpId("无");
+        opportunity.setpDate("无");
+        return opprotunityRepository.save(opportunity);
     }
 
     @Override
-    public int deleteOpportunity(int id) {
-        int success=opprotunityRepository.deleteOpportunityById(id);
-        if(success==0){
-            System.out.println("删除失败");
-            return 0;
-        }else {
-            System.out.println("删除成功");
-            return 1;
-        }
-
+    public void deleteOpportunity(int id) {
+        Opportunity opportunity = new Opportunity();
+        opportunity.setId(id);
+        opprotunityRepository.delete(opportunity);
     }
 
     @Override
     public List<Opportunity> findAllOpportunity() {
-        List<Opportunity> list=new ArrayList<>();
-        list=opprotunityRepository.findOpportunitiesByState("未分配");
+        List<Opportunity> list = opprotunityRepository.findOpportunitiesByState("未分配");
+        System.out.println("findAll:" + list);
         return list;
     }
 
     @Override
-    public List<Opportunity> findById(int id) {
-        return null;
+    public Opportunity findById(int id) {
+        Opportunity opportunity = opprotunityRepository.findOpportunityById(id);
+        return opportunity;
     }
 }

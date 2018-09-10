@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
 
     <title>素材火www.sucaihuo.com - 空白页</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link href="../css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="../font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link href="../css/animate.css" rel="stylesheet">
-    <link href="../css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <style>
+        .form_center{
+            margin-left: 130px;
+        }
+        .form_margin{
+            margin: 10px;
+        }
+    </style>
 
 </head>
 
@@ -52,12 +59,12 @@
                     </div>
 
                 </li>
-                <li class="active">
+                <li >
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="opportunitymanage.html">营销机会管理</a>
+                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="createplan.html">客户开发计划</a>
+                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -71,18 +78,18 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li class="active">
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../service/create.html">服务创建</a>
+                        <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="../service/distribute.html">服务分配</a>
+                        <li><a href="distribute.html">服务分配</a>
                         </li>
-                        <li><a href="../service/handle.html">服务处理</a>
+                        <li><a href="handle.html">服务处理</a>
                         </li>
-                        <li><a href="../service/feedback.html">服务反馈</a>
+                        <li><a href="feedback.html">服务反馈</a>
                         </li>
-                        <li><a href="../service/ok.html">服务归档</a>
+                        <li><a href="ok.html">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -109,30 +116,13 @@
                         </li>
                         <li><a href="../../static/product.html">查询产品信息</a>
                         </li>
-<<<<<<< HEAD:src/main/resources/static/opportunitypoint.html
-                        <li><a href="../templates/basic/stock.html">查询库存</a>
-=======
-                        <li><a href="../../static/stock.html">查询库存</a>
->>>>>>> master:src/main/resources/templates/opportunity/opportunitypoint.html
+                        <li><a href="../basic/stock.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
                 <li >
-<<<<<<< HEAD:src/main/resources/static/opportunitypoint.html
-                    <a href="../templates/permission/permission.html"><i class="fa fa-cogs"></i> <span
+                    <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
-                </li>
-=======
-                        <li><a href="mailbox.html">数据字典管理</a>
-                        </li>
-                        <li><a href="mail_detail.html">查询产品信息</a>
-                        </li>
-                        <li><a href="mail_compose.html">查询库存</a>
-                        </li>
-                    </ul>
-=======
-                    <a href="../permission.html"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
->>>>>>> lzl:src/main/resources/templates/opportunity/opportunitypoint.html
                 </li>
             </ul>
         </div>
@@ -142,26 +132,29 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="../../static/classify.html#"><i class="fa fa-bars"></i> </a>
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="create.html#"><i
+                            class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
+                                   id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
+                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a7.jpg">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
@@ -175,7 +168,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a4.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
@@ -189,7 +182,7 @@
                             <li>
                                 <div class="text-center link-block">
                                     <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i>  <strong> 查看所有消息</strong>
+                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
                             </li>
@@ -197,7 +190,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
@@ -241,199 +234,182 @@
         </div>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>营销管理</h2>
+                <h2>服务管理</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.html">销售机会指派</a>
+                        <a href="index.html">服务管理</a>
+                    </li>
+                    <li>
+                        <strong>服务创建</strong>
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-8">
-                <div class="title-action">
-                    <a href="../../static/classify.html" class="btn btn-primary">活动区域</a>
-                </div>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>新建销售机会</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="form_basic.html#">选项1</a>
-                                </li>
-                                <li><a href="form_basic.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <form method="post" class="form-horizontal" action="/opportunity/add">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">编号</label>
 
-                                <div class="col-sm-10">
-                                    <input type="text" name="num" class="form-control" value="11" disabled="">
-                                </div>
+
+        <form method="post" class="form-horizontal"  th:action="@{/create/add}">
+
+            <table class="table-striped ">
+                <div class="form-group" style="text-align: center" >
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin"  name="sId" disabled="" th:value="${oppor.id}">
                             </div>
+                        </td>
+                    </tr>
 
-                            <div class="hr-line-dashed"></div>
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">机会来源</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" name="resource" class="form-control" value="333" disabled="">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">机会来源</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin"  name="resource" disabled="" th:value="${oppor.resource}">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">
-                                    <span class="red" style="color: red"> *</span>
-                                    成功机率
-                                </label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" name="successPercent" class="form-control error" value="333"
-                                           disabled="" required="" aria-required="true" aria-invalid="true">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">成功机率</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin"  name="successPercent" disabled="" th:value="${oppor.successPercent}">
                             </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">
-                                    <span class="red" style="color: red"> *</span>
-                                    客户名称
-                                </label>
+                        </td>
+                    </tr>
 
-                                <div class="col-sm-10">
-                                    <input id="username" name="username" class="form-control" value="222" required=""
-                                           disabled="" aria-required="true" aria-invalid="true">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">客户名称</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" th:value="${oppor.username}" name="username" disabled="" >
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">
-                                    <span class="red" style="color: red"> *</span>
-                                    概要
-                                </label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="summary" class="form-control error" value="555" required=""
-                                           disabled="" aria-required="true" aria-invalid="true">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">概要</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" name="summary" th:value="${oppor.summary}" disabled="">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">联系人</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" name="lName" class="form-control" value="666" disabled="">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">联系人</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" th:value="${oppor.lName}" name="lName" disabled="">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">联系人电话</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" name="lPhone" class="form-control" value="13243546" disabled="">
-                                </div>
+                    <tr class="active">
+                        <td style="width: 400px;">
+                            <label class="col-sm-3 control-label form_center">联系人电话</label>
+                        </td>
+                        <td style="width: 550px">
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" name="lPhone" th:value="${oppor.lPhone}" disabled="">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">
-                                    <span class="red" style="color: red"> *</span>
-                                    机会描述
-                                </label>
-
-                                <div class="col-sm-10">
-                                    <textarea id="cComment" cols="50" rows="4" name="cComment" class="form-control error"
-                                              disabled="" required="" aria-required="true" aria-invalid="true">666666</textarea>
-
-                                </div>
+                    <tr>
+                        <td>
+                            <label class="col-lg-3 control-label form_center">机会描述</label>
+                        </td>
+                        <td>
+                            <div class="col-lg-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <textarea class="form-control form_margin" rows="5" name="cComment"  th:text="${oppor.cComment}" disabled=""></textarea>
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">
-                                    <span class="red" style="color: red"> *</span>
-                                    创建人
-                                </label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" name="sName" class="form-control error" value="7898" required=""
-                                           disabled="" aria-required="true" aria-invalid="true">
-                                </div>
+                    <tr>
+                        <td>
+                            <label class="col-sm-3 control-label form_center">创建人</label></td>
+                        <td>
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" name="sName" th:value="${oppor.sName}" disabled="">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">创建时间</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="startDate" class="form-control error" id="shijian" value="1111"
-                                           disabled="" required="" aria-required="true" aria-invalid="true">
-                                </div>
+                    <tr>
+                        <td>
+                            <label class="col-sm-3 control-label form_center">创建时间</label></td>
+                        <td>
+                            <div class="col-sm-5">
+                                <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                                <input type="text" class="form-control form_margin" name="startDate" th:value="${oppor.startDate}" disabled="">
                             </div>
-                            <div class="hr-line-dashed"></div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">指派给</label>
-
-                                <div class="col-lg-10">
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <select class="form-control m-b" name="pUsername">
-                                                <option value="1">张三</option>
-                                                <option value="2">李四</option>
-                                                <option value="3">王五</option>
-                                                <option value="4">赵六</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                    <tr>
+                        <td>
+                            <label class="col-sm-3 control-label form_center">指派给</label>
+                        </td>
+                        <td>
+                            <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
+                                <select th:each="manager:${}" class="form-control m-b" name="pUsername" id="pUsername">
+                                    <option>京东</option>
+                                    <option>阿里巴巴</option>
+                                    <option>微软</option>
+                                </select>
                             </div>
+                        </td>
+                    </tr>
 
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">指派时间</label>
+                    <tr>
+                        <td>
+                            <label class="col-sm-3 control-label form_center">指派时间</label></td>
+                        <td>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control form_margin" name="pDate" id="shijian" value="">
+                                <!--<input type="text" name="pDate"  class="form-control"  disabled="">-->
+                            </div>
+                        </td>
+                    </tr>
 
-                                <div class="col-lg-10">
-                                    <input type="text" name="pDate" id="shijian2" class="form-control" value="">
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">保存内容</button>
-                                    <button class="btn btn-white" type="submit">取消</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <br>
+                    <tr style="height: 50px"></tr>
+                    <tr>
+
+                        <td style="position: absolute;left:300px">
+
+                            <button class="btn btn-success" style="margin-left: 180px" type="submit">保存内容</button>
+                            <button class="btn btn-info" style="margin-left: 20px" type="submit">取消</button>
+
+                        </td>
+                    </tr>
                 </div>
-            </div>
-            <div class="footer">
-                <div class="pull-right">
-                    By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
-                </div>
-                <div>
-                    <strong>Copyright</strong> H+ &copy; 2014
-                </div>
-            </div>
+            </table>
+        </form>
 
-        </div>
         <div class="footer">
             <div class="pull-right">
                 By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
@@ -442,20 +418,31 @@
                 <strong>Copyright</strong> H+ &copy; 2014
             </div>
         </div>
-
     </div>
 </div>
-</div>
+
+
 
 <!-- Mainly scripts -->
 <script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="../js/hplus.js"></script>
 <script src="../js/plugins/pace/pace.min.js"></script>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var nowDate = new Date();
+        var str = nowDate.getFullYear() + "-"
+            + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + " "
+            + nowDate.getHours() + ":" + nowDate.getMinutes() + ":"
+            + nowDate.getSeconds();
+        document.getElementById("shijian").value = str;
+    }
+</script>
 
 
 </body>

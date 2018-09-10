@@ -17,10 +17,10 @@ public interface OpportunityService {
     /**
      * 编辑销售机会
      * lzl
-     * @param id
+     * @param opportunity
      * @return
      */
-    List<Opportunity> modifyOpportunity(int id);
+    Opportunity modifyOpportunity(Opportunity opportunity);
 
     /**
      * 删除销售机会
@@ -28,7 +28,7 @@ public interface OpportunityService {
      * @param id
      * @return
      */
-    int deleteOpportunity(int id);
+    void deleteOpportunity(int id);
 
     /**
      *查询所有未指派的销售机会
@@ -41,5 +41,5 @@ public interface OpportunityService {
      * @param id
      * @return
      */
-    List<Opportunity> findById(int id);
+    Opportunity findById(int id);
 }
