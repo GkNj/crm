@@ -5,8 +5,8 @@ package com.nuc.sw.crm.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Service {
@@ -18,25 +18,14 @@ public class Service {
     private String sDetail;
     private String sState;
     private String sRequest;
+    private int uId;
+    private String sCreateDate;
+    private int cId;
 
     public Service() {
     }
 
-    @Override
-    public String toString() {
-        return "Service{" +
-                "sId=" + sId +
-                ", sType='" + sType + '\'' +
-                ", sDetail='" + sDetail + '\'' +
-                ", sState='" + sState + '\'' +
-                ", sRequest='" + sRequest + '\'' +
-                ", uId=" + uId +
-                ", sCreateDate=" + sCreateDate +
-                ", cId=" + cId +
-                '}';
-    }
-
-    public Service(String sType, String sDetail, String sState, String sRequest, int uId, Date sCreateDate, int cId) {
+    public Service(String sType, String sDetail, String sState, String sRequest, int uId, String sCreateDate, int cId) {
         this.sType = sType;
         this.sDetail = sDetail;
         this.sState = sState;
@@ -94,11 +83,11 @@ public class Service {
         this.uId = uId;
     }
 
-    public Date getsCreateDate() {
+    public String getsCreateDate() {
         return sCreateDate;
     }
 
-    public void setsCreateDate(Date sCreateDate) {
+    public void setsCreateDate(String sCreateDate) {
         this.sCreateDate = sCreateDate;
     }
 
@@ -110,11 +99,19 @@ public class Service {
         this.cId = cId;
     }
 
-    private int uId;
-    private Date sCreateDate;
-    private int cId;
 
 
-
-
+    @Override
+    public String toString() {
+        return "Service{" +
+                "sId=" + sId +
+                ", sType='" + sType + '\'' +
+                ", sDetail='" + sDetail + '\'' +
+                ", sState='" + sState + '\'' +
+                ", sRequest='" + sRequest + '\'' +
+                ", uId=" + uId +
+                ", sCreateDate='" + sCreateDate + '\'' +
+                ", cId=" + cId +
+                '}';
+    }
 }

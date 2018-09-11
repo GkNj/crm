@@ -15,38 +15,48 @@
 
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    <!-- Custom and plugin javascript -->
+    <script src="../js/hplus.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        .form_center{
+        .form_center {
             margin-left: 130px;
         }
-        .form_margin{
+
+        .form_margin {
             margin: 10px;
         }
     </style>
 
-    <script>
-        $(document).ready(function () {
+    <script type="text/javascript">
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/service/queryForCustomer", //此次url改为真正需要的url
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    $("#select").append(  //此处向select中循环绑定数据
+                        "<option value=" + item.cId + ">" + item.cName + "</option>");
+                });
+                console.log(data)
+            },
+        });
 
-            var url="create/queryForCustomer";
-            $.ajax({
-                type:"get",
-                url:url, //访问后台去数据库查询select的选项
-                success:function(userList){
-                    var unitObj=document.getElementById("mySelect"); //页面上的<html:select>元素
-                    if(userList!=null){ //后台传回来的select选项
-                        for(var i=0;i<userList.length;i++){
-                            //遍历后台传回的结果，一项项往select中添加option
-                            unitObj.options.add(new Option(userList[i].name,userList[i].name));
-                        }
-                    }
-                },
-                error:function(){
-                    J.alert('Error');
-                }
-            })
+        window.onload = function () {
+            var nowDate = new Date();
+            var str = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + " " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds();
+            var sCreateDate = document.getElementById("sCreateDate")
+            sCreateDate.value = str;
+            console.log("create ", sCreateDate.value)
+            // document.getElementById("shijian1").value=str;
+        }
 
-        })
     </script>
 </head>
 
@@ -84,8 +94,9 @@
                     </div>
 
                 </li>
-                <li >
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
@@ -95,7 +106,8 @@
                 </li>
 
                 <li>
-                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="../customer/customerinfo.html">客户信息管理</a>
                         </li>
@@ -104,11 +116,12 @@
                     </ul>
                 </li>
                 <li class="active">
-                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="distribute.html">服务分配</a>
+                        <li><a th:href="@{query}">服务分配</a>
                         </li>
                         <li><a href="handle.html">服务处理</a>
                         </li>
@@ -145,7 +158,7 @@
                         </li>
                     </ul>
                 </li>
-                <li >
+                <li>
                     <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
@@ -270,24 +283,24 @@
                 </ol>
             </div>
             <!--<div class="col-sm-8">-->
-                <!--<div class="title-action">-->
-                    <!--<a href="create.html" class="btn btn-primary">活动区域</a>-->
-                <!--</div>-->
+            <!--<div class="title-action">-->
+            <!--<a href="create.html" class="btn btn-primary">活动区域</a>-->
+            <!--</div>-->
             <!--</div>-->
         </div>
 
 
-            <form method="post" class="form-horizontal"  th:action="@{/create/add}">
+        <form method="post" class="form-horizontal" th:action="@{/service/add}">
 
-                <table class="table-striped ">
-                <div class="form-group" style="text-align: center" >
+            <table class="table-striped ">
+                <div class="form-group" style="text-align: center">
                     <tr class="active">
                         <td style="width: 400px;">
                             <label class="col-sm-3 control-label form_center">编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
                         </td>
                         <td style="width: 550px">
                             <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin"  name="sId">
+                                <input type="text" class="form-control form_margin" name="sId">
                             </div>
                         </td>
                     </tr>
@@ -300,9 +313,9 @@
                         <td>
                             <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
                                 <select class="form-control m-b" name="sType">
-                                    <option>投诉</option>
-                                    <option>建议</option>
-                                    <option>咨询</option>
+                                    <option value="投诉">投诉</option>
+                                    <option value="建议">建议</option>
+                                    <option value="咨询">咨询</option>
                                 </select>
                             </div>
                         </td>
@@ -325,10 +338,8 @@
                         </td>
                         <td>
                             <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
-                                <select class="form-control m-b" name="cId">
-                                    <option>京东</option>
-                                    <option>阿里巴巴</option>
-                                    <option>微软</option>
+                                <select class="form-control m-b" name="cId" id="select">
+                                    <option value="cId">--请选择--</option>
                                 </select>
                             </div>
                         </td>
@@ -336,7 +347,7 @@
                     <!--<div class="hr-line-dashed"></div>-->
                     <tr>
                         <td>
-                            <label class="col-lg-3 control-label form_center" >状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
+                            <label class="col-lg-3 control-label form_center">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
                         </td>
                         <td>
                             <div class="col-lg-5">
@@ -361,7 +372,7 @@
                         </td>
                         <td>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin" name="cId">
+                                <input type="text" class="form-control form_margin" name="uId" value="2">
                             </div>
                         </td>
                     </tr>
@@ -370,8 +381,11 @@
                         <td>
                             <label class="col-sm-3 control-label form_center">创建时间</label></td>
                         <td>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin" name="sCreateDate">
+                            <div class="col-sm-10">
+                                <input type="text" name="sCreateDate" class="form-control error" id="sCreateDate" value="1111"
+                                       required="" aria-required="true" aria-invalid="true">
+
+
                             </div>
                         </td>
                     </tr>
@@ -381,14 +395,14 @@
 
                         <td style="position: absolute;left:300px">
 
-                                <button class="btn btn-success" style="margin-left: 180px" type="submit">保存内容</button>
-                                <button class="btn btn-info" style="margin-left: 20px" type="submit">取消</button>
+                            <button class="btn btn-success" style="margin-left: 180px" type="submit">保存内容</button>
+                            <button class="btn btn-info" style="margin-left: 20px" type="submit">取消</button>
 
                         </td>
                     </tr>
                 </div>
-                </table>
-            </form>
+            </table>
+        </form>
 
         <div class="footer">
             <div class="pull-right">
@@ -400,18 +414,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- Mainly scripts -->
-<script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="../js/hplus.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
 
 
 </body>
