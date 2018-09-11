@@ -13,6 +13,8 @@ public interface TradeRepository extends JpaRepository<Trade,Integer> {
 
     List<Trade> findTradesByCId(int cId);
 
+    int countTradesByCId(int cId);
+
     @Modifying
     @Query(value = "update trade set t_address =?1,t_date =?2,t_outline =?3,t_remark =?4 where t_id =?5",nativeQuery = true)
     void updateLinkmanByLId(String address,String date,String outline,String remark,int id);
