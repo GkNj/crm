@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 <head>
 
@@ -24,7 +26,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
           crossorigin="anonymous">
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -38,9 +40,22 @@
                                 <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="../index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                                    </span> <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span>
+                                                            <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -281,53 +296,39 @@
                                     <th>编号</th>
                                     <th>姓名</th>
                                     <th>账号</th>
-                                    <th>权限等级</th>
+                                    <th>性别</th>
                                     <th>职位</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="gradeA">
-                                    <td>01</td>
-                                    <td>杨晓辉</td>
-                                    <td>youngxhui</td>
-                                    <td class="center">2</td>
-                                    <td class="center">系统管理员</td>
+
+
+                                <!--循环-->
+                                <!--/*@thymesVar id="users" type="com.nuc.sw.crm.entity.User"*/-->
+                                <tr class="gradeA" th:each="user:${users}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.name}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.sex}"></td>
+
+                                    <td class="center" th:text="${user.position}"></td>
+
                                     <td class="center">
-                                        <i class="fas fa-wrench" data-toggle="modal" data-target="#myModal"
-                                           onclick="transmit(1,'杨晓辉','youngxhui','2','admin')"></i>
+                                        </i>
                                         &nbsp;
-                                        <i class="fas fa-user-minus"></i>
+
+                                        <i class="fas fa-wrench" data-toggle="modal" data-target="#myModal"
+                                           th:onclick="'javascript:transmit('+${user.id}+',\''+${user.name}+'\','+${user.username}+','+${user.sex}+',\''+${user.position}+'\')'"></i>
+                                        &nbsp;
+                                        &nbsp;
+                                        &nbsp;
+                                        <i class="fas fa-user-minus"
+                                           th:onclick="'javascript:deleteUser('+${user.id}+')'"></i>
                                     </td>
                                 </tr>
 
-                                <tr class="gradeA">
-                                    <td>02</td>
-                                    <td>高凯</td>
-                                    <td>gk</td>
-                                    <td class="center">2</td>
-                                    <td class="center">系统管理员</td>
-                                    <td class="center">
-                                        <i class="fas fa-wrench" data-toggle="modal" data-target="#myModal"
-                                           onclick="transmit(2,'高凯','gk','2','admin')"></i>
-                                        &nbsp;
-                                        <i class="fas fa-user-minus"></i>
-                                    </td>
-                                </tr>
-
-                                <tr class="gradeA">
-                                    <td>03</td>
-                                    <td>吴亚斌</td>
-                                    <td>wuyabin</td>
-                                    <td class="center">2</td>
-                                    <td class="center">系统管理员</td>
-                                    <td class="center">
-                                        <i class="fas fa-wrench" data-toggle="modal" data-target="#myModal"
-                                           onclick="transmit(3,'吴亚斌','wuyabin','2','admin')"></i>
-                                        &nbsp;
-                                        <i class="fas fa-user-minus"></i>
-                                    </td>
-                                </tr>
+                                <!---->
 
 
                                 </tbody>
@@ -336,7 +337,7 @@
                                     <th>编号</th>
                                     <th>姓名</th>
                                     <th>账号</th>
-                                    <th>权限等级</th>
+                                    <th>性别</th>
                                     <th>职位</th>
                                     <th>操作</th>
                                 </tr>
@@ -347,8 +348,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
+
         <div class="footer">
             <div class="pull-right">
                 By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
@@ -381,41 +383,43 @@
                             <label class="col-sm-3 control-label">名字：</label>
                             <div class="col-sm-8">
                                 <input id="name" name="lastname" class="form-control valid" type="text"
-                                       aria-required="true"
+                                       aria-required="true" required="required"
                                        aria-invalid="false">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户名：</label>
                             <div class="col-sm-8">
-                                <input id="username" name="username" class="form-control error" type="text"
+                                <input id="username" name="username" class="form-control" type="text"
                                        aria-required="true"
-                                       aria-invalid="true">
+                                       aria-invalid="true" readonly="readonly">
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">权限等级：</label>
+                            <label class="col-sm-3 control-label">性别：</label>
                             <div class="col-sm-8">
-                                <select name="level" id="level" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+
+                                <select name="sex" id="sex" class="form-control" required="required">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+
                                 </select>
 
-                                <!-- <input id="level" name="password" class="form-control" type="text"> -->
+
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">职位</label>
                             <div class="col-sm-8">
                                 <!-- <input id="position" name="password" class="form-control" type="text"> -->
-                                <select name="position" id="position" class="form-control">
-                                    <option value="root">高级管理员</option>
-                                    <option value="admin">系统管理员</option>
-                                    <option value="manager">客户经理</option>
-                                    <option value="director">销售主管</option>
-                                    <option value="executive">高管</option>
+                                <select name="position" id="position" class="form-control" required="required">
+                                    <option value="ROOT">高级管理员</option>
+                                    <option value="ADMIN">系统管理员</option>
+                                    <option value="AM">客户经理</option>
+                                    <option value="SA">销售主管</option>
+                                    <option value="SM">高管</option>
                                 </select>
                             </div>
                         </div>
@@ -444,12 +448,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <form class="form-horizontal m-t" id="signupFor">
+                    <form class="form-horizontal m-t" id="signupFor" th:action="@{/permission/add}" method="post">
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">名字：</label>
                             <div class="col-sm-8">
-                                <input id="add_name" name="lastname" class="form-control valid" type="text"
+                                <input id="add_name" name="name" class="form-control valid" type="text"
                                        aria-required="true"
                                        aria-invalid="false">
                             </div>
@@ -457,7 +461,9 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">用户名：</label>
                             <div class="col-sm-8">
-                                <input id="add_username" name="username" class="form-control error" type="text"
+                                <input id="add_username" name="username" class="form-control" type="text"
+                                       onblur="checkUsername(this.value)"
+                                       required="required"
                                        aria-required="true"
                                        aria-invalid="true">
                             </div>
@@ -465,33 +471,33 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">密码：</label>
                             <div class="col-sm-8">
-                                <input id="add_password" name="password" class="form-control error" type="password"
-                                       aria-required="true" aria-invalid="true">
+                                <input id="add_password" name="password" class="form-control" type="password"
+                                       aria-required="true" aria-invalid="true" required="required">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">权限等级：</label>
-                            <div class="col-sm-8">
-                                <select name="level" id="add_level" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
 
-                                <!-- <input id="level" name="password" class="form-control" type="text"> -->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性别：</label>
+                            <div class="col-sm-8">
+
+                                <select name="sex" class="form-control">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
                             </div>
                         </div>
+
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">职位</label>
                             <div class="col-sm-8">
                                 <!-- <input id="position" name="password" class="form-control" type="text"> -->
                                 <select name="position" id="add_position" class="form-control">
-                                    <option value="root">高级管理员</option>
-                                    <option value="admin">系统管理员</option>
-                                    <option value="manager">客户经理</option>
-                                    <option value="director">销售主管</option>
-                                    <option value="executive">高管</option>
+                                    <option value="ROOT">高级管理员</option>
+                                    <option value="ADMIN">系统管理员</option>
+                                    <option value="AM">客户经理</option>
+                                    <option value="SA">销售主管</option>
+                                    <option value="SM">高管</option>
                                 </select>
                             </div>
                         </div>
@@ -529,19 +535,64 @@
 
 <!-- Page-Level Scripts -->
 
-<script type="text/javascript">
+<script th:inline="javascript">
+
+    function checkUsername(username) {
+        var addUserNameInput = document.getElementById("add_username")
+        var u = username
+        console.log("u is ", u)
+        axios.get('http://localhost:8080/permission/checkUsername', {
+            params: {
+                'username': u
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                if (response.data == '200') {
+                    addUserNameInput.classList.remove("error")
+                } else {
+                    addUserNameInput.placeholder = "名称重复，请重新输入"
+                    addUserNameInput.value = ""
+                    addUserNameInput.classList.add("error")
+                }
+            })
+            .catch(function (error) {
+
+                console.log(error);
+            });
+
+    }
+
+    function deleteUser(id) {
+        console.log("id is ", id)
+        axios.get('http://localhost:8080/permission/del', {
+            params: {
+                'userId': id
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                location.reload()
+            })
+            .catch(function (error) {
+
+                console.log(error);
+            });
+    }
+
     // $("#myModal").modal("hide"); //加载页面首先隐藏模态框，指向模态框的ID
-    function transmit(id, name, username, level, position) {
+    function transmit(id, name, username, sex, position) {
         // $("#myModal").modal("show"); //显示模态框
 
-        console.log("id= ", id, "name= ", name, "username = ", username, "level=", level, "position = ", position)
+        console.log("id= ", id, "name= ", name, "username = ", username, "position = ", position)
 
 
         //向模态框中传值
         $('#id').val(id);
         $('#name').val(name)
         $('#username').val(username)
-        $('#level').val(level)
+
+        $('#sex').val(sex)
         $('#position').val(position)
     }
 
@@ -551,25 +602,6 @@
 
         /* Init DataTables */
         var oTable = $('#editable').dataTable();
-
-        /* Apply the jEditable handlers to the table */
-        // oTable.$('td').editable('../example_ajax.php', {
-        //     "callback": function (sValue, y) {
-        //         var aPos = oTable.fnGetPosition(this);
-        //         oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-        //     },
-        //     "submitdata": function (value, settings) {
-        //         return {
-        //             "row_id": this.parentNode.getAttribute('id'),
-        //             "column": oTable.fnGetPosition(this)[2]
-        //         };
-        //     },
-
-        //     "width": "90%",
-        //     "height": "100%"
-        // });
-
-
     });
 
     function fnClickAddRow() {
@@ -582,6 +614,7 @@
         ]);
 
     }
+
 </script>
 
 
