@@ -33,25 +33,43 @@ public interface DictionaryService {
      * @param dictionary
      * @return list
      */
-    List<Dictionary> updateDictionary(Dictionary dictionary);
+    Dictionary updateDictionary(Dictionary dictionary);
 
     /**
      * 删除数据字典信息
      * @param id
-     * @return int
      */
-    int deleteDictionary(int id);
+    void deleteDictionary(int id);
     /**
      *  添加数据条目
      * @param dictionary
      * @return
      */
-    int addDictionary(Dictionary dictionary);
+    Dictionary addDictionary(Dictionary dictionary);
 
     /**
      * 查询所有字典数据
      * @return List<dictionary>
      */
     List<Dictionary> findAllDictionary();
+
+    /**
+     * 不是到干啥的啦啦啦阿拉啦
+     * @return
+     */
+    List<Dictionary> findSatifaction();
+
+    /**
+     * 依据父节点删除信息
+     * @param id
+     */
+    void deleteByParentId(int id);
+
+    /**
+     * 依据父节点查询子节点的id值
+     * @param id
+     * @return list
+     */
+//    List<Dictionary> findDictionariesIdByParentID(int id);
 
 }

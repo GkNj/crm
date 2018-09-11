@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 
 <head>
     <meta charset="utf-8">
@@ -54,7 +57,7 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
 
-                        <li><a th:href="@{/templates/opportunity/opportunitymanage.html}">营销机会管理</a>
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
                         <li><a th:href="@{/createplan.html}">客户开发计划</a>
 
@@ -121,20 +124,11 @@
                         </li>
                         <li><a th:href="@{/product.html}">查询产品信息</a>
                         </li>
-<<<<<<< HEAD:src/main/resources/static/oppportunityeditor.html
-                        <li><a href="../templates/basic/stock.html">查询库存</a>
-=======
-                        <li><a th:href="@{/stock.html}">查询库存</a>
->>>>>>> master:src/main/resources/templates/opportunity/createopportunity.html
+                        <li><a href="../basic/stock.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
-<<<<<<< HEAD:src/main/resources/static/oppportunityeditor.html
-                <li >
-                    <a href="../templates/permission/permission.html"><i class="fa fa-cogs"></i> <span
-                            class="nav-label">权限管理</span></a>
-                </li>
-=======
+
                         <li><a href="mailbox.html">数据字典管理</a>
                         </li>
                         <li><a href="mail_detail.html">查询产品信息</a>
@@ -142,11 +136,11 @@
                         <li><a href="mail_compose.html">查询库存</a>
                         </li>
                     </ul>
-=======
+
                 <li>
-                    <a th:href="@{/templates/permission.html}"><i class="fa fa-cogs"></i> <span
+                    <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
->>>>>>> lzl:src/main/resources/templates/opportunity/createopportunity.html
+
                 </li>
 
             </ul>
@@ -298,15 +292,15 @@
                     <div class="ibox-content">
 
                         <form method="post" class="form-horizontal" action="/opportunity/add">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">编号</label>
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">编号</label>-->
 
-                                <div class="col-sm-10">
-                                    <input type="text" name="num" class="form-control" value="">
-                                </div>
-                            </div>
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="text" name="num" class="form-control" value="">-->
+                                <!--</div>-->
+                            <!--</div>-->
 
-                            <div class="hr-line-dashed"></div>
+                            <!--<div class="hr-line-dashed"></div>-->
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">机会来源</label>
