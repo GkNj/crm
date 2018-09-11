@@ -148,6 +148,28 @@ public class User implements Serializable, UserDetails {
     }
 
     public String getPosition() {
+//        switch (position) {
+//            case "ROOT":
+//                position = "超级管理员";
+//                break;
+//            case "ADMIN":
+//                position = "系统管理";
+//                break;
+//            case "AM":
+//                position = "客户经理";
+//                break;
+//            case "SA":
+//                position = "销售主管";
+//                break;
+//            case "SM":
+//                position = "高管";
+//                break;
+//            default:
+//                position = "未知职位";
+//                break;
+//        }
+
+
         return position;
     }
 
@@ -168,3 +190,4 @@ public class User implements Serializable, UserDetails {
                 '}';
     }
 }
+
