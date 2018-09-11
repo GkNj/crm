@@ -28,12 +28,12 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("opportunity/{path}")
-    public String opportunity(@PathVariable("path")String path){
-        System.out.println("执行");
-
-        return "opportunity/"+path;
-
-    }
+//    @RequestMapping("opportunity/{path}")
+//    public String opportunity(@PathVariable("path")String path){
+//        System.out.println("执行");
+//
+//        return "opportunity/"+path;
+//
+//    }
 
 }
