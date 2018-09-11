@@ -11,7 +11,7 @@ import java.util.List;
 public interface OpprotunityRepository extends JpaRepository<Opportunity,Integer> {
 
 
-    List<Opportunity> findOpportunityById(int id);
+    Opportunity findOpportunityById(int id);
 
     List<Opportunity> findOpportunitiesByState(String state);
 

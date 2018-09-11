@@ -1,18 +1,10 @@
 package com.nuc.sw.crm.Param;
 
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
-@Entity
-public class ServiceParm {
 
-    @Id
-    @GeneratedValue
+public class ServiceParam {
     private int sId;
 
     private String sType;
@@ -22,32 +14,11 @@ public class ServiceParm {
     private String sState;
     @NotNull(message = "请求不能为空")
     private String sRequest;
+    private int uId;
+    private String sCreateDate;
+    private int cId;
 
-    public ServiceParm() {
-    }
-
-    @Override
-    public String toString() {
-        return "Service{" +
-                "sId=" + sId +
-                ", sType='" + sType + '\'' +
-                ", sDetail='" + sDetail + '\'' +
-                ", sState='" + sState + '\'' +
-                ", sRequest='" + sRequest + '\'' +
-                ", uId=" + uId +
-                ", sCreateDate=" + sCreateDate +
-                ", cId=" + cId +
-                '}';
-    }
-
-    public ServiceParm(String sType, String sDetail, String sState, String sRequest, int uId, Date sCreateDate, int cId) {
-        this.sType = sType;
-        this.sDetail = sDetail;
-        this.sState = sState;
-        this.sRequest = sRequest;
-        this.uId = uId;
-        this.sCreateDate = sCreateDate;
-        this.cId = cId;
+    public ServiceParam() {
     }
 
     public int getsId() {
@@ -98,11 +69,11 @@ public class ServiceParm {
         this.uId = uId;
     }
 
-    public Date getsCreateDate() {
+    public String getsCreateDate() {
         return sCreateDate;
     }
 
-    public void setsCreateDate(Date sCreateDate) {
+    public void setsCreateDate(String sCreateDate) {
         this.sCreateDate = sCreateDate;
     }
 
@@ -114,10 +85,28 @@ public class ServiceParm {
         this.cId = cId;
     }
 
+    public ServiceParam(int sId, String sType, @NotNull(message = "概要不能为空") String sDetail, String sState, @NotNull(message = "请求不能为空") String sRequest, int uId, String sCreateDate, int cId) {
+        this.sId = sId;
+        this.sType = sType;
+        this.sDetail = sDetail;
+        this.sState = sState;
+        this.sRequest = sRequest;
+        this.uId = uId;
+        this.sCreateDate = sCreateDate;
+        this.cId = cId;
+    }
 
-    private int uId;
-    private Date sCreateDate;
-    private int cId;
-
-
+    @Override
+    public String toString() {
+        return "ServiceParam{" +
+                "sId=" + sId +
+                ", sType='" + sType + '\'' +
+                ", sDetail='" + sDetail + '\'' +
+                ", sState='" + sState + '\'' +
+                ", sRequest='" + sRequest + '\'' +
+                ", uId=" + uId +
+                ", sCreateDate='" + sCreateDate + '\'' +
+                ", cId=" + cId +
+                '}';
+    }
 }

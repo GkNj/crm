@@ -21,6 +21,12 @@ public class Role implements Serializable {
      */
     private String name;
 
+    /**
+     * 角色介绍
+     */
+    private String introduction;
+
+
 
     public Long getId() {
         return id;
@@ -38,6 +44,14 @@ public class Role implements Serializable {
         this.name = name;
     }
 
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
     @Override
     public String toString() {
