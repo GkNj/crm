@@ -280,13 +280,12 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div class="dataTables_wrapper form-inline">
-                                        <table class="table table-hover">
+                                        <table class="table table-striped table-bordered table-hover dataTables-example" id="editable">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>字典类型</th>
                                                 <th>数据名称</th>
-                                                <!--<th>字典排序值</th>-->
                                                 <th>所属字典类型</th>
                                                 <th>可否编辑</th>
                                                 <th>操作</th>
@@ -297,56 +296,19 @@
                                                 <td th:text="${dictionary.id}">#</td>
                                                 <td th:text="${dictionary.typeKey}">字典类型</td>
                                                 <td th:text="${dictionary.typeValue}">数据名称</td>
-                                                <!--<td th:text="${dictionary.IndexNub}">字典排序值</td>-->
                                                 <td th:text="${dictionary.parentID}">所属字典类型id</td>
                                                 <td th:text="${dictionary.editable}">可否编辑(0否1是)</td>
                                                 <td th:if="${dictionary.editable==1}"></th:if>
-                                                    <!--<a class="like" href="javascript:void(0)" title="Like" th:onclick="'selectDictionary('+${dictionary}+');'"-->
-                                                    <!--<a class="like" href="javascript:void(0)" title="Like" th:onclick="'selectNumber('+${dictionary.id}+','+${dictionary.typeKey}+','+${dictionary.typeValue}+','+${dictionary.parentID}');'"-->
-                                                    <a class="like" href="javascript:void(0)" title="Like" th:onclick="'selectNumber(\''+${dictionary.id}+'\',\''+${dictionary.typeKey}+'\',\''+${dictionary.typeValue}+'\',\''+${dictionary.parentID}+'\',\''+${dictionary.editable}+'\');'"
-
+                                                  <a class="like" href="javascript:void(0)" title="Like" th:onclick="'selectNumber(\''+${dictionary.id}+'\',\''+${dictionary.typeKey}+'\',\''+${dictionary.typeValue}+'\',\''+${dictionary.parentID}+'\',\''+${dictionary.editable}+'\');'"
                                                        data-toggle="modal" data-target="#myModal1"><i
                                                             class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a class="like" href="javascript:void(0)" title="Like"><i
+                                                    <a th:href="'/basic/deleteDictionary?id='+${dictionary.id}" class="like" href="javascript:void(0)" title="Like" th:onclick="'deleteNumber(\''+${dictionary.id}+'\');'"><i
                                                             class="fa fa-trash-o"></i></a>
                                                 </td>
                                                 <td th:if="${dictionary.editable==0}"></th:if></td>
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="dataTables_info" id="DataTables_Table_0_info" role="alert"
-                                                     aria-live="polite" aria-relevant="all" >显示 1 到 10 项，共 57 项
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6" >
-                                                <div class="dataTables_paginate paging_simple_numbers" style="hight:37px"
-                                                     id="DataTables_Table_0_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button previous disabled"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"
-                                                            id="DataTables_Table_0_previous"><a href="#">上一页</a></li>
-                                                        <li class="paginate_button active"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"><a href="#">1</a>
-                                                        </li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">2</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">3</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">4</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">5</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">6</a></li>
-                                                        <li class="paginate_button next"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"
-                                                            id="DataTables_Table_0_next"><a href="#">下一页</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -555,48 +517,50 @@
 <!-- Sparkline demo data  -->
 <script src="../js/demo/sparkline-demo.js"></script>
 
+<!-- Data Tables -->
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 <script type="text/javascript">
+    $(document).ready(function () {
 
+        $('.dataTables-example').dataTable();
 
-
-    // 点击添加size属性
-    window.selectFocus=function(that) {
-    $(that).attr("size","5");
-    }
-    //点击删除size属性
-    window.selectClick=function(that) {
-        $(that).parent().removeAttr("size");
-        $(that).parent().blur();
-        $(that).parent().children("[selected='selected']").removeAttrs("selected");
-        $(that).attr("selected","");
-
-    }
-
-    function selectNumber(id,key,value,pid,edit) {
-        //默认选中
-        var num=$("#select1").find("option");
-        for (var j=0;j<num.length;j++){
-            if($(num[j]).val()==(pid)){
-                num[j].selected=true;
-                break;
-            }
+        // 点击添加size属性
+        window.selectFocus = function (that) {
+            $(that).attr("size", "5");
         }
-        //默认显示
-       $("#m_typeKey").val(key);
-       $("#m_typeKey").attr("value",key);
-       $("#m_typeValue").val(value);
-       $("#m_typeValue").attr("value",value);
-       $("#m_id").val(id);
+        //点击删除size属性
+        window.selectClick = function (that) {
+            $(that).parent().removeAttr("size");
+            $(that).parent().blur();
+            $(that).parent().children("[selected='selected']").removeAttrs("selected");
+            $(that).attr("selected", "");
 
-    }
-    function selectDictionary(object) {
-        alert(object);
+        }
 
-    }
-    function delect(id) {
-        alert(id)
-    }
+        function selectNumber(id, key, value, pid, edit) {
+            //默认选中
+            var num = $("#select1").find("option");
+            for (var j = 0; j < num.length; j++) {
+                if ($(num[j]).val() == (pid)) {
+                    num[j].selected = true;
+                    break;
+                }
+            }
+            //默认显示
+            $("#m_typeKey").val(key);
+            $("#m_typeKey").attr("value", key);
+            $("#m_typeValue").val(value);
+            $("#m_typeValue").attr("value", value);
+            $("#m_id").val(id);
+
+        }
+
+        function deleteNumber(id) {
+            alert(id)
+        }
+    });
 </script>
 
 </body>

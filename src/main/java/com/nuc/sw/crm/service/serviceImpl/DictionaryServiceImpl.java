@@ -30,6 +30,43 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
+    public List<Dictionary> findSatifaction() {
+        return dictionaryRepository.findDictionaryByParentID(14);
+    }
+
+    /**
+     * 1.根据p_id=id查到所有一级子节点
+     * 2.根据一级子节点的id查二级子节点
+     *             ...(直到)
+     * 4.
+     */
+    @Override
+    public void deleteByParentId(int id) {
+        List<Dictionary> ids=dictionaryRepository.findDictionaryByParentID(id);
+        System.out.println(ids.toString()+"11111");
+        System.out.println(id);
+        deleteDictionary(id);
+        if(ids.size()==0){
+            System.out.println("进来了   不知道要干啥");
+//            deleteDictionary(id);
+            return;
+        }
+        for(int i=0;i<ids.size();i++){
+            System.out.println(ids.toString()+i);
+            System.out.println("现在用的是这个"+ids.get(i).getId());
+            id=ids.get(i).getId();
+            deleteByParentId(id);
+        }
+//        dictionaryRepository.findDictionaryByParentID(id);
+//        dictionaryRepository.deleteByParentID(id);
+    }
+
+//    @Override
+//    public List<Dictionary> findDictionariesIdByParentID(int id) {
+//         return dictionaryRepository.findDictionaryByParentID(id);
+//    }
+
+    @Override
     public List<Stock> findAllStock() {
         return stockRepository.findAll();
     }
@@ -52,9 +89,8 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public int deleteDictionary(int id) {
-        int i=deleteDictionary(id);
-        return i;
+    public void deleteDictionary(int id) {
+        dictionaryRepository.deleteById(id);
     }
 
     @Override
