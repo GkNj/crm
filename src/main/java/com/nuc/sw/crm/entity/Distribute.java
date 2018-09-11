@@ -3,11 +3,12 @@ package com.nuc.sw.crm.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+
 
 @Entity
-public class distribute {
+public class Distribute {
 
     @Id
     @GeneratedValue
@@ -19,14 +20,14 @@ public class distribute {
     /**
      * 分配时间
      */
-    private Date dTime;
+    private String dTime;
 
-    public distribute() {
+    public Distribute() {
     }
 
     @Override
     public String toString() {
-        return "distribute{" +
+        return "Distribute{" +
                 "dId=" + dId +
                 ", uId=" + uId +
                 ", dTime=" + dTime +
@@ -34,7 +35,7 @@ public class distribute {
                 '}';
     }
 
-    public distribute(int uId, Date dTime, int sId) {
+    public Distribute(int uId, String dTime, int sId) {
         this.uId = uId;
         this.dTime = dTime;
         this.sId = sId;
@@ -56,11 +57,11 @@ public class distribute {
         this.uId = uId;
     }
 
-    public Date getdTime() {
+    public String getdTime() {
         return dTime;
     }
 
-    public void setdTime(Date dTime) {
+    public void setdTime(String dTime) {
         this.dTime = dTime;
     }
 
