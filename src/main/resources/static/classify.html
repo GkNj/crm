@@ -328,7 +328,7 @@
                 </div>
             </div>
         </div>
-
+        <div></div>
         <div class="footer">
             <div class="pull-right">
                 By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
@@ -367,132 +367,160 @@
 <script src="assets/jquery.min.js"></script>
 <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
 <script src="ga.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 <script>
+
     $(function () {
-        var pieChart = echarts.init(document.getElementById("pie"));
-        var pieoption = {
-            title: {
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
+        var chartsDate;
+        axios.get('/statistic/getCharts')
+            .then(function(response) {
+                chartsDate=response.data;
+                console.log(chartsDate);
+                var res1=[];
+                var res2=[];
+                var res3=[];
+                var ctype= chartsDate.ctype;
+                console.log(ctype);
+                console.log(Object.keys(ctype));
+                //格式化饼形图数据
+                for ( var i in chartsDate.ctype){
+                    var obj = new Object()
+                    alert(chartsDate.ctype[i]);
+                    obj.name=i;
+                    obj.value=chartsDate.ctype[i];
+                    res1.push(obj);
+                }
+                for ( var i in chartsDate.credit){
+                    var obj = new Object()
+                    alert(chartsDate.credit[i]);
+                    obj.name=i;
+                    obj.value=chartsDate.credit[i];
+                    res2.push(obj);
+                }
+                for ( var i in chartsDate.satisfaction){
+                    var obj = new Object()
+                    alert(chartsDate.satisfaction[i]);
+                    obj.name=i;
+                    obj.value=chartsDate.satisfaction[i];
+                    res3.push(obj);
+                }
 
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: {show: true},
-                    dataView: {show: true, readOnly: false},
-                    magicType: {
-                        show: true,
-                        type: ['pie', 'funnel']
-                    },
-                    restore: {show: true},
-                    saveAsImage: {show: true}
-                }
-            },
-            calculable: true,
-            series: [
-                {
-                    name: '面积模式',
-                    type: 'pie',
-                    radius: [20, 90],
-                    roseType: 'area',
-                    data: [
-                        {value: 10, name: '普通客户'},
-                        {value: 5, name: '重点开发客户'},
-                        {value: 15, name: '大客户'},
-                        {value: 25, name: '合作伙伴'},
-                        {value: 20, name: '战略合作伙伴'},
-                    ]
-                }
-            ]
-        };
-        pieChart.setOption(pieoption);
-        var pieChart1 = echarts.init(document.getElementById("pie1"));
-        var pieoption1 = {
-            title: {
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
 
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: {show: true},
-                    dataView: {show: true, readOnly: false},
-                    magicType: {
-                        show: true,
-                        type: ['pie', 'funnel']
+                var pieChart = echarts.init(document.getElementById("pie"));
+                var pieoption = {
+                    title: {
+                        x: 'center'
                     },
-                    restore: {show: true},
-                    saveAsImage: {show: true}
-                }
-            },
-            calculable: true,
-            series: [
-                {
-                    name: '面积模式',
-                    type: 'pie',
-                    radius: [20, 90],
-                    roseType: 'area',
-                    data: [
-                        {value: 10, name: '1'},
-                        {value: 5, name: '2'},
-                        {value: 15, name: '3'},
-                        {value: 25, name: '4'},
-                        {value: 20, name: '5'},
-                    ]
-                }
-            ]
-        };
-        pieChart1.setOption(pieoption1);
-        var pieChart2 = echarts.init(document.getElementById("pie2"));
-        var pieoption2 = {
-            title: {
-                x: 'center'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
 
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: {show: true},
-                    dataView: {show: true, readOnly: false},
-                    magicType: {
+                    toolbox: {
                         show: true,
-                        type: ['pie', 'funnel']
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
                     },
-                    restore: {show: true},
-                    saveAsImage: {show: true}
-                }
-            },
-            calculable: true,
-            series: [
-                {
-                    name: '面积模式',
-                    type: 'pie',
-                    radius: [20, 90],
-                    roseType: 'area',
-                    data: [
-                        {value: 10, name: '1'},
-                        {value: 5, name: '2'},
-                        {value: 15, name: '3'},
-                        {value: 25, name: '4'},
-                        {value: 20, name: '5'},
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            // data: [
+                            //     {value: 10, name: '普通客户'},
+                            //     {value: 5, name: '重点开发客户'},
+                            //     {value: 15, name: '大客户'},
+                            //     {value: 25, name: '合作伙伴'},
+                            //     {value: 20, name: '战略合作伙伴'},
+                            // ]
+                            data:res1
+                        }
                     ]
-                }
-            ]
-        };
-        pieChart2.setOption(pieoption2);
+                };
+                pieChart.setOption(pieoption);
+                var pieChart1 = echarts.init(document.getElementById("pie1"));
+                var pieoption1 = {
+                    title: {
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            data:res2
+                        }
+                    ]
+                };
+                pieChart1.setOption(pieoption1);
+                var pieChart2 = echarts.init(document.getElementById("pie2"));
+                var pieoption2 = {
+                    title: {
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            data: res3
+                        }
+                    ]
+                };
+                pieChart2.setOption(pieoption2);
+
+            });
 
 
         function editRow(row) {

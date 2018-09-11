@@ -17,5 +17,10 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Modifying
     @Query(value = "update customer set c_address =?1,c_class =?2,c_credit =?3,c_satisfaction =?4,c_email =?5,c_post =?6,c_website =?7 where c_id =?8",nativeQuery = true)
     void updateCustomerByCId(String address,String cClass,int credit,int satisfaction,String email,String post,String website,int id);
+    @Modifying
+    @Query(value = "select c_class,count(*) num from customer ",nativeQuery = true)
+    List findGroupByCClass();
 
+    @Query(value = "select s_type, count(*) from service group by s_type ",nativeQuery = true)
+    List findGroupByService();
 }
