@@ -42,13 +42,11 @@ class UserServiceImpl : UserDetailsService, UserService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
 
-        val user = userRepository.findUserByUsername(username)
+        val user = userRepository.findUserByUsername(username)?.get(0)
         println("user is $user")
 
-        return user
+        return user!!
     }
-}
-
 
 
     /**
