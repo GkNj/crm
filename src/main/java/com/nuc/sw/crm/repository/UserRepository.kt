@@ -2,6 +2,7 @@ package com.nuc.sw.crm.repository
 
 import com.nuc.sw.crm.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
 /**
@@ -17,6 +18,7 @@ interface UserRepository : JpaRepository<User, Long> {
      */
     fun findUserByUsername(username: String): List<User>?
 
+    @Query("select * from user where position='AM' and id not in (select p_id from opportunity where state='开发中')", nativeQuery = true)
     fun findUserByPosition(position:String):List<User>
 
 

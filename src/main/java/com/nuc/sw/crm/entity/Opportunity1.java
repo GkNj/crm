@@ -1,42 +1,23 @@
 package com.nuc.sw.crm.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+
+import javax.persistence.*;
 
 @Entity
-public class Opportunity {
+public class Opportunity1 {
     @Id
     @GeneratedValue
-    //机会id
-
     private int id;
-//    @Column(nullable = false)
-    //机会编号
-
-    private int num;
     //机会来源
-
     private String resource;
     //机会状态
-    @Column(columnDefinition = "未开发")//开发中  开发失败  开发成功
     private String state;
     //客户id
-
-//    @Column(nullable = false)
-    private int cId;
+    private String cName;
     //客户姓名
-
-//    @Column(nullable = false)
-    private String username;
-    //成功几率
-
-//    @Column(nullable = false)
     private int successPercent;
     //机会概要
-
-//    @Column(nullable = false)
     private String summary;
     //联系人姓名
 
@@ -45,55 +26,17 @@ public class Opportunity {
 
     private String lPhone;
     //机会描述
-
-//    @Column(nullable = false)
     private String cComment;
     //创建人
-
-//    @Column(nullable = false)
     private String sName;
     //创建时间
-
-//    @Column(nullable = false)
     private String startDate;
-    //指派人
-
-//    @Column(nullable = false)
-    private String pUsername;
     //指派人id
-
-//    @Column(nullable = false)
-    private int pId;
+    @ManyToOne(cascade =CascadeType.ALL)
+    @JoinColumn(name = "p_id",referencedColumnName = "id")
+    private User pId;
     //指派时间
-
     private String pDate;
-
-
-    public String getpDate() {
-        return pDate;
-    }
-
-    public void setpDate(String pDate) {
-        this.pDate = pDate;
-    }
-
-
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
     public int getId() {
         return id;
@@ -101,15 +44,6 @@ public class Opportunity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
     }
 
     public String getResource() {
@@ -120,20 +54,24 @@ public class Opportunity {
         this.resource = resource;
     }
 
-    public int getcId() {
-        return cId;
+    public String getState() {
+        return state;
     }
 
-    public void setcId(int cId) {
-        this.cId = cId;
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName;
     }
 
     public int getSuccessPercent() {
         return successPercent;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
     }
 
     public void setSuccessPercent(int successPercent) {
@@ -184,33 +122,26 @@ public class Opportunity {
         return startDate;
     }
 
-    public String getpUsername() {
-        return pUsername;
-    }
-
-    public void setpUsername(String pUsername) {
-        this.pUsername = pUsername;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
 
-
-    public int getpId() {
-        return pId;
+    public String getpDate() {
+        return pDate;
     }
 
-    public void setpId(int pId) {
-        this.pId = pId;
+    public void setpDate(String pDate) {
+        this.pDate = pDate;
     }
 
     @Override
     public String toString() {
-        return "Opportunity{" +
+        return "Opportunity1{" +
                 "id=" + id +
-                ", num=" + num +
                 ", resource='" + resource + '\'' +
                 ", state='" + state + '\'' +
-                ", cId=" + cId +
-                ", username='" + username + '\'' +
+                ", cName='" + cName + '\'' +
                 ", successPercent=" + successPercent +
                 ", summary='" + summary + '\'' +
                 ", lName='" + lName + '\'' +
@@ -218,8 +149,7 @@ public class Opportunity {
                 ", cComment='" + cComment + '\'' +
                 ", sName='" + sName + '\'' +
                 ", startDate='" + startDate + '\'' +
-                ", pUsername='" + pUsername + '\'' +
-                ", pId='" + pId + '\'' +
+                ", pId=" + pId +
                 ", pDate='" + pDate + '\'' +
                 '}';
     }

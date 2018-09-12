@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import javax.servlet.http.HttpSession
 
 /**
  * @author 杨晓辉 2018-09-07 9:43
@@ -42,6 +43,7 @@ class UserServiceImpl : UserDetailsService, UserService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findUserByUsername(username)?.get(0)
+
         logger.info("user is $user")
         return user!!
     }
