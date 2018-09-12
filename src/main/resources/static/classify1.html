@@ -303,9 +303,48 @@
         </div>
 
         <div class="row">
-            <table id="table" data-toolbar="#toolbar" data-id-field="cId" data-show-refresh="true"
-                   data-show-toggle="true" data-detail-view="true" class="table table-hover">
-            </table>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>客户订单信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="table_data_tables.html#">选项1</a>
+                                </li>
+                                <li><a href="table_data_tables.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="toolbar">
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="selectYear">年份:</label>
+                                <select class="form-control-static" id="selectYear">
+                                    <option value="">全部</option>
+                                    <option>2017</option>
+                                    <option>2018</option>
+                                    <option>2019</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table id="table" data-toolbar="#toolbar" data-id-field="cId" data-show-refresh="true"
+                               class="table table-hover">
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="footer">
             <div class="pull-right">
@@ -341,11 +380,30 @@
 <!-- Custom and plugin javascript -->
 <script src="js/hplus.js?v=2.2.0"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
-
-
+<script src="assets/jquery.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
 </body>
 <script>
+    $("#selectYear").change(function() {
+        var opt = $("#selectYear").val();
+        var $table = $('#table');
+        $.ajax({
+            url: "http://localhost:8080/statistic/findByContribute?year=" + opt,
+            dataType: "json",
+            data: 'data',
+            success: function (data) {
+                $table.bootstrapTable('load', data);//刷新ds_table的数据
+            }
+        });
+    })
     $(function () {
+        axios.get('/statistic/getCharts')
+            .then(function(response){
+                var data = response.data;
+
+            });
         var barChart = echarts.init(document.getElementById("bar"));
         var option = {
             title : {
@@ -410,6 +468,27 @@
             ]
         };
         barChart.setOption(option);
+
+        var $table = $('#table');
+        $table.bootstrapTable({
+            url: 'http://localhost:8080/statistic/findByContribute',//获得数据的url
+            pagination: true,//是否开启分页（*）
+            pageNumber: 1,//初始化加载第一页，默认第一页
+            pageSize: 10,//每页的记录行数（*）
+            pageList: [10, 25, 50, 100],//可供选择的每页的行数（*）
+            sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
+            showRefresh: true,//刷新按钮
+            search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+            // detailFormatter: "detailFormatter",
+            uniqueId: 'id',
+            columns: [
+                // {title:'delete',checkbox: true, align: 'center', valign: 'middle'},
+                {field: 'cId', title: '客户编号'},
+                {field: 'cName', title: ' 客户名称'},
+                {field:'sum',title:'订单总额'}
+            ]
+        })
+
     })
 
 

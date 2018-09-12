@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index.html");
+        registry.addViewController("/customer/linkman.html");
+
         registry.addViewController("/dictionary/addDictionary.html");
         registry.addRedirectViewController("/index","/templates/index.html");
     }
