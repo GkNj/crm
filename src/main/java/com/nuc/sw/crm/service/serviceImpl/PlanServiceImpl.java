@@ -24,18 +24,20 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<Exploit> finfAllExploit() {
-        return null;
+    public List<Exploit> findAllExploit() {
+        List<Exploit> list =planRepository.findAll();
+        return list;
     }
 
     @Override
     public Exploit findById(int id) {
-        return null;
+        Exploit exploit=planRepository.findExploitByEId(id);
+        return exploit;
     }
 
     @Override
-    public Exploit modifyExploit(Exploit exploit) {
-        return null;
+    public void modifyExploit(Exploit exploit) {
+        Exploit expl=planRepository.save(exploit);
     }
 
     @Override

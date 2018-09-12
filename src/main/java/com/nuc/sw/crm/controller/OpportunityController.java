@@ -1,6 +1,7 @@
 package com.nuc.sw.crm.controller;
 
 import com.nuc.sw.crm.entity.Opportunity;
+import com.nuc.sw.crm.entity.User;
 import com.nuc.sw.crm.service.serviceImpl.OpportunityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +31,6 @@ public class OpportunityController {
 
     @RequestMapping(value = "/add")
     public String createOpportunity(Opportunity opportunity) {
-
         opportunityServiceImpl.createOpportunity(opportunity);
         return BASE_URL + MANAGER;
     }
@@ -46,21 +45,18 @@ public class OpportunityController {
 
     @RequestMapping("/update")
     public String editor(Opportunity opportunity, ModelMap map) {
-        System.out.println("opportunity editor= " + opportunity.getId() + " [" + opportunity.toString() + "], map = [" + map + "]");
         map.addAttribute("oppo", opportunity);
         return BASE_URL + EDITOR;
     }
 
     @RequestMapping("/modify")
     public String modify(Opportunity opportunity) {
-        System.out.println("opportunity modify= [" + opportunity.toString() + " " + opportunity.getId() + "]");
         opportunityServiceImpl.modifyOpportunity(opportunity);
         return "forward:/" + BASE_URL + "findAll";
     }
 
     @RequestMapping("/delete")
     public String deleteOpportunity(int id) {
-        System.out.println("id is " + id);
         opportunityServiceImpl.deleteOpportunity(id);
         return "forward:/" + BASE_URL + "findAll";
     }
@@ -72,5 +68,11 @@ public class OpportunityController {
         return BASE_URL + POINT;
     }
 
+    @RequestMapping("/point")
+    public String pointOpportunity(Opportunity opportunity){
+        opportunityServiceImpl.pointOpportunity(opportunity);
+        System.out.println("point：："+opportunity);
+        return "forward:/" + BASE_URL + "findAll";
+    }
 
 }
