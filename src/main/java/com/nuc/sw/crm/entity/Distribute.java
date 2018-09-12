@@ -3,7 +3,6 @@ package com.nuc.sw.crm.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
@@ -22,24 +21,10 @@ public class Distribute {
      */
     private String dTime;
 
-    public Distribute() {
-    }
-
-    @Override
-    public String toString() {
-        return "Distribute{" +
-                "dId=" + dId +
-                ", uId=" + uId +
-                ", dTime=" + dTime +
-                ", sId=" + sId +
-                '}';
-    }
-
-    public Distribute(int uId, String dTime, int sId) {
-        this.uId = uId;
-        this.dTime = dTime;
-        this.sId = sId;
-    }
+    /**
+     * 服务的编号
+     */
+    private int sId;
 
     public int getdId() {
         return dId;
@@ -73,8 +58,22 @@ public class Distribute {
         this.sId = sId;
     }
 
-    /**
-     * 服务的编号
-     */
-    private int sId;
+    public Distribute(int uId, String dTime, int sId) {
+        this.uId = uId;
+        this.dTime = dTime;
+        this.sId = sId;
+    }
+
+    @Override
+    public String toString() {
+        return "Distribute{" +
+                "dId=" + dId +
+                ", uId=" + uId +
+                ", dTime='" + dTime + '\'' +
+                ", sId=" + sId +
+                '}';
+    }
+
+    public Distribute() {
+    }
 }
