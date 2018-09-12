@@ -26,7 +26,7 @@ class UserServiceImpl : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findUserByUsername(username)
         println("user is $user")
+
         return user
     }
 }
-

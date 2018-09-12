@@ -1,35 +1,16 @@
-package com.nuc.sw.crm.entity;
+package com.nuc.sw.crm.vo;
 
+import com.nuc.sw.crm.entity.Customer;
+import com.nuc.sw.crm.entity.User;
 
+public class ServiceVO {
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
-@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
-public class Service {
-
-    public Service() {
-    }
-
-    @Id
-    @GeneratedValue
     private int sId;
     private String sType;
     private String sDetail;
     private String sState;
     private String sRequest;
-    private int uId;
-    private String sCreateDate;
-    private int cId;
-    private String hTime;
-    private String hContent;
-    private String hResult;
-    private int hSatisficing;
+    private User user;
 
     public String gethTime() {
         return hTime;
@@ -63,23 +44,12 @@ public class Service {
         this.hSatisficing = hSatisficing;
     }
 
-    @Override
-    public String toString() {
-        return "Service{" +
-                "sId=" + sId +
-                ", sType='" + sType + '\'' +
-                ", sDetail='" + sDetail + '\'' +
-                ", sState='" + sState + '\'' +
-                ", sRequest='" + sRequest + '\'' +
-                ", uId=" + uId +
-                ", sCreateDate='" + sCreateDate + '\'' +
-                ", cId=" + cId +
-                ", hTime='" + hTime + '\'' +
-                ", hContent='" + hContent + '\'' +
-                ", hResult='" + hResult + '\'' +
-                ", hSatisficing=" + hSatisficing +
-                '}';
-    }
+    private String sCreateDate;
+    private Customer customer;
+    private String hTime;
+    private String hContent;
+    private String hResult;
+    private int hSatisficing;
 
     public int getsId() {
         return sId;
@@ -121,12 +91,12 @@ public class Service {
         this.sRequest = sRequest;
     }
 
-    public int getuId() {
-        return uId;
+    public User getUser() {
+        return user;
     }
 
-    public void setuId(int uId) {
-        this.uId = uId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getsCreateDate() {
@@ -137,27 +107,47 @@ public class Service {
         this.sCreateDate = sCreateDate;
     }
 
-    public int getcId() {
-        return cId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setcId(int cId) {
-        this.cId = cId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-
-    public Service(String sType, String sDetail, String sState, String sRequest, int uId, String sCreateDate, int cId, String hTime, String hContent, String hResult, int hSatisficing) {
+    public ServiceVO(int sId, String sType, String sDetail, String sState, String sRequest, User user, String sCreateDate, Customer customer, String hTime, String hContent, String hResult, int hSatisficing) {
+        this.sId = sId;
         this.sType = sType;
         this.sDetail = sDetail;
         this.sState = sState;
         this.sRequest = sRequest;
-        this.uId = uId;
+        this.user = user;
         this.sCreateDate = sCreateDate;
-        this.cId = cId;
+        this.customer = customer;
         this.hTime = hTime;
         this.hContent = hContent;
         this.hResult = hResult;
         this.hSatisficing = hSatisficing;
     }
 
+    @Override
+    public String toString() {
+        return "ServiceVO{" +
+                "sId=" + sId +
+                ", sType='" + sType + '\'' +
+                ", sDetail='" + sDetail + '\'' +
+                ", sState='" + sState + '\'' +
+                ", sRequest='" + sRequest + '\'' +
+                ", user=" + user +
+                ", sCreateDate='" + sCreateDate + '\'' +
+                ", customer=" + customer +
+                ", hTime='" + hTime + '\'' +
+                ", hContent='" + hContent + '\'' +
+                ", hResult='" + hResult + '\'' +
+                ", hSatisficing=" + hSatisficing +
+                '}';
+    }
+
+    public ServiceVO() {
+    }
 }
