@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit">
 
     <title>素材火www.sucaihuo.com - 空白页</title>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -247,7 +247,7 @@
         </div>
 
 
-        <form method="post" class="form-horizontal"  th:action="@{/create/add}">
+        <form method="post" class="form-horizontal"  th:action="@{/opportunity/point}">
 
             <table class="table-striped ">
                 <div class="form-group" style="text-align: center" >
@@ -258,7 +258,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin"  name="sId" disabled="" th:value="${oppor.id}">
+                                <input type="text" class="form-control form_margin"  name="id"  th:value="${oppor.id}" readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -270,7 +270,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin"  name="resource" disabled="" th:value="${oppor.resource}">
+                                <input type="text" class="form-control form_margin"  name="resource"  th:value="${oppor.resource}"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -282,7 +282,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin"  name="successPercent" disabled="" th:value="${oppor.successPercent}">
+                                <input type="text" class="form-control form_margin"  name="successPercent"  th:value="${oppor.successPercent}"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -294,7 +294,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" th:value="${oppor.username}" name="username" disabled="" >
+                                <input type="text" class="form-control form_margin" th:value="${oppor.username}" name="username"   readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -306,7 +306,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" name="summary" th:value="${oppor.summary}" disabled="">
+                                <input type="text" class="form-control form_margin" name="summary" th:value="${oppor.summary}"  readonly="readonly" >
                             </div>
                         </td>
                     </tr>
@@ -318,7 +318,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" th:value="${oppor.lName}" name="lName" disabled="">
+                                <input type="text" class="form-control form_margin" th:value="${oppor.lName}" name="lName"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -330,7 +330,7 @@
                         <td style="width: 550px">
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" name="lPhone" th:value="${oppor.lPhone}" disabled="">
+                                <input type="text" class="form-control form_margin" name="lPhone" th:value="${oppor.lPhone}"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -342,7 +342,7 @@
                         <td>
                             <div class="col-lg-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <textarea class="form-control form_margin" rows="5" name="cComment"  th:text="${oppor.cComment}" disabled=""></textarea>
+                                <textarea class="form-control form_margin" rows="5" name="cComment"  th:text="${oppor.cComment}"  readonly="readonly"></textarea>
                             </div>
                         </td>
                     </tr>
@@ -353,7 +353,7 @@
                         <td>
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" name="sName" th:value="${oppor.sName}" disabled="">
+                                <input type="text" class="form-control form_margin" name="sName" th:value="${oppor.sName}"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -364,7 +364,7 @@
                         <td>
                             <div class="col-sm-5">
                                 <!--/*@thymesVar id="oppor" type="com.nuc.sw.crm.entity.Opportunity"*/-->
-                                <input type="text" class="form-control form_margin" name="startDate" th:value="${oppor.startDate}" disabled="">
+                                <input type="text" class="form-control form_margin" name="startDate" th:value="${oppor.startDate}"  readonly="readonly">
                             </div>
                         </td>
                     </tr>
@@ -375,10 +375,9 @@
                         </td>
                         <td>
                             <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
-                                <select th:each="manager:${}" class="form-control m-b" name="pUsername" id="pUsername">
-                                    <option>京东</option>
-                                    <option>阿里巴巴</option>
-                                    <option>微软</option>
+                                <select onfocus="selectFocus(this)" class="dd-handle pre-scrollable" name="pId" id="pId"
+                                        style="width:176px; border: 1px solid #e7eaec; background: #f5f5f5; -webkit-border-radius: 3px;
+                                        border-radius: 3px; box-sizing: border-box; -moz-box-sizing: border-box;">
                                 </select>
                             </div>
                         </td>
@@ -390,7 +389,7 @@
                         <td>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control form_margin" name="pDate" id="shijian" value="">
-                                <!--<input type="text" name="pDate"  class="form-control"  disabled="">-->
+                                <!--<input type="text" name="pDate"  class="form-control"  >-->
                             </div>
                         </td>
                     </tr>
@@ -441,6 +440,30 @@
             + nowDate.getHours() + ":" + nowDate.getMinutes() + ":"
             + nowDate.getSeconds();
         document.getElementById("shijian").value = str;
+    }
+
+
+    function selectFocus(value){
+
+        var obj = document.getElementById("pId")
+
+        axios.get('http://localhost:8080/opportunity/findByPosition')
+            .then(function (response) {
+                for (var i = 0; i < response.data.length; i++) {
+                    $("#pId").append("<option value="+response.data[i].id+">"+response.data[i].name+"</option>");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+    window.selectClick=function(that) {
+        $(that).parent().removeAttr("size");
+        $(that).parent().blur();
+        $(that).parent().children("[selected='selected']").removeAttrs("selected");
+        $(that).attr("selected","");
     }
 </script>
 

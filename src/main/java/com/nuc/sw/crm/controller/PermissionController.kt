@@ -1,9 +1,14 @@
 package com.nuc.sw.crm.controller
 
-import com.nuc.sw.crm.repository.RoleRepository
+import com.nuc.sw.crm.entity.Role
+import com.nuc.sw.crm.entity.User
 import com.nuc.sw.crm.repository.UserRepository
+import com.nuc.sw.crm.service.UserService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
+import org.springframework.ui.ModelMap
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 
@@ -15,35 +20,62 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping("/permission")
 class PermissionController {
 
-    @RequestMapping("{path}")
+    private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
+
+    private val baseUrl = "permission/"
+
+    private val permission = "permission"
+
+    @Autowired
+    private lateinit var userService: UserService
+
+    @RequestMapping("/{path}")
     fun toHtml(@PathVariable("path") path: String): String {
         return "permission/$path"
+    }
+
+    /**
+     * 添加用户
+     */
+    @RequestMapping("/add")
+    fun addUser(user: User, map: ModelMap): String {
+
+        logger.info("user is " + user.toString())
+        var roleId: Long = 0
+        logger.info("user position ${user.position}")
+        roleId = when (user.position) {
+            "ROOT" -> {
+                1L
+            }
+            "ADMIN" -> {
+                2L
+            }
+            "AM" -> 3L
+            "SA" -> 4L
+            "SM" -> 5L
+            else -> {
+                0
+            }
+        }
+        logger.info("user role id is $roleId")
+        val role = Role()
+        role.id = roleId
+        val user = userService.saveUser(user, role)
+
+        return "forward:/${baseUrl}list"
 
     }
 
+    /**
+     * 获取所有用户
+     */
+    @RequestMapping("/list")
+    fun listUsers(map: ModelMap): String {
+        val users = userService.findAllUsers()
+        logger.info(users.toString())
+        map["users"] = users
+        return baseUrl + permission
+    }
 
-//    @Autowired
-//    lateinit var userRepository: UserRepository
-//
-//    @Autowired
-//    lateinit var roleRepository: RoleRepository
-
-
-//    @RequestMapping("/add")
-//    fun addUser(): String {
-//
-//        val role = Role()
-//        role.permission = Permission.ADMIN
-//        roleRepository.save(role)
-//
-//        val user = User()
-//        user.name = "zs"
-//        user.position = "高管"
-//        val roleList = listOf<Role>(role)
-//        user.roles = roleList
-//        user.password = "1234"
-//        userRepository.save(user)
-//        return "index"
-//    }
 
 }

@@ -1,6 +1,7 @@
 package com.nuc.sw.crm.service;
 
 import com.nuc.sw.crm.entity.Opportunity;
+import com.nuc.sw.crm.entity.User;
 import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +43,11 @@ public interface OpportunityService {
      * @return
      */
     Opportunity findById(int id);
+
+    /**
+     * 查询客户经理
+     * @param Position
+     * @return
+     */
+    List<User> findUserByPosition(String Position);
 }

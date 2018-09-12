@@ -7,6 +7,122 @@
 
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script><!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/hplus.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var nowDate = new Date();
+            var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate();
+            document.getElementById("shijian").value=str;
+            document.getElementById("shijian1").value=str;
+        }
+    </script>
+    <script type="text/javascript">
+
+        function editInfo(id,name,address,cClass,satisfaction,credit,post,website,uId) {
+            //默认显示
+            $("#c_name").val(name);
+            $("#c_name").attr("value",name);
+            $("#c_address").val(address);
+            $("#c_address").attr("value",address);
+            $("#c_clss").val(cClass);
+            $("#c_class").attr("value",cClass);
+            $("#c_satisfaction").val(satisfaction);
+            $("#c_satisfaction").attr("value",satisfaction);
+            $("#c_credit").val(credit);
+            $("#c_credit").attr("value",credit);
+            $("#c_post").val(post);
+            $("#c_post").attr("value",post);
+            $("#c_website").val(website);
+            $("#c_website").attr("value",website);
+            $("#u_id").val(uId);
+            $("#c_id").val(id);
+        }
+
+        function editLinkman(id,name,cId,sex,position,tel,remark) {
+            //默认显示
+            $("#l_name").val(name);
+            $("#l_name").attr("value",name);
+            $("#l_sex").val(sex);
+            $("#l_position").attr("value",sex);
+            $("#l_position").val(position);
+            $("#l_position").attr("value",position);
+            $("#l_tel").val(tel);
+            $("#l_tel").attr("value",tel);
+            $("#l_remark").val(remark);
+            $("#l_remark").attr("value",remark);
+            $("#l_id").val(id);
+            $("#c_id1").val(cId);
+        }
+
+        function editTrade(id,cId,date,address,outline,remark) {
+            //默认显示
+            $("#t_date").val(date);
+            $("#t_date").attr("value",date);
+            $("#t_address").val(address);
+            $("#t_address").attr("value",address);
+            $("#t_outline").val(outline);
+            $("#t_outline").attr("value",outline);
+            $("#t_remark").val(remark);
+            $("#t_remark").attr("value",remark);
+            $("#t_id").val(id);
+            $("#c_id2").val(cId);
+        }
+        function OrderDetail(id,date,address,state,price) {
+            axios.get('http://localhost:8080/queryProduct', {
+                params: {
+                    id: id
+                }
+            }) .then(function(response) {
+                var data =response.data;
+                console.log(data);
+                var str="";
+                for (i in data) {
+                    str += "<tr>" +
+                        "<td align='center'>" + data[i].pId + "</td>" +
+                        "<td align='center'>" + data[i].pName+ "</td>" +
+                        "<td align='center'>" + data[i].pNum+ "</td>" +
+                        "<td align='center'>" + data[i].pUnit+ "</td>" +
+                        "<td align='center'>" + data[i].pPrice+ "</td>" +
+                        "<td align='center'>" + (data[i].pPrice*data[i].pNum)+ "</td>" +
+                        "</tr>";
+
+
+                }
+                $("#tbody-result").innerHTML=str;
+                $("#tbody-result").add(str);
+                $("#tbody-result").append(str);
+
+
+            });
+            //默认显示
+            $("#o_date").val(date);
+            $("#o_date").attr("value",date);
+            $("#o_address").val(address);
+            $("#o_address").attr("value",address);
+            $("#o_state").val(state);
+            $("#o_state").attr("value",state);
+            $("#o_price").val(price);
+            $("#o_price").attr("value",price);
+            $("#o_id1").val(id);
+            $("#o_id1").attr("value",id);
+            //
+            // var o_id = document.getElementById("o_id").innerHTML;
+            console.log("o_id ", id);
+
+        }
+
+
+    </script>
+
+
     <title>Title</title>
 
     <style>
@@ -17,6 +133,7 @@
 </head>
 <body>
 <div id="wrapper">
+
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
@@ -42,6 +159,7 @@
                             <li class="divider"></li>
                             <li><a href="login.html">安全退出</a>
                             </li>
+
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -70,9 +188,9 @@
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="customerinfo.html">客户信息管理</a>
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                         </li>
-                        <li><a href="customerlost.html">客户流失管理</a>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
@@ -260,7 +378,7 @@
                                 <h5 style="color: #0a6aa1">联系人</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">4</h1>
+                                <h1 class="no-margins" th:text="${count}"></h1>
                                 <!--<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>-->
                                 <!--</div>-->
                                 <small>总人数</small>
@@ -275,7 +393,7 @@
                                 <h5 style="color:#3c763d">交往记录</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">3</h1>
+                                <h1 class="no-margins" th:text="${count1}"></h1>
                                 <!--<div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>-->
                                 <!--</div>-->
                                 <small>总记录</small>
@@ -290,7 +408,7 @@
                                 <h5 style="color:#00b7ee">历史订单</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">3</h1>
+                                <h1 class="no-margins" th:text="${count2}"></h1>
                                 <!--<div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>-->
                                 <!--</div>-->
                                 <small>订单总数</small>
@@ -307,19 +425,24 @@
                         <br>
                         <tbody style="font-size: 14px;">
                         <tr>
-                            <td class="fontsize">客户编号</td>
+                            <td class="fontsize" id="cid">客户编号</td>
                             <td th:text="${customer.cId}"></td>
-                            <td class="fontsize">客户名称</td>
+                            <td class="fontsize" id="cname">客户名称</td>
                             <td th:text="${customer.cName}"></td>
                         </tr>
                         <tr>
-                            <td class="fontsize">地区</td>
+                            <td class="fontsize" id="caddress">地区</td>
                             <td th:text="${customer.cAddress}"></td>
-                            <td class="fontsize">客户等级</td>
-                            <td th:text="${customer.cClass}"></td>
+                            <td class="fontsize" id="cclass">客户等级</td>
+                            <td th:if="${customer.cClass eq ''}"></td>
+                            <td th:if="${customer.cClass eq '战略合作伙伴'}">战略合作伙伴</td>
+                            <td th:if="${customer.cClass eq '大客户'}">大客户</td>
+                            <td th:if="${customer.cClass eq '合作伙伴'}">合作伙伴</td>
+                            <td th:if="${customer.cClass eq '重点开发客户'}">重点开发客户</td>
+                            <td th:if="${customer.cClass eq '普通客户'}">普通客户</td>
                         </tr>
                         <tr>
-                            <td class="fontsize">客户满意度</td>
+                            <td class="fontsize" id="csatisfaction">客户满意度</td>
                             <td th:if="${customer.cSatisfaction==-1}"></td>
                             <td th:if="${customer.cSatisfaction==1}">⭐</td>
                             <td th:if="${customer.cSatisfaction==2}">⭐⭐</td>
@@ -327,7 +450,7 @@
                             <td th:if="${customer.cSatisfaction==4}">⭐⭐⭐⭐</td>
                             <td th:if="${customer.cSatisfaction==5}">⭐⭐⭐⭐⭐</td>
 
-                            <td class="fontsize">客户信誉度</td>
+                            <td class="fontsize" id="ccredict">客户信誉度</td>
                             <td th:if="${customer.cCredit==-1}"></td>
                             <td th:if="${customer.cCredit==1}">⭐</td>
                             <td th:if="${customer.cCredit==2}">⭐⭐</td>
@@ -336,14 +459,15 @@
                             <td th:if="${customer.cCredit==5}">⭐⭐⭐⭐⭐</td>
                         </tr>
                         <tr>
-                            <td class="fontsize">公司邮政编码</td>
+                            <td class="fontsize" id="cpost">公司邮政编码</td>
                             <td th:text="${customer.cPost}"></td>
-                            <td class="fontsize">公司网址</td>
+                            <td class="fontsize" id="cwebsite">公司网址</td>
                             <td th:text="${customer.cWebsite}"></td>
                         </tr>
                         <tr style="height: 50px"></tr>
                         <tr>
-                            <td colspan="4"><button class="btn btn-primary btn-sm" style="float: right" data-toggle="modal" data-target="#updateCusModal">修&nbsp;&nbsp;&nbsp;&nbsp;改</button></td>
+                            <td colspan="4"><a href="javascript:void(0)" th:onclick="'editInfo(\''+${customer.cId}+'\',\''+${customer.cName}+'\',\''+${customer.cAddress}+'\',\''+${customer.cClass}+'\',\''+${customer.cSatisfaction}+'\',\''+${customer.cCredit}+'\',\''+${customer.cPost}+'\',\''+${customer.cWebsite}+'\',\''+${customer.uId}+'\');'" data-toggle="modal" data-target="#updateCusModal">
+                                <button class="btn btn-primary btn-sm" style="float: right">修&nbsp;&nbsp;&nbsp;&nbsp;改</button></a></td>
                         </tr>
                         </tbody>
 
@@ -369,49 +493,16 @@
                             <th style="text-align: center">操作</th>
                         </tr>
                         </thead>
-                        <tbody style="font-size: 14px;">
-                        <tr>
-                            <td>1</td>
-                            <td>Jack</td>
-                            <td>男</td>
-                            <td>总经理</td>
-                            <td>13659456354</td>
-                            <td></td>
-                            <td><a data-toggle="modal" data-target="#updateLinkModal"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i> </a>
-                                &nbsp;&nbsp;<a><i class="fa fa-trash-o fa-lg" style="color:#3c763d" title="删除"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>mike</td>
-                            <td>男</td>
-                            <td>总经理助理</td>
-                            <td>13659456354</td>
-                            <td></td>
-                            <td><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;">
-
-                            </i> &nbsp;&nbsp;<i class="fa fa-trash-o fa-lg" style="color:#3c763d"></i></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>jim</td>
-                            <td>男</td>
-                            <td>主管</td>
-                            <td>13659456354</td>
-                            <td></td>
-                            <td><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;">
-
-                            </i> &nbsp;&nbsp;<i class="fa fa-trash-o fa-lg" style="color:#3c763d"></i></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Amy</td>
-                            <td>女</td>
-                            <td>秘书</td>
-                            <td>13659456354</td>
-                            <td>负责接打电话</td>
-                            <td><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;">
-
-                            </i> &nbsp;&nbsp;<i class="fa fa-trash-o fa-lg" style="color:#3c763d"></i></td>
+                        <tbody style="font-size: 14px;" >
+                        <tr th:each="link:${linkmen}">
+                            <td th:text="${link.lId}"></td>
+                            <td th:text="${link.lName}"></td>
+                            <td th:text="${link.lSex}"></td>
+                            <td th:text="${link.lPosition}"></td>
+                            <td th:text="${link.lTel}"></td>
+                            <td th:text="${link.lRemark}"></td>
+                            <td><a data-toggle="modal" data-target="#updateLinkModal" href="javascript:void(0)" th:onclick="'editLinkman(\''+${link.lId}+'\',\''+${link.lName}+'\',\''+${link.cId}+'\',\''+${link.lSex}+'\',\''+${link.lPosition}+'\',\''+${link.lTel}+'\',\''+${link.lRemark}+'\');'"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i> </a>
+                                &nbsp;&nbsp;<a th:href="@{/deleteLinkman(lId=${link.lId},cId=${link.cId})}"><i class="fa fa-trash-o fa-lg" style="color:#3c763d" title="删除"></i></a></td>
                         </tr>
 
 
@@ -489,34 +580,14 @@
                         </tr>
                         </thead>
                         <tbody style="font-size: 14px;">
-                        <tr>
-                            <td>1</td>
-                            <td>2018-02-12</td>
-                            <td>会所</td>
-                            <td>签订意向合同</td>
-                            <td></td>
-                            <td><a data-toggle="modal" data-target="#updateTradeModal"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i></a>
-                                &nbsp;&nbsp;<a><i class="fa fa-trash-o fa-lg" style="color:#3c763d" title="删除"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>2017-04-26</td>
-                            <td>公司</td>
-                            <td>行业展望座谈会</td>
-                            <td>主办单位：计算机报社</td>
-                            <td><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;">
-
-                            </i> &nbsp;&nbsp;<i class="fa fa-trash-o fa-lg" style="color:#3c763d"></i></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>2016-06-15</td>
-                            <td>公司</td>
-                            <td>参观公司</td>
-                            <td></td>
-                            <td><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;">
-
-                            </i> &nbsp;&nbsp;<i class="fa fa-trash-o fa-lg" style="color:#3c763d"></i></td>
+                        <tr th:each="trade:${trade}">
+                            <td th:text="${trade.tId}"></td>
+                            <td th:text="${trade.tDate}"></td>
+                            <td th:text="${trade.tAddress}"></td>
+                            <td th:text="${trade.tOutline}"></td>
+                            <td th:text="${trade.tRemark}"></td>
+                            <td><a data-toggle="modal" data-target="#updateTradeModal" href="javascript:void(0)" th:onclick="'editTrade(\''+${trade.tId}+'\',\''+${trade.cId}+'\',\''+${trade.tDate}+'\',\''+${trade.tAddress}+'\',\''+${trade.tOutline}+'\',\''+${trade.tRemark}+'\');'"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i></a>
+                                &nbsp;&nbsp;<a th:href="@{/deleteTrade(tId=${trade.tId},cId=${trade.cId})}"><i class="fa fa-trash-o fa-lg" style="color:#3c763d"  title="删除"></i></a></td>
                         </tr>
 
                         </tbody>
@@ -591,27 +662,16 @@
                     </tr>
                     </thead>
                     <tbody style="font-size: 14px;">
-                    <tr>
-                        <td>1</td>
-                        <td>2018-02-12</td>
-                        <td>北京市朝阳区</td>
-                        <td>已发货</td>
-                        <td><a href="orderdetail.html"><i class="fa fa-file-text" style="color: #2a6496" title="订单详情"></i></a></td>
+                    <tr th:each="order:${orders}">
+                        <td th:text="${order.oId}" id="o_id"></td>
+                        <td th:text="${order.oDate}"></td>
+                        <td th:text="${order.oAddress}"></td>
+                        <td th:text="${order.oState}"></td>
+                        <td><a data-toggle="modal" data-target="#OrderDetailModal" href="javascript:void(0)" th:onclick="'OrderDetail(\''+${order.oId}+'\',\''+${order.oDate}+'\',\''+${order.oAddress}+'\',\''+${order.oState}+'\',\''+${order.oPrice}+'\');'">
+                            <i class="fa fa-file-text" style="color: #2a6496" title="订单详情"></i></a></td>
+
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2018-02-12</td>
-                        <td>北京市朝阳区</td>
-                        <td>已发货</td>
-                        <td><a href="orderdetail.html"><i class="fa fa-file-text" style="color: #2a6496" title="订单详情"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>2018-02-12</td>
-                        <td>北京市朝阳区</td>
-                        <td>已发货</td>
-                        <td><a href="orderdetail.html"><i class="fa fa-file-text" style="color: #2a6496" title="订单详情"></i></a></td>
-                    </tr>
+
                     </tbody>
 
 
@@ -682,12 +742,19 @@
                         </div>
                         <div class="modal-body">
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal" th:action="@{/addLinkman}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">客户编号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control" name="cId" th:attr="value=${customer.cId}">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">姓名</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="name">
+                                            <input type="text" class="form-control" name="lName">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -697,11 +764,11 @@
                                         <div class="col-sm-10">
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">男</label>
+                                                    <input type="radio" checked="" value="男" id="optionsRadios1" name="lSex">男</label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">女</label>
+                                                    <input type="radio" value="女" id="optionsRadios2" name="lSex">女</label>
                                             </div>
                                         </div>
                                     </div>
@@ -709,7 +776,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">职务</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="position">
+                                            <input type="text" class="form-control" name="lPosition">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -717,7 +784,7 @@
                                         <label class="col-sm-2 control-label">联系方式</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="tel">
+                                            <input type="text" class="form-control" name="lTel">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -725,13 +792,13 @@
                                         <label class="col-sm-2 control-label">备注</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" name="remark">
+                                            <input type="text"  class="form-control" name="lRemark">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="submit" class="btn btn-primary">保存</button>
                                     </div>
                                 </form>
                             </div>
@@ -748,19 +815,26 @@
                         </div>
                         <div class="modal-body">
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal" th:action="@{/addTrade}">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">客户编号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control" name="cId" th:attr="value=${customer.cId}">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">日期</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="time" id="shijian" value="">
+                                            <input type="text" class="form-control" name="tDate" id="shijian" value="tDate"  required="" aria-required="true" aria-invalid="true">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">地点</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="address">
+                                            <input type="text" class="form-control" name="tAddress">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -768,7 +842,7 @@
                                         <label class="col-sm-2 control-label">概要</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="outline">
+                                            <input type="text" class="form-control" name="tOutline">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -776,13 +850,13 @@
                                         <label class="col-sm-2 control-label">备注</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" name="remark">
+                                            <input type="text"  class="form-control" name="tRemark">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="submit" class="btn btn-primary">保存</button>
                                     </div>
                                 </form>
                             </div>
@@ -799,19 +873,33 @@
                         </div>
                         <div class="modal-body">
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal" action="/updateCustomer" id="form1">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label" hidden>客户经理编号</label>
+
+                                        <div class="col-lg-10">
+                                            <input type="hidden" id="u_id" name="uId" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label" hidden>客户编号</label>
+
+                                        <div class="col-lg-10">
+                                            <input type="hidden" id="c_id" name="cId" class="form-control" value="">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">客户名称</label>
 
                                         <div class="col-lg-10">
-                                            <input type="text" disabled="" class="form-control" value="无限极(中国)有限公司">
+                                            <input type="text" id="c_name" name="cName" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">地区</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="address">
+                                            <input type="text" class="form-control" id="c_address" name="cAddress">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -819,12 +907,12 @@
                                         <label class="col-sm-2 control-label">客户等级</label>
 
                                         <div class="col-sm-10">
-                                            <select class="form-control m-b" name="class">
-                                                <option>战略合作伙伴</option>
-                                                <option>大客户</option>
-                                                <option>合作伙伴</option>
-                                                <option>重点开发客户</option>
-                                                <option>普通客户</option>
+                                            <select class="form-control m-b" name="cClass" id="c_class">
+                                                <option value="战略合作伙伴">战略合作伙伴</option>
+                                                <option value="大客户">大客户</option>
+                                                <option value="合作伙伴">合作伙伴</option>
+                                                <option value="重点开发客户">重点开发客户</option>
+                                                <option value="普通客户">普通客户</option>
                                             </select>
 
                                         </div>
@@ -834,12 +922,12 @@
                                         <label class="col-sm-2 control-label">客户满意度</label>
 
                                         <div class="col-sm-10">
-                                            <select class="form-control m-b" name="satisfaction">
-                                                <option>⭐</option>
-                                                <option>⭐⭐</option>
-                                                <option>⭐⭐⭐</option>
-                                                <option>⭐⭐⭐⭐</option>
-                                                <option>⭐⭐⭐⭐⭐</option>
+                                            <select class="form-control m-b" name="cSatisfaction" id="c_satisfaction">
+                                                <option value="1">⭐</option>
+                                                <option value="2">⭐⭐</option>
+                                                <option value="3">⭐⭐⭐</option>
+                                                <option value="4">⭐⭐⭐⭐</option>
+                                                <option value="5">⭐⭐⭐⭐⭐</option>
                                             </select>
 
                                         </div>
@@ -849,33 +937,33 @@
                                         <label class="col-sm-2 control-label">客户信誉度</label>
 
                                         <div class="col-sm-10">
-                                            <select class="form-control m-b" name="credit">
-                                                <option>⭐</option>
-                                                <option>⭐⭐</option>
-                                                <option>⭐⭐⭐</option>
-                                                <option>⭐⭐⭐⭐</option>
-                                                <option>⭐⭐⭐⭐⭐</option>
+                                            <select class="form-control m-b" name="cCredit" id="c_credit">
+                                                <option value="1">⭐</option>
+                                                <option value="2">⭐⭐</option>
+                                                <option value="3">⭐⭐⭐</option>
+                                                <option value="4">⭐⭐⭐⭐</option>
+                                                <option value="5">⭐⭐⭐⭐⭐</option>
                                             </select>
 
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">公司邮箱</label>
+                                        <label class="col-sm-2 control-label">邮政编码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="email">
+                                            <input type="text" class="form-control" name="cPost" id="c_post">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">公司网址</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="website">
+                                            <input type="text" class="form-control" name="cWebsite" id="c_website">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="submit" class="btn btn-primary">提交更改</button>
                                     </div>
                                 </form>
                             </div>
@@ -892,19 +980,40 @@
                         </div>
                         <div class="modal-body">
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal" action="/updateLinkman">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" hidden>客户编号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="hidden" class="form-control" name="cId" value="" id="c_id1">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" hidden>联系人编号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="hidden" class="form-control" name="lId" value="" id="l_id">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">姓名</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="name" value="jack">
+                                            <input type="text" class="form-control" name="lName" value="" id="l_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" hidden>性别</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="hidden" class="form-control" name="lSex" value="" id="l_sex">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">职务</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="position" value="总经理">
+                                            <input type="text" class="form-control" name="lPosition" value="" id="l_position">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -912,7 +1021,7 @@
                                         <label class="col-sm-2 control-label">联系方式</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="tel" value="13659456354">
+                                            <input type="text" class="form-control" name="lTel" value="" id="l_tel">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -920,13 +1029,13 @@
                                         <label class="col-sm-2 control-label">备注</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" name="remark">
+                                            <input type="text"  class="form-control" name="lRemark" value="" id="l_remark">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="submit" class="btn btn-primary">提交更改</button>
                                     </div>
                                 </form>
                             </div>
@@ -943,19 +1052,33 @@
                         </div>
                         <div class="modal-body">
                             <div class="ibox-content">
-                                <form method="get" class="form-horizontal">
+                                <form method="post" class="form-horizontal" action="/updateTrade">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">日期</label>
+                                        <label class="col-sm-2 control-label" hidden>记录编号</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" disabled="" class="form-control" name="time" id="shijian1" value="">
+                                            <input type="hidden"  class="form-control" name="tId" id="t_id" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" hidden>客户编号</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="hidden"  class="form-control" name="cId" id="c_id2" value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" hidden>日期</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="hidden"  class="form-control" name="tDate" id="t_date" value="">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">地点</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="address" value="会所">
+                                            <input type="text" class="form-control" name="tAddress" value="" id="t_address">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -963,7 +1086,7 @@
                                         <label class="col-sm-2 control-label">概要</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="outline" value="签订意向合同">
+                                            <input type="text" class="form-control" name="tOutline" value="" id="t_outline">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -971,13 +1094,13 @@
                                         <label class="col-sm-2 control-label">备注</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" name="remark">
+                                            <input type="text"  class="form-control" name="tRemark" value="" id="t_remark">
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        <button type="button" class="btn btn-primary">提交更改</button>
+                                        <button type="submit" class="btn btn-primary">提交更改</button>
                                     </div>
                                 </form>
                             </div>
@@ -985,29 +1108,67 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
+            <div class="modal fade" id="OrderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"x`>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="OrderModalLabel">订单详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ibox-content">
+                                <table class="table table-striped" style="text-align: center;">
+                                    <tbody style="font-size: 14px;">
 
+                                        <tr>
+                                            <td class="fontsize" style="width: 300px">订单编号</td>
+                                            <td><input type="text" readonly style="border: 0;background:transparent" id="o_id1" value=""/></td>
+                                            <td class="fontsize" style="width: 250px">日期</td>
+                                            <td><input type="text" readonly style="border: 0;background:transparent" id="o_date" value=""/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fontsize">送货地址</td>
+                                            <td><input type="text" readonly style="border: 0;background:transparent" id="o_address" value=""/></td>
+                                            <td class="fontsize">订单状态</td>
+                                            <td><input type="text" readonly style="border: 0;background:transparent" id="o_state" value=""/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fontsize">总金额</td>
+                                            <td><input type="text" readonly style="border: 0;background:transparent" id="o_price" value=""/></td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    </tbody>
+
+
+
+                                </table>
+                                <table class="table table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th>产品编号</th>
+                                            <th>产品名称</th>
+                                            <th>数量</th>
+                                            <th>单位</th>
+                                            <th>单价</th>
+                                            <th>总价</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-result">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
 
 
     </div>
 </div>
 </div>
 
-<!-- Mainly scripts -->
-<script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="../js/hplus.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
-<script type="text/javascript">
-    window.onload = function(){
-        var nowDate = new Date();
-        var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate();
-        document.getElementById("shijian").value=str;
-        document.getElementById("shijian1").value=str;
-    }
-</script>
+
 </body>
 </html>

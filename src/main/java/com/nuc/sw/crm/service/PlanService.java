@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface PlanService {
     void createExploit(Exploit exploit);
-    List<Exploit> finfAllExploit();
+    List<Exploit> findAllExploit();
     Exploit findById(int id);
-    Exploit modifyExploit(Exploit exploit);
+    void modifyExploit(Exploit exploit);
     void deleteExpolit(int id);
 }
