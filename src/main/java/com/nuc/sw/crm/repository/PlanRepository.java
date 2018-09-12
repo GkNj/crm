@@ -14,4 +14,6 @@ public interface PlanRepository extends JpaRepository<Exploit,Integer> {
     Exploit findExploitByEId(int eId);
 
     int deleteExploitByEId(int eId);
+
+
 }

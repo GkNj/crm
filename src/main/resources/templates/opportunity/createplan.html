@@ -464,85 +464,84 @@
           <div class="ibox-content">
             <table class="table table-hover ">
               <thead>
-              <tr>
-                <th>日期</th>
-                <th>计划项</th>
-                <th>执行效果</th>
-                <th></th>
-              </tr>
+                <tr>
+                  <th>日期</th>
+                  <th>计划项</th>
+                  <th>执行效果</th>
+                  <th></th>
+                </tr>
               </thead>
               <tbody>
               <!--/*@thymesVar id="plans" type="com.nuc.sw.crm.entity.Exploit"*/-->
-              <tr class="gradeX" th:each="plan:${plans}">
-                <form>
-                  <td th:text="${plan.eDate}"></td>
-                  <td th:text="${plan.ePlan}"></td>
-                  <td th:text="${plan.eEffect}"></td>
-                  <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#myModal2">编辑
-                    </button>
-                  </td>
-                  <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog"
-                       aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content animated bounceInRight">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span
-                                  aria-hidden="true">&times;</span><span
-                                  class="sr-only">关闭</span>
-                          </button>
-                          <i class="fa fa-paint-brush" aria-hidden="true"></i>
-                          <h4 class="modal-title">添加执行效果</h4>
-                        </div>
-                        <div class="modal-body">
-                          <!--<form method="post" class="form-horizontal  m-t" id="signupForm2"-->
-                          <!--action="plan/modify">-->
-                          <!--<div class="hr-line-dashed"></div>-->
-                          <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                              <span class="red" style="color: red"> *</span>
-                              效果
-                            </label>
-                            <div class="col-sm-10">
-                              <input type="hidden" class="form-control"
-                                     th:value="${plan.eId}" name="eId">
-                              <input type="hidden" class="form-control"
-                                     th:value="${plan.eDate}" name="eDate">
-
-                              <input type="hidden" class="form-control"
-                                     th:value="${plan.ePlan}" name="ePlan">
-
-                              <input type="text" class="form-control" value=""
-                                     name="eEffect" id="eEffect">
-                            </div>
-                          </div>
-                          <div class="hr-line-dashed"></div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-white"
-                                    data-dismiss="modal">关闭
+                <tr class="gradeX" th:each="plan:${plans}">
+                    <td th:text="${plan.eDate}"></td>
+                    <td th:text="${plan.ePlan}"></td>
+                    <td th:text="${plan.eEffect}"></td>
+                    <td>
+                      <button type="button" class="btn btn-primary" data-toggle="modal"
+                              data-target="#myModal2" th:onclick="'edit(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\');'">编辑
+                      </button>
+                    </td>
+                    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">&times;</span><span
+                                    class="sr-only">关闭</span>
                             </button>
-                            <button type="button" class="btn btn-primary"
-                                    th:onclick="'javascript:havesave2(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\')'">
-                              保存
-                            </button>
+                            <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                            <h4 class="modal-title">添加执行效果</h4>
                           </div>
-                          <!--</form>-->
-                        </div>
+                          <div class="modal-body">
+                            <form method="post" class="form-horizontal  m-t" id="signupForm2" action="/plan/modify">
+                              <div class="form-group">
+                                  <label class="col-sm-2 control-label" hidden>编号</label>
+                                  <div class="col-sm-10">
+                                    <input type="hidden" class="form-control" value="" name="eId" id="eId">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label class="col-sm-2 control-label" hidden>指派时间</label>
+                                  <div class="col-sm-10">
+                                    <input type="hidden" class="form-control" value="" name="eDate" id="eDate1">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <label class="col-sm-2 control-label" hidden>指派计划</label>
+                                  <div class="col-sm-10">
+                                    <input type="hidden" class="form-control" value="" name="ePlan" id="ePlan">
+                                  </div>
+                              </div>
+                              <div class="form-group">
 
+                                  <div class="col-sm-10">
+                                    效果： <input type="text" class="form-control" value="" name="eEffect" id="eEffect">
+                                  </div>
+                              </div>
+                              <div class="hr-line-dashed"></div>
+                              <div class="hr-line-dashed"></div>
+                              <div class="hr-line-dashed"></div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn-primary">提交更改</button>
+                              </div>
+                            </form>
+
+                          </div>
+
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
-              </tr>
+                </tr>
               </tbody>
               <tfoot>
-              <tr>
-                <th>日期</th>
-                <th>计划项</th>
-                <th>执行效果</th>
-                <td></td>
-              </tr>
+                <tr>
+                  <th>日期</th>
+                  <th>计划项</th>
+                  <th>执行效果</th>
+                  <td></td>
+                </tr>
               </tfoot>
             </table>
             <div class="">
@@ -672,6 +671,10 @@
 
         axios.get('http://localhost:8080/plan/modify', {
             params: {
+                eId: eId,
+                eDate1: eDate1,
+                ePlan: ePlan,
+                eEffect: eEffect
 
             }
         }).then(function (value) {
@@ -705,10 +708,19 @@
 </script>
 
 <script>
-    axios.get('http://localhost:8080/plan/findall', {
-        params: {}
-    })
+    function edit(id,date,plan,effect) {
+        $("#eDate1").val(date);
+        $("#eDate1").attr("value",date);
+        $("#ePlan").val(plan);
+        $("#ePlan").attr("value",plan);
+        $("#eEffect").val(effect);
+        $("#eEffect").attr("value",effect);
+        $("#eId").val(id);
+        $("#eId").attr("value",id);
+    }
 </script>
+
+
 
 </body>
 
