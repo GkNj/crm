@@ -173,8 +173,9 @@ public class User implements Serializable, UserDetails {
         return position;
     }
 
-    public void setPosition(String position) {
+    public String setPosition(String position) {
         this.position = position;
+        return position;
     }
 
     @Override

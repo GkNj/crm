@@ -13,7 +13,7 @@ import java.util.List;
 public interface PlanRepository extends JpaRepository<Exploit,Integer> {
     Exploit findExploitByEId(int eId);
 
-//    List<Exploit> findExploitByState(String state);
-
     int deleteExploitByEId(int eId);
+
+
 }

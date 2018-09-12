@@ -17,4 +17,7 @@ interface UserRepository : JpaRepository<User, Long> {
      */
     fun findUserByUsername(username: String): List<User>?
 
+    fun findUserByPosition(position:String):List<User>
+
+
 }
