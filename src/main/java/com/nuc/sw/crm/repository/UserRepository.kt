@@ -15,7 +15,7 @@ interface UserRepository : JpaRepository<User, Long> {
      * @param username 登录用户名
      * @return user 实体对象
      */
-    fun findUserByUsername(username: String): User
+    fun findUserByUsername(username: String): List<User>?
 
     fun findUserByPosition(position:String):List<User>
 
