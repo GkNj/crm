@@ -49,7 +49,7 @@ public interface CustomerService {
     List<Orders> queryOrdersByCid(int cId);
 
     /**
-     * 根据客户id统计联系人总数
+     * 根据客户id统计历史订单总数
      * @param cId
      * @return int
      */
@@ -63,7 +63,7 @@ public interface CustomerService {
     int countTradesByCId(int cId);
 
     /**
-     * 根据客户id统计历史订单总数
+     * 根据客户id统计联系人总数
      * @param cId
      * @return int
      */
@@ -131,12 +131,28 @@ public interface CustomerService {
     List<Product> queryProduct(int oId);
 
     /**
-     * 修改订单总价
-     * @param orders
-     * @return
+     * 更新订单总金额
+     * @param price
+     * @param oid
+     * @return int
      */
-    //Orders savePrice(Orders orders);
-
     int updatePrice(double price,int oid);
+
+    /**
+     * 流失表新增
+     * @param loss
+     * @return LossVo
+     */
+    Loss saveLoss(Loss loss);
+
+    List<Loss> queryLossByUId(int uid);
+
+    List<Integer> queryCustomerIdNotInLossByUId(int uId);
+
+//    List<String> queryCNameByCId(int cId);
+
+    List<Customer> queryCustomerNotInLossByUId(int uId);
+
+    int updateMeasure(String measure,int id);
 
 }

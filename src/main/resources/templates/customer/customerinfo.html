@@ -92,7 +92,9 @@
                         <ul class="nav nav-second-level">
                             <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                             </li>
-                            <li><a href="customerlost.html">客户流失管理</a>
+                            <li style="display: none"> <p th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}"></p>
+                            </li>
+                            <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                             </li>
                         </ul>
                     </li>
