@@ -22,6 +22,11 @@ public interface OrdersRepository extends JpaRepository<Orders,Integer> {
     @Query(value = "update orders set o_price=?1 where o_id =?2",nativeQuery = true)
     int updatePrice(double price,int oid);
 
+    @Query(value = "select count(*),sum(o_price),o_date from orders group by o_date ",nativeQuery = true)
+    List findYearOrder();
+
+    @Query(value = "select count(*),o_date from orders where o_state=\"已还款\" group by o_date",nativeQuery = true)
+    List findHasPay();
 //    @Modifying
 //    @Query(value = "insert into loss")
 //    int addLost(String a,int cId,int rId);

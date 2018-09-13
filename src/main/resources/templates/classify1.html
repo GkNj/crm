@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 <head>
 
@@ -7,16 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>素材火www.sucaihuo.com - 空白页</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <title>客户类型分析</title>
+
 
     <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
 </head>
 
 <body>
@@ -27,98 +41,122 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../../static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
+
+
                     </div>
                     <div class="logo-element">
                         H+
                     </div>
 
                 </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                            class="fa arrow"></span></a>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/opptunitymanage.html">营销机会管理</a>
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
-                        <li><a href="../../static/createplan.html">客户开发计划</a>
+                        <li><a th:href="@{/plan/findall}">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
 
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/customer/customerinfo.html">客户信息管理</a>
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                         </li>
-                        <li><a href="../templates/customer/customerlost.html">客户流失管理</a>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
-                <li >
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/service/create.html">服务创建</a>
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
                         </li>
-                        <li><a href="../templates/service/distribute.html">服务分配</a>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                            <a th:href="@{service/queryState}">服务分配</a>
                         </li>
-                        <li><a href="../templates/service/handle.html">服务处理</a>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="../templates/service/feedback.html">服务反馈</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="../templates/service/ok.html">服务归档</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="active">
+                <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')" class="active">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="classify.html">客户构成分析</a>
+                        <li><a href="classify1.html">客户构成分析</a>
                         </li>
-                        <li><a href="classify.html">客户服务分析</a>
-                        </li>
-                        <li><a href="classify.html">客户流失分析</a>
-                        </li>
+                        <li><a href="classify2.html">客户服务分析</a>
+
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="dictionary.html">数据字典管理</a>
+                        <li><a href="/basic/findAllDictionary">数据字典管理</a>
                         </li>
-                        <li><a href="product.html">查询产品信息</a>
+                        <li><a href="/basic/findAllProduct">查询产品信息</a>
                         </li>
-                        <li><a href="stock.html">查询库存</a>
+
+                        <li><a href="/basic/findAllStock">查询库存</a>
+
                         </li>
                     </ul>
                 </li>
-                <li >
-                    <a href="../templates/permission.html"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
+                            class="nav-label">权限管理</span></a>
                 </li>
             </ul>
         </div>
@@ -236,7 +274,7 @@
                         <a href="index.html">主页</a>
                     </li>
                     <li>
-                        <strong>分析客户构成</strong>
+                        <strong>分析客户订单</strong>
                     </li>
                 </ol>
             </div>
@@ -268,7 +306,7 @@
                             <div class="col-lg-3">
                                 <ul class="stat-list">
                                     <li>
-                                        <h2 class="no-margins">2,346</h2>
+                                        <h2 class="no-margins" id="ordernum">2,346</h2>
                                         <small>订单总数</small>
                                         <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i>
                                         </div>
@@ -277,8 +315,8 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <h2 class="no-margins ">4,422</h2>
-                                        <small>最近一个月订单</small>
+                                        <h2 class="no-margins " id="sum">4,422</h2>
+                                        <small>销售总额</small>
                                         <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i>
                                         </div>
                                         <div class="progress progress-mini">
@@ -286,7 +324,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <h2 class="no-margins ">9,180</h2>
+                                        <h2 class="no-margins ">10</h2>
                                         <small>最近一个月销售额</small>
                                         <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i>
                                         </div>
@@ -376,12 +414,47 @@
 
 <!-- ECharts -->
 <script src="js/plugins/echarts/echarts-all.js"></script>
+<script src="js/hplus.js?v=2.2.0"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- ECharts -->
+<script src="js/plugins/echarts/echarts-all.js"></script>
+
+
+
+</body>
+<script src="js/hplus.js?v=2.2.0"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- ECharts -->
+<script src="js/plugins/echarts/echarts-all.js"></script>
+
+
+
+</body>
+<script src="assets/jquery.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+
+
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="js/hplus.js?v=2.2.0"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
-<script src="assets/jquery.min.js"></script>
-<script src="js/bootstrap.min.js?v=3.4.0"></script>
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
 </body>
@@ -399,75 +472,83 @@
         });
     })
     $(function () {
-        axios.get('/statistic/getCharts')
+        axios.get('http://localhost:8080/statistic/orderData')
             .then(function(response){
                 var data = response.data;
-
-            });
-        var barChart = echarts.init(document.getElementById("bar"));
-        var option = {
-            title : {
-                text: '近年来客户订单情况',
-
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['订单量','付款量']
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    data : ['2015','2016','2017','2018']
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'订单量',
-                    type:'bar',
-                    data:[1000,1500,1250,2000],
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
+                var years =data.years;
+                var x1 = data.x1;
+                var x2 = data.x2;
+                var sum =data.sum;
+                var ordernum=0;
+                for (var i in x1)
+                    ordernum =i+ordernum;
+                $("#ordernum").html(ordernum);
+                $("#sum").html(sum);
+                var barChart = echarts.init(document.getElementById("bar"));
+                var option = {
+                    title : {
+                        text: '近年来客户订单情况',
                     },
-                    // markLine : {
-                    //     data : [
-                    //         {type : 'average', name: '平均值'}
-                    //     ]
-                    // }
-                },
-                {
-                    name:'付款量',
-                    type:'line',
-                    data:[900,500,600,1000],
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['订单量','付款量']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : years
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'订单量',
+                            type:'bar',
+                            data:x1,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            // markLine : {
+                            //     data : [
+                            //         {type : 'average', name: '平均值'}
+                            //     ]
+                            // }
+                        },
+                        {
+                            name:'付款量',
+                            type:'line',
+                            data:x2,
 
-                    // markLine : {
-                    //     data : [
-                    //         {type : 'average', name : '平均值'}
-                    //     ]
-                    // }
-                }
-            ]
-        };
-        barChart.setOption(option);
+                            // markLine : {
+                            //     data : [
+                            //         {type : 'average', name : '平均值'}
+                            //     ]
+                            // }
+                        }
+                    ]
+                };
+                barChart.setOption(option);
+            });
+
 
         var $table = $('#table');
         $table.bootstrapTable({

@@ -1,12 +1,11 @@
 package com.nuc.sw.crm.controller;
 
-import com.nuc.sw.crm.entity.Contribution;
-import com.nuc.sw.crm.entity.Customer;
-import com.nuc.sw.crm.entity.Service;
-import com.nuc.sw.crm.entity.ServiceCustomer;
+import com.nuc.sw.crm.entity.*;
 import com.nuc.sw.crm.repository.CustomerRepository;
 import com.nuc.sw.crm.repository.CustomerRepositoryImpl;
+import com.nuc.sw.crm.repository.OrdersRepository;
 import com.nuc.sw.crm.repository.service.ServiceRepository;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/statistic")
@@ -30,6 +26,8 @@ public class StaticController {
     CustomerRepositoryImpl repository1;
     @Autowired
     ServiceRepository serviceRepository;
+    @Autowired
+    OrdersRepository ordersRepository;
     @RequestMapping(value = "/findAll")
     @ResponseBody
     public List<Customer> findAllCustomer(@RequestParam("order") String arc){
@@ -99,5 +97,32 @@ public class StaticController {
         }
         return list;
 
+    }
+    @RequestMapping(value = "orderData")
+    @ResponseBody
+    public Map orderData(){
+        List list = ordersRepository.findYearOrder();
+        List list1= ordersRepository.findHasPay();
+        List<String> years = new ArrayList<>();
+        List x1=new ArrayList();
+        List x2=new ArrayList();
+        double sum=0;
+        for (Object o: list){
+            Object[] cells = (Object[]) o;
+            years.add((String) cells[2]);
+            sum= sum+(double)cells[1];
+            x1.add(cells[0]);
+        }
+        for (Object o: list1){
+            Object[] cells = (Object[]) o;
+            x2.add(cells[0]);
+        }
+
+        Map map = new HashMap();
+        map.put("x1",x1);
+        map.put("x2",x2);
+        map.put("sum",sum);
+        map.put("years",years);
+        return map;
     }
 }
