@@ -4,8 +4,6 @@ import com.nuc.sw.crm.entity.Dictionary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
-
-=======
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,8 +18,6 @@ public interface DictionaryRepository extends JpaRepository<Dictionary,Integer> 
         List<Dictionary> findAll();
         List<Dictionary> findDictionaryById(int id);
 
-        List<Dictionary> findAll();
-        List<Dictionary> findDictionaryById(int id);
         @Query(value = "update Dictionary set parentID=?1,typeKey=?2,typeValue=?3,editable=?4 where id=?5",nativeQuery = true)
         public String updataOne(int parentID,String typeKey,String typeValue,int editablre,int id);
         List<Dictionary> findDictionaryByParentID(int parentID);

@@ -10,8 +10,5 @@ import java.util.List;
 public interface StockRepository extends JpaRepository<Stock,Integer> {
         List<Stock> findAll();
 
-public interface StockRepository extends JpaRepository<Stock, Integer> {
-    List<Stock> findAll();
-
 
 }

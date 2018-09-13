@@ -1,26 +1,12 @@
-package com.nuc.sw.crm.service;
+ package com.nuc.sw.crm.service;
 
 import com.nuc.sw.crm.entity.Dictionary;
 import com.nuc.sw.crm.entity.Product;
-
 import com.nuc.sw.crm.entity.Stock;
 
 import java.util.List;
 
 public interface DictionaryService {
-    /**
-     *  添加数据条目
-     * @param dictionary
-     * @return
-     */
-    int addDictionary(Dictionary dictionary);
-
-    /**
-     * 查询所有字典数据
-     * @return List<dictionary>
-     */
-    List<Dictionary> findAllDictionary();
-
 
 
     /**
@@ -33,11 +19,7 @@ public interface DictionaryService {
      * 查询所有产品信息
      * @return list
      */
-
-//    List<Product> findAllProduct();
-
     List<Product> findAllProduct();
-
 
     /**
      * 根据id查询数据字典信息
@@ -51,18 +33,11 @@ public interface DictionaryService {
      * @param dictionary
      * @return list
      */
-
-    List<Dictionary> updateDictionary(Dictionary dictionary);
     Dictionary updateDictionary(Dictionary dictionary);
 
     /**
      * 删除数据字典信息
      * @param id
-
-     * @return int
-     */
-    int deleteDictionary(int id);
-
      */
     void deleteDictionary(int id);
     /**
@@ -96,6 +71,5 @@ public interface DictionaryService {
      * @return list
      */
 //    List<Dictionary> findDictionariesIdByParentID(int id);
-
 
 }
