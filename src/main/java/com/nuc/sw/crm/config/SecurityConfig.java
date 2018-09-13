@@ -40,11 +40,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 允许跨域请求
         http.cors().disable();
         http.csrf().disable();
-        // 所有的访问必须登录
+
+        // AM 客户经理 SM 销售主管 SA 高管
         http.authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/", "/index").hasAnyRole("ROOT", "ADMIN", "SM", "AM", "SA")
+                //  销售主管
+                .antMatchers("/service/queryState").hasAnyRole("SM", "ROOT", "ADMIN")
+                // 客户经理
+                .antMatchers("/service/create.html", "/service/queryForHandle",
+                        "/service/queryForFeedBack", "/service/ok", "queryCustomerByUId", "/queryLossByUId",
+                        "/opportunity/findAll", "/plan/findall", "/basic/findAllStock", "/basic/findAllDIctionary").hasAnyRole("AM", "ROOT", "ADMIN")
+                // 管理员
+                .antMatchers("/permission/list").hasAnyRole("ADMIN", "ROOT")
+                // 高管
+                .antMatchers("/index").hasAnyRole("SA", "ROOT", "ADMIN")
+                // 系统管理员
+                .antMatchers("/basic/findAllStock").hasAnyRole("ROOT", "ADMIN")
+                .antMatchers("/login", "/login.html", "/logout").permitAll();
 
         // 登录配置
         http.formLogin()
@@ -95,8 +107,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("root").password("$2a$10$1Mh01qeGRtBSHX0ERnRspOipzy4FFT0z.fPkG2ogIQwTGXnIL1bHu").roles("ROOT").and()
-
         auth.userDetailsService(userService);
     }
 }
