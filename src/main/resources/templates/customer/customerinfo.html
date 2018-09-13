@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
 
-    <title>素材火www.sucaihuo.com - 空白页</title>
+    <title>客户信息管理</title>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -24,7 +27,13 @@
     <script src="js/hplus.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
-
+<script>
+    function upload(name) {
+        //默认显示
+        $("#c_id").val(name);
+        $("#c_id").attr("value", name);
+    }
+</script>
     <script>
         $(document).ready(function () {
             $('.contact-box').each(function () {
@@ -46,103 +55,118 @@
                             <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="form_avatar.html">修改头像</a>
-                                </li>
-                                <li><a href="profile.html">个人资料</a>
-                                </li>
-                                <li><a href="contacts.html">联系我们</a>
-                                </li>
-                                <li><a href="mailbox.html">信箱</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
-                                </li>
-                            </ul>
+
+
                         </div>
                         <div class="logo-element">
                             H+
                         </div>
 
                     </li>
-                    <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                                class="fa arrow"></span></a>
+
+                    <!--<span sec:authentication="name"></span>-->
+                    <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                    <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                    <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                    <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                    <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                    <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                        <a href="index.html"><i class="fa fa-th-large"></i>
+                            <span class="nav-label">营销管理</span> <span
+                                    class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-
-                            <li><a href="opptunitymanage.html">营销机会管理</a>
+                            <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                             </li>
-                            <li><a href="createplan.html">客户开发计划</a>
-
-                            <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
-                            </li>
-                            <li><a href="../opportunity/createplan.html">客户开发计划</a>
-
+                            <li><a th:href="@{/plan/findall}">客户开发计划</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li class="active">
+                    <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                         <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                             </li>
-                            <li style="display: none"> <p th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}"></p>
-                            </li>
                             <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                             </li>
                         </ul>
                     </li>
-                    <li >
+                    <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
                         <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../service/create.html">服务创建</a>
+                            <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                                <a th:href="@{service/create.html}">服务创建</a>
                             </li>
-                            <li><a href="../service/distribute.html">服务分配</a>
+                            <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                                <a th:href="@{service/queryState}">服务分配</a>
                             </li>
-                            <li><a href="../service/handle.html">服务处理</a>
+
+                            <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                                <a th:href="@{service/queryForHandle}">服务处理</a>
                             </li>
-                            <li><a href="../service/feedback.html">服务反馈</a>
+                            <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                                <a th:href="@{service/queryForFeedBack}">服务反馈</a>
                             </li>
-                            <li><a href="../service/ok.html">服务归档</a>
+                            <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                                <a th:href="@{service/ok}">服务归档</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li >
+                    <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+
                         <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                                 class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../../static/classify.html">客户贡献分析</a>
+                            <li><a href="../classify.html">客户贡献分析</a>
                             </li>
-                            <li><a href="../../static/classify.html">客户构成分析</a>
+                            <li><a href="../classify1.html">客户构成分析</a>
                             </li>
-                            <li><a href="../../static/classify.html">客户服务分析</a>
-                            </li>
-                            <li><a href="../../static/classify.html">客户流失分析</a>
-                            </li>
+                            <li><a href="../classify2.html">客户服务分析</a>
+
                         </ul>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                         <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                                 class="label label-warning pull-right">16</span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../../static/dictionary.html">数据字典管理</a>
+                            <li><a href="/basic/findAllDictionary">数据字典管理</a>
                             </li>
-                            <li><a href="../../static/product.html">查询产品信息</a>
+                            <li><a href="/basic/findAllProduct">查询产品信息</a>
                             </li>
-                            <li><a href="../basic/stock.html">查询库存</a>
+
+                            <li><a href="/basic/findAllStock">查询库存</a>
+
                             </li>
                         </ul>
                     </li>
-                    <li >
-                        <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
+                    <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                        <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
                                 class="nav-label">权限管理</span></a>
                     </li>
                 </ul>
@@ -152,26 +176,29 @@
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="customerinfo.html#"><i class="fa fa-bars"></i> </a>
-                        <form role="search" class="navbar-form-custom" method="post" action="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/search_results.html">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                                class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                             <div class="form-group">
-                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
+                                       id="top-search">
                             </div>
                         </form>
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message"><a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
+                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/index.html#">
-                                <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
                                 <li>
                                     <div class="dropdown-messages-box">
-                                        <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/img/a7.jpg">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a7.jpg">
                                         </a>
                                         <div class="media-body">
                                             <small class="pull-right">46小时前</small>
@@ -184,8 +211,8 @@
                                 <li class="divider"></li>
                                 <li>
                                     <div class="dropdown-messages-box">
-                                        <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/img/a4.jpg">
+                                        <a href="profile.html" class="pull-left">
+                                            <img alt="image" class="img-circle" src="img/a4.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right text-navy">25小时前</small>
@@ -198,20 +225,20 @@
                                 <li class="divider"></li>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/mailbox.html">
-                                            <i class="fa fa-envelope"></i>  <strong> 查看所有消息</strong>
+                                        <a href="#">
+                                            <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                         </a>
                                     </div>
                                 </li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/index.html#">
-                                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
                                 <li>
-                                    <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/mailbox.html">
+                                    <a href="#">
                                         <div>
                                             <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                                             <span class="pull-right text-muted small">4分钟前</span>
@@ -220,7 +247,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/profile.html">
+                                    <a href="#">
                                         <div>
                                             <i class="fa fa-qq fa-fw"></i> 3条新回复
                                             <span class="pull-right text-muted small">12分钟钱</span>
@@ -230,7 +257,7 @@
                                 <li class="divider"></li>
                                 <li>
                                     <div class="text-center link-block">
-                                        <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/notifications.html">
+                                        <a href="#">
                                             <strong>查看所有 </strong>
                                             <i class="fa fa-angle-right"></i>
                                         </a>
@@ -241,7 +268,7 @@
 
 
                         <li>
-                            <a href="../../../../../../../tim接收/H-background-theme-master/H-background-theme-master/login.html">
+                            <a th:href="@{/logout}">
                                 <i class="fa fa-sign-out"></i> 退出
                             </a>
                         </li>
@@ -266,48 +293,123 @@
                     </div>
                 </div>
                 <div class="wrapper wrapper-content animated fadeInRight">
-                    <div class="row" th:each="cus:${list}">
+                    <div class="row">
+                        <div th:each="cus:${list}">
 
-                        <div th:if="${cus.cAddress}!=null" >
-                            <div class="col-lg-4" >
-                                <div class="contact-box">
-                                        <div class="col-sm-4">
-                                            <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg" style="margin-top: 15px">
-                                            </div><br>
-                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal">上传头像</button>
+                            <div th:if="${cus.cAddress} ne null">
+                                <div class="col-lg-4">
+                                    <div class="contact-box">
+                                        <div th:if="${cus.cPicture} eq null ">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
                                         </div>
-                                    <a th:href="@{/queryCustomerByCId(cid=${cus.cId})}">
-                                        <div class="col-sm-8">
-                                            <h3><strong th:text="${cus.cName}"></strong></h3>
-                                            <p><i class="fa fa-map-marker"></i> <span th:text="${cus.cAddress}"></span><br>
+                                        <div th:if="${cus.cPicture} eq '' ">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <div th:if="${cus.cPicture} ne null ">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" th:src="@{${cus.cPicture}}" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/queryCustomerByCId(cid=${cus.cId})}">
+                                            <div class="col-sm-8">
+                                                <h3><strong th:text="${cus.cName}"></strong></h3>
+                                                <p><i class="fa fa-map-marker"></i> <span th:text="${cus.cAddress}"></span><br>
 
-                                                Post:<span th:text="${cus.cPost}"></span><br>
-                                                Website:<a href="contacts.html" th:text="${cus.cWebsite}"></a><br>
-                                            </p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
+                                                    Post:<span th:text="${cus.cPost}"></span><br>
+                                                    Website:<a href="contacts.html" th:text="${cus.cWebsite}"></a><br>
+                                                </p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div th:if="${cus.cAddress}==null">
-                            <div class="col-lg-4" >
-                                <div class="contact-box">
 
-                                        <div class="col-sm-4">
-                                            <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="img/a2.jpg" style="margin-top: 15px">
-                                            </div><br>
-                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal">上传头像</button>
+                            <div th:if="${cus.cAddress} eq null">
+                                <div class="col-lg-4" >
+                                    <div class="contact-box">
+                                        <div th:if="${cus.cPicture} eq null">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
                                         </div>
-                                    <a th:href="@{/queryCustomerByCId(cid=${cus.cId})}">
-                                        <div class="col-sm-8">
-                                            <h3><strong th:text="${cus.cName}"></strong></h3>
-                                            <p>信息不全！</p>
+                                        <div th:if="${cus.cPicture} eq ''">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
                                         </div>
-                                        <div class="clearfix"></div>
-                                    </a>
+                                        <div th:if="${cus.cPicture} ne null ">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" th:src="@{${cus.cPicture}}" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/queryCustomerByCId(cid=${cus.cId})}">
+                                            <div class="col-sm-8">
+                                                <h3><strong th:text="${cus.cName}"></strong></h3>
+                                                <p>信息不全！</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${cus.cAddress} eq ''">
+                                <div class="col-lg-4" >
+                                    <div class="contact-box">
+                                        <div th:if="${cus.cPicture} eq null">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <div th:if="${cus.cPicture} eq ''">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" src="../img/a1.jpg" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <div th:if="${cus.cPicture} ne null ">
+                                            <div class="col-sm-4">
+                                                <div class="text-center">
+                                                    <img alt="image" class="img-circle m-t-xs img-responsive" th:src="@{${cus.cPicture}}" style="margin-top: 15px">
+                                                </div><br>
+                                                <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#uploadModal" href="javascript:void(0)" th:onclick="'upload(\''+${cus.cId}+'\');'">上传头像</button>
+                                            </div>
+                                        </div>
+                                        <a th:href="@{/queryCustomerByCId(cid=${cus.cId})}">
+                                            <div class="col-sm-8">
+                                                <h3><strong th:text="${cus.cName}"></strong></h3>
+                                                <p>信息不全！</p>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -321,12 +423,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="ibox-content">
-                                        <form class="form-inline" role="form">
+                                        <form action="/upload" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <label class="sr-only" for="inputfile">文件输入</label>
-                                                <input type="file" id="inputfile">
+                                                <label class="sr-only" hidden >客户编号</label>
+                                                <input type="hidden" id="c_id" name="c_id" value="">
                                             </div>
-                                            <button type="submit" class="btn btn-default">提交</button>
+                                            <p>选择文件: <input type="file" name="file"/></p>
+                                            <p><input type="submit" value="提交"/></p>
                                         </form>
                                     </div>
                                 </div>

@@ -14,6 +14,9 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
 
     List<Customer> findCustomersByUId(int uId);
 
+    @Query(value = "select u_id from customer where c_id = ?1",nativeQuery = true)
+    int findUIdByCId(int cId);
+
     @Modifying
     @Query(value = "select c_id from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
     List<Integer> queryCustomerIdNotInLossByUId(int uId);
@@ -21,4 +24,8 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Modifying
     @Query(value = "select * from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
     List<Customer> queryCustomerNotInLossByUId(int uId);
+
+    @Modifying
+    @Query(value = "update customer set c_picture=?1 where c_id  = ?2",nativeQuery = true)
+    int updatePic(String Pic,int id);
 }
