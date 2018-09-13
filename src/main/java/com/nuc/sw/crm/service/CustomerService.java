@@ -147,12 +147,16 @@ public interface CustomerService {
 
     List<Loss> queryLossByUId(int uid);
 
-    List<Integer> queryCustomerIdNotInLossByUId(int uId);
+    List<Integer> queryCustomerIdNotInLoss();
 
-//    List<String> queryCNameByCId(int cId);
 
     List<Customer> queryCustomerNotInLossByUId(int uId);
 
     int updateMeasure(String measure,int id);
 
+    int updateReasonAndState(String reason,int id);
+
+    int updatePic(String Pic,int id);
+
+    int updateUId(int log_id,int id);
 }

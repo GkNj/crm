@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 <head>
     <meta charset="UTF-8">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -7,96 +10,99 @@
 
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script><!-- Mainly scripts -->
+    <!-- Data Tables -->
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../js/jquery-2.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
+    <script src="../js/plugins/jeditable/jquery.jeditable.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="../js/hplus.js"></script>
     <script src="../js/plugins/pace/pace.min.js"></script>
-    <script type="text/javascript">
-        window.onload = function(){
-            var nowDate = new Date();
-            var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate();
-            document.getElementById("shijian").value=str;
-            document.getElementById("shijian1").value=str;
-        }
-    </script>
-    <script type="text/javascript">
 
-        function editInfo(id,name,address,cClass,satisfaction,credit,post,website,uId) {
+    <!-- Data Tables -->
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+        })
+
+        function editInfo(id, name, address, cClass, satisfaction, credit, post, website, uId) {
             //默认显示
+            alert(id);
             $("#c_name").val(name);
-            $("#c_name").attr("value",name);
+            $("#c_name").attr("value", name);
             $("#c_address").val(address);
-            $("#c_address").attr("value",address);
+            $("#c_address").attr("value", address);
             $("#c_clss").val(cClass);
-            $("#c_class").attr("value",cClass);
+            $("#c_class").attr("value", cClass);
             $("#c_satisfaction").val(satisfaction);
-            $("#c_satisfaction").attr("value",satisfaction);
+            $("#c_satisfaction").attr("value", satisfaction);
             $("#c_credit").val(credit);
-            $("#c_credit").attr("value",credit);
+            $("#c_credit").attr("value", credit);
             $("#c_post").val(post);
-            $("#c_post").attr("value",post);
+            $("#c_post").attr("value", post);
             $("#c_website").val(website);
-            $("#c_website").attr("value",website);
+            $("#c_website").attr("value", website);
             $("#u_id").val(uId);
             $("#c_id").val(id);
         }
 
-        function editLinkman(id,name,cId,sex,position,tel,remark) {
+        function editLinkman(id, name, cId, sex, position, tel, remark) {
             //默认显示
             $("#l_name").val(name);
-            $("#l_name").attr("value",name);
+            $("#l_name").attr("value", name);
             $("#l_sex").val(sex);
-            $("#l_position").attr("value",sex);
+            $("#l_position").attr("value", sex);
             $("#l_position").val(position);
-            $("#l_position").attr("value",position);
+            $("#l_position").attr("value", position);
             $("#l_tel").val(tel);
-            $("#l_tel").attr("value",tel);
+            $("#l_tel").attr("value", tel);
             $("#l_remark").val(remark);
-            $("#l_remark").attr("value",remark);
+            $("#l_remark").attr("value", remark);
             $("#l_id").val(id);
             $("#c_id1").val(cId);
         }
 
-        function editTrade(id,cId,date,address,outline,remark) {
+        function editTrade(id, cId, date, address, outline, remark) {
             //默认显示
             $("#t_date").val(date);
-            $("#t_date").attr("value",date);
+            $("#t_date").attr("value", date);
             $("#t_address").val(address);
-            $("#t_address").attr("value",address);
+            $("#t_address").attr("value", address);
             $("#t_outline").val(outline);
-            $("#t_outline").attr("value",outline);
+            $("#t_outline").attr("value", outline);
             $("#t_remark").val(remark);
-            $("#t_remark").attr("value",remark);
+            $("#t_remark").attr("value", remark);
             $("#t_id").val(id);
             $("#c_id2").val(cId);
         }
-        function OrderDetail(id,date,address,state,price) {
+
+        function OrderDetail(id, date, address, state, price) {
             axios.get('http://localhost:8080/queryProduct', {
                 params: {
                     id: id
                 }
-            }) .then(function(response) {
-                var data =response.data;
+            }).then(function (response) {
+                var data = response.data;
                 console.log(data);
-                var str="";
+                var str = "";
                 for (i in data) {
                     str += "<tr>" +
                         "<td align='center'>" + data[i].pId + "</td>" +
-                        "<td align='center'>" + data[i].pName+ "</td>" +
-                        "<td align='center'>" + data[i].pNum+ "</td>" +
-                        "<td align='center'>" + data[i].pUnit+ "</td>" +
-                        "<td align='center'>" + data[i].pPrice+ "</td>" +
-                        "<td align='center'>" + (data[i].pPrice*data[i].pNum)+ "</td>" +
+                        "<td align='center'>" + data[i].pName + "</td>" +
+                        "<td align='center'>" + data[i].pNum + "</td>" +
+                        "<td align='center'>" + data[i].pUnit + "</td>" +
+                        "<td align='center'>" + data[i].pPrice + "</td>" +
+                        "<td align='center'>" + (data[i].pPrice * data[i].pNum) + "</td>" +
                         "</tr>";
 
 
                 }
-                $("#tbody-result").innerHTML=str;
+                $("#tbody-result").innerHTML = str;
                 $("#tbody-result").add(str);
                 $("#tbody-result").append(str);
 
@@ -104,22 +110,31 @@
             });
             //默认显示
             $("#o_date").val(date);
-            $("#o_date").attr("value",date);
+            $("#o_date").attr("value", date);
             $("#o_address").val(address);
-            $("#o_address").attr("value",address);
+            $("#o_address").attr("value", address);
             $("#o_state").val(state);
-            $("#o_state").attr("value",state);
+            $("#o_state").attr("value", state);
             $("#o_price").val(price);
-            $("#o_price").attr("value",price);
+            $("#o_price").attr("value", price);
             $("#o_id1").val(id);
-            $("#o_id1").attr("value",id);
+            $("#o_id1").attr("value", id);
             //
             // var o_id = document.getElementById("o_id").innerHTML;
             console.log("o_id ", id);
 
         }
-
-
+        function demo(){
+            alert("ceshiceshi")
+        }
+        window.onload = function(){
+            demo();
+            alert("asdasdasdasdsadsadasdsadsa");
+            var nowDate = new Date();
+            var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate();
+            document.getElementById("shijian").value=str;
+            document.getElementById("shijian1").value=str;
+        }
     </script>
 
 
@@ -140,51 +155,56 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
 
-                        </ul>
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
+                        </a>
+
+
                     </div>
                     <div class="logo-element">
                         H+
                     </div>
 
                 </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                            class="fa arrow"></span></a>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_AM')">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-
-                        <li><a href="../opptunitymanage.html">营销机会管理</a>
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
-                        <li><a href="../createplan.html">客户开发计划</a>
-
-                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
-                        </li>
-                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
-
+                        <li><a th:href="@{/plan/findall}">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="active">
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -194,53 +214,62 @@
                         </li>
                     </ul>
                 </li>
-                <li >
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_AM','ROLE_SM')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../service/create.html">服务创建</a>
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
                         </li>
-                        <li><a href="../service/distribute.html">服务分配</a>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT')">
+                            <a th:href="@{service/queryState}">服务分配</a>
                         </li>
-                        <li><a href="../service/handle.html">服务处理</a>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="../service/feedback.html">服务反馈</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="../service/ok.html">服务归档</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN','ROLE_SM')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
 
-                <li >
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../classify.html">客户贡献分析</a>
+                        <li><a href="classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="../classify.html">客户构成分析</a>
+                        <li><a href="classify1.html">客户构成分析</a>
                         </li>
-                        <li><a href="../classify.html">客户服务分析</a>
-                        </li>
-                        <li><a href="../classify.html">客户流失分析</a>
-                        </li>
+                        <li><a href="classify2.html">客户服务分析</a>
+
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../dictionary.html">数据字典管理</a>
+                        <li><a href="/basic/findAllDictionary">数据字典管理</a>
                         </li>
-                        <li><a href="../product.html">查询产品信息</a>
+                        <li><a href="/basic/findAllProduct">查询产品信息</a>
                         </li>
 
-                        <li><a href="../basic/stock.html">查询库存</a>
+                        <li><a href="/basic/findAllStock">查询库存</a>
 
                         </li>
                     </ul>
                 </li>
-                <li >
-                    <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
             </ul>
@@ -251,20 +280,23 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="empty_page.html#"><i class="fa fa-bars"></i> </a>
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                            class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
+                                   id="top-search">
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
+                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
@@ -297,8 +329,8 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i>  <strong> 查看所有消息</strong>
+                                    <a href="#">
+                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
                             </li>
@@ -306,11 +338,11 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="mailbox.html">
+                                <a href="#">
                                     <div>
                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                                         <span class="pull-right text-muted small">4分钟前</span>
@@ -319,7 +351,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="profile.html">
+                                <a href="#">
                                     <div>
                                         <i class="fa fa-qq fa-fw"></i> 3条新回复
                                         <span class="pull-right text-muted small">12分钟钱</span>
@@ -329,7 +361,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="notifications.html">
+                                    <a href="#">
                                         <strong>查看所有 </strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
@@ -340,7 +372,7 @@
 
 
                     <li>
-                        <a href="login.html">
+                        <a th:href="@{/logout}">
                             <i class="fa fa-sign-out"></i> 退出
                         </a>
                     </li>
@@ -466,8 +498,9 @@
                         </tr>
                         <tr style="height: 50px"></tr>
                         <tr>
-                            <td colspan="4"><a href="javascript:void(0)" th:onclick="'editInfo(\''+${customer.cId}+'\',\''+${customer.cName}+'\',\''+${customer.cAddress}+'\',\''+${customer.cClass}+'\',\''+${customer.cSatisfaction}+'\',\''+${customer.cCredit}+'\',\''+${customer.cPost}+'\',\''+${customer.cWebsite}+'\',\''+${customer.uId}+'\');'" data-toggle="modal" data-target="#updateCusModal">
-                                <button class="btn btn-primary btn-sm" style="float: right">修&nbsp;&nbsp;&nbsp;&nbsp;改</button></a></td>
+                            <td colspan="4"><a  data-toggle="modal" data-target="#updateCusModal">
+                                <button th:onclick="'editInfo(\''+${customer.cId}+'\',\''+${customer.cName}+'\',\''+${customer.cAddress}+'\',\''+${customer.cClass}+'\',\''+${customer.cSatisfaction}+'\',\''+${customer.cCredit}+'\',\''+${customer.cPost}+'\',\''+${customer.cWebsite}+'\',\''+${customer.uId}+'\');'" class="btn btn-primary btn-sm" style="float: right">修&nbsp;&nbsp;&nbsp;&nbsp;改</button></a></td>
+                                <!--<button onclick= class="btn btn-primary btn-sm" style="float: right">修&nbsp;&nbsp;&nbsp;&nbsp;改</button></a></td>-->
                         </tr>
                         </tbody>
 
@@ -476,100 +509,60 @@
                     </table>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="home">
-                    <div>
-                        <button class="btn btn-primary btn-sm" style="float: right" data-toggle="modal" data-target="#myModal">
-                            添加联系人</button>
-                        <table class="table table-striped" style="text-align: center;">
-                        <caption style="text-align: center;font-size: 16px;font-weight: bold">联系人信息列表</caption>
-                        <br>
-                        <thead style="background-color:#c8c8c8">
-                        <tr>
-                            <th style="text-align: center;width: 80px">编号</th>
-                            <th style="text-align: center">姓名</th>
-                            <th style="text-align: center">性别</th>
-                            <th style="text-align: center">职务</th>
-                            <th style="text-align: center">联系方式</th>
-                            <th style="text-align: center">备注</th>
-                            <th style="text-align: center">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody style="font-size: 14px;" >
-                        <tr th:each="link:${linkmen}">
-                            <td th:text="${link.lId}"></td>
-                            <td th:text="${link.lName}"></td>
-                            <td th:text="${link.lSex}"></td>
-                            <td th:text="${link.lPosition}"></td>
-                            <td th:text="${link.lTel}"></td>
-                            <td th:text="${link.lRemark}"></td>
-                            <td><a data-toggle="modal" data-target="#updateLinkModal" href="javascript:void(0)" th:onclick="'editLinkman(\''+${link.lId}+'\',\''+${link.lName}+'\',\''+${link.cId}+'\',\''+${link.lSex}+'\',\''+${link.lPosition}+'\',\''+${link.lTel}+'\',\''+${link.lRemark}+'\');'"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i> </a>
-                                &nbsp;&nbsp;<a th:href="@{/deleteLinkman(lId=${link.lId},cId=${link.cId})}"><i class="fa fa-trash-o fa-lg" style="color:#3c763d" title="删除"></i></a></td>
-                        </tr>
+                    <div class="ibox-title">
+                        <h5>联系人</h5>
+
+                            <button class="btn btn-primary btn-sm" style="float: right" data-toggle="modal" data-target="#myModal">
+                                添加联系人</button>
+
+                    </div>
+                    <div class="ibox-content">
+                        <!--<div class="dataTables_wrapper form-inline">-->
+
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;width: 80px">编号</th>
+                                    <th style="text-align: center">姓名</th>
+                                    <th style="text-align: center">性别</th>
+                                    <th style="text-align: center">职务</th>
+                                    <th style="text-align: center">联系方式</th>
+                                    <th style="text-align: center">备注</th>
+                                    <th style="text-align: center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="link:${linkmen}">
+                                    <td th:text="${link.lId}"></td>
+                                    <td th:text="${link.lName}"></td>
+                                    <td th:text="${link.lSex}"></td>
+                                    <td th:text="${link.lPosition}"></td>
+                                    <td th:text="${link.lTel}"></td>
+                                    <td th:text="${link.lRemark}"></td>
+                                    <td><a data-toggle="modal" data-target="#updateLinkModal" href="javascript:void(0)" th:onclick="'editLinkman(\''+${link.lId}+'\',\''+${link.lName}+'\',\''+${link.cId}+'\',\''+${link.lSex}+'\',\''+${link.lPosition}+'\',\''+${link.lTel}+'\',\''+${link.lRemark}+'\');'"><i class="fa fa-pencil-square-o fa-lg" style="color: #0F769F;" title="修改"></i> </a>
+                                        &nbsp;&nbsp;<a th:href="@{/deleteLinkman(lId=${link.lId},cId=${link.cId})}"><i class="fa fa-trash-o fa-lg" style="color:#3c763d" title="删除"></i></a></td>
+                                </tr>
 
 
-                        </tbody>
+                                </tbody>
 
-                    </table>
-                        <div class="row"><div class="col-sm-6">
-                            <div class="dataTables_info" id="editable_info" role="alert" aria-live="polite" aria-relevant="all" style="position: relative;top: 27px;">
-                                显示 1 到 10 项，共 57 项
-                            </div>
-                        </div>
-                            <div class="col-sm-6">
-                                <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
-                                    <ul class="pagination" style="float: right">
-                                        <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
-                                            <a href="#">
-                                                上一页
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button active" aria-controls="editable" tabindex="0">
-                                            <a href="#">
-                                                1
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                            <a href="#">
-                                                2
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                                <a href="#">
-                                                    3
-                                                </a>
-                                            </li>
-                                        <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                            <a href="#">
-                                                4
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                            <a href="#">
-                                                5
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                            <a href="#">
-                                                6
-                                            </a>
-                                        </li>
-                                        <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
-                                            <a href="#">
-                                                下一页
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        </table>
+
+                        <!--</div>-->
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="profile">
-                   <button class="btn btn-primary btn-sm" style="float: right" data-toggle="modal" data-target="#addTradeModal">
+                    <div class="ibox-title">
+                        <h5>交往记录</h5>
+
+                        <button class="btn btn-primary btn-sm" style="float: right" data-toggle="modal" data-target="#addTradeModal">
                             添加交往记录</button>
-                    <table class="table table-striped" style="text-align: center;">
-                        <caption style="text-align: center;font-size: 16px;font-weight: bold">交往记录列表</caption>
-                        <br>
-                        <thead style="background-color:#c8c8c8">
+
+                    </div>
+                    <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
                         <tr>
                             <th style="text-align: center;width: 80px">编号</th>
                             <th style="text-align: center">日期</th>
@@ -579,7 +572,7 @@
                             <th style="text-align: center">操作</th>
                         </tr>
                         </thead>
-                        <tbody style="font-size: 14px;">
+                        <tbody>
                         <tr th:each="trade:${trade}">
                             <td th:text="${trade.tId}"></td>
                             <td th:text="${trade.tDate}"></td>
@@ -595,64 +588,16 @@
 
 
                     </table>
-                    <div class="row"><div class="col-sm-6">
-                        <div class="dataTables_info" id="editable_info1" role="alert" aria-live="polite" aria-relevant="all" style="position: relative;top: 27px;">
-                            显示 1 到 10 项，共 57 项
-                        </div>
-                    </div>
-                        <div class="col-sm-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate1">
-                                <ul class="pagination" style="float: right">
-                                    <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous1">
-                                        <a href="#">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button active" aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            4
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            5
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            6
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next1">
-                                        <a href="#">
-                                            下一页
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="settings">
-                    <table class="table table-striped" style="text-align: center;">
-                    <caption style="text-align: center;font-size: 16px;font-weight: bold">历史订单列表</caption>
+                    <div class="ibox-title">
+                        <h5>历史订单</h5>
+                    </div>
+                    <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <br>
-                    <thead style="background-color:#c8c8c8">
+                    <thead>
                     <tr>
                         <th style="text-align: center;width: 80px">订单编号</th>
                         <th style="text-align: center">日期</th>
@@ -661,7 +606,7 @@
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
-                    <tbody style="font-size: 14px;">
+                    <tbody>
                     <tr th:each="order:${orders}">
                         <td th:text="${order.oId}" id="o_id"></td>
                         <td th:text="${order.oDate}"></td>
@@ -677,57 +622,6 @@
 
 
                 </table>
-                    <div class="row"><div class="col-sm-6">
-                        <div class="dataTables_info" id="editable_info2" role="alert" aria-live="polite" aria-relevant="all" style="position: relative;top: 27px;">
-                            显示 1 到 10 项，共 57 项
-                        </div>
-                    </div>
-                        <div class="col-sm-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate2">
-                                <ul class="pagination" style="float: right">
-                                    <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous2">
-                                        <a href="#">
-                                            上一页
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button active" aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            4
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            5
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button " aria-controls="editable" tabindex="0">
-                                        <a href="#">
-                                            6
-                                        </a>
-                                    </li>
-                                    <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next2">
-                                        <a href="#">
-                                            下一页
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1167,7 +1061,6 @@
     </div>
 </div>
 </div>
-
 
 
 </body>

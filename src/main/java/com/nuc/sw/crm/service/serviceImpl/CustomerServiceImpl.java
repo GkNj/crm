@@ -159,16 +159,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Integer> queryCustomerIdNotInLossByUId(int uId) {
+    public List<Integer> queryCustomerIdNotInLoss() {
 
-        return lossRepository.queryCustomerIdNotInLossByUId(uId);
+        return lossRepository.queryCustomerIdNotInLoss();
     }
-
-//    @Override
-//    public List<String> queryCNameByCId(int cId) {
-//
-//        return lossRepository.queryCNameByCId(cId);
-//    }
 
     @Override
     public List<Customer> queryCustomerNotInLossByUId(int uId) {
@@ -200,5 +194,23 @@ public class CustomerServiceImpl implements CustomerService {
     public int updateMeasure(String measure, int id) {
 
         return lossRepository.updateMeasure(measure,id);
+    }
+
+    @Override
+    public int updateReasonAndState(String reason, int id) {
+
+        return lossRepository.updateReasonAndState(reason,id);
+    }
+
+    @Override
+    public int updatePic(String Pic, int id){
+
+        return customerRepository.updatePic(Pic,id);
+    }
+
+    @Override
+    public int updateUId(int log_id, int id) {
+
+        return lossRepository.updateUId(log_id,id);
     }
 }
