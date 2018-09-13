@@ -1,6 +1,8 @@
 package com.nuc.sw.crm.service.serviceImpl;
 
 import com.nuc.sw.crm.entity.Exploit;
+import com.nuc.sw.crm.entity.Opportunity;
+import com.nuc.sw.crm.repository.OpportunityRepository;
 import com.nuc.sw.crm.repository.PlanRepository;
 import com.nuc.sw.crm.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class PlanServiceImpl implements PlanService {
 
     @Autowired
     PlanRepository planRepository;
+
+    @Autowired
+    OpportunityRepository opportunityRepository;
 
     @Override
     public void createExploit(Exploit exploit) {
@@ -38,6 +43,16 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void modifyExploit(Exploit exploit) {
         Exploit expl=planRepository.save(exploit);
+    }
+
+    public  void modifySuccess(Opportunity opportunity){
+        opportunity.setState("开发成功");
+        opportunityRepository.save(opportunity);
+    }
+
+    public  void modifyFail(Opportunity opportunity){
+        opportunity.setState("开发失败");
+        opportunityRepository.save(opportunity);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class OpportunityRestController {
     @RequestMapping("/findByPosition")
     public List<User> findUserByPosition(){
         User user=new User();
-        String position =user.setPosition("客户经理");
+        String position =user.setPosition("AM");
         List<User> list =opportunityServiceImpl.findUserByPosition(position);
 //        System.out.println("进入controller");
 //        map.addAttribute("user",list);

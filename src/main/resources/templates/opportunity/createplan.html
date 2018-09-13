@@ -273,12 +273,12 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
                 <i class="fa fa-wrench"></i>
               </a>
-              <ul class="dropdown-menu dropdown-user">
-                <li><a href="form_basic.html#">选项1</a>
-                </li>
-                <li><a href="form_basic.html#">选项2</a>
-                </li>
-              </ul>
+              <!--<ul class="dropdown-menu dropdown-user">-->
+                <!--<li><a href="form_basic.html#">选项1</a>-->
+                <!--</li>-->
+                <!--<li><a href="form_basic.html#">选项2</a>-->
+                <!--</li>-->
+              <!--</ul>-->
               <a class="close-link">
                 <i class="fa fa-times"></i>
               </a>
@@ -290,7 +290,8 @@
                 <label class="col-sm-2 control-label">编号</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="num" class="form-control" value="11" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="num" class="form-control" th:value="${opportunity.id}" readonly>
                 </div>
               </div>
 
@@ -300,7 +301,8 @@
                 <label class="col-sm-2 control-label">机会来源</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="resource" class="form-control" value="333" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="resource" class="form-control" th:value="${opportunity.resource}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -312,8 +314,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="successPercent" class="form-control error" value="333"
-                         disabled="" required="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="successPercent" class="form-control error" th:value="${opportunity.successPercent}"
+                         readonly  required="" aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -324,8 +327,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input id="username" name="username" class="form-control" value="222" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input id="username" name="username" class="form-control"  required="" th:value="${opportunity.username}"
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -336,8 +340,9 @@
                   概要
                 </label>
                 <div class="col-sm-10">
-                  <input type="text" name="summary" class="form-control error" value="555" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="summary" class="form-control error" th:value="${opportunity.summary}" required=""
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -346,7 +351,8 @@
                 <label class="col-sm-2 control-label">联系人</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="lName" class="form-control" value="666" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="lName" class="form-control" th:value="${opportunity.lName}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -355,7 +361,8 @@
                 <label class="col-sm-2 control-label">联系人电话</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="lPhone" class="form-control" value="13243546" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="lPhone" class="form-control" th:value="${opportunity.lPhone}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -367,10 +374,11 @@
                 </label>
 
                 <div class="col-sm-10">
+                                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
                                     <textarea id="cComment" cols="50" rows="4" name="cComment"
-                                              class="form-control error"
-                                              disabled="" required="" aria-required="true"
-                                              aria-invalid="true">666666</textarea>
+                                              class="form-control error" th:text="${opportunity.cComment}"
+                                              readonly required="" aria-required="true"
+                                              aria-invalid="true"></textarea>
 
                 </div>
               </div>
@@ -383,8 +391,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="sName" class="form-control error" value="7898" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="sName" class="form-control error" th:value="${opportunity.sName}" required=""
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -392,35 +401,19 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">创建时间</label>
                 <div class="col-sm-10">
-                  <input type="text" name="startDate" class="form-control error" id="shijian3"
-                         disabled="" required="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="startDate" class="form-control error" readonly th:value="${opportunity.startDate}" required="" aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
 
               <div class="form-group">
-                <label class="col-lg-2 control-label">指派给</label>
-
-                <div class="col-lg-10">
-                  <div class="form-group">
-                    <div class="col-sm-10">
-                      <select class="form-control m-b" name="pUsername" disabled="">
-                        <option value="1">张三</option>
-                        <option value="2">李四</option>
-                        <option value="3">王五</option>
-                        <option value="4">赵六</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
                 <label class="col-lg-2 control-label">指派时间</label>
 
                 <div class="col-lg-10">
-                  <input type="text" name="pDate" disabled="" id="shijian2" class="form-control"
-                         value="">
+                  <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="pDate" readonly  class="form-control"
+                         th:value="${opportunity.pDate}">
                 </div>
               </div>
             </form>
@@ -451,9 +444,9 @@
                 <i class="fa fa-wrench"></i>
               </a>
               <ul class="dropdown-menu dropdown-user">
-                <li><a href="table_data_tables.html#">开发成功</a>
+                <li><a th:href="'../plan/success?oId='+${opportunity.id}">开发成功</a>
                 </li>
-                <li><a href="table_data_tables.html#">终止开发</a>
+                <li><a th:href="'../plan/fail?oId='+${opportunity.id}">终止开发</a>
                 </li>
               </ul>
               <a class="close-link">
@@ -479,7 +472,7 @@
                     <td th:text="${plan.eEffect}"></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-toggle="modal"
-                              data-target="#myModal2" th:onclick="'edit(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\');'">编辑
+                              data-target="#myModal2" th:onclick="'edit(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\',\''+${opportunity.id}+'\');'">编辑
                       </button>
                     </td>
                     <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
@@ -535,14 +528,7 @@
                     </div>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>日期</th>
-                  <th>计划项</th>
-                  <th>执行效果</th>
-                  <td></td>
-                </tr>
-              </tfoot>
+
             </table>
             <div class="">
               <div class="text-center">
@@ -563,7 +549,7 @@
                     </div>
                     <div class="modal-body">
                       <form method="post" class="form-horizontal  m-t" id="signupForm"
-                            action="/plan/add">
+                            th:action="'/plan/add?o_id='+${opportunity.id}">
                         <div class="form-group">
                           <label class="col-sm-2 control-label">
                             <span class="red" style="color: red"> *</span>
@@ -708,15 +694,16 @@
 </script>
 
 <script>
-    function edit(id,date,plan,effect) {
-        $("#eDate1").val(date);
-        $("#eDate1").attr("value",date);
-        $("#ePlan").val(plan);
-        $("#ePlan").attr("value",plan);
-        $("#eEffect").val(effect);
-        $("#eEffect").attr("value",effect);
-        $("#eId").val(id);
-        $("#eId").attr("value",id);
+    function edit(id,date,plan,oId) {
+        // $("#eDate1").val(date);
+        // $("#eDate1").attr("value",date);
+        // $("#ePlan").val(plan);
+        // $("#ePlan").attr("value",plan);
+        // $("#eEffect").val(effect);
+        // $("#eEffect").attr("value",effect);
+        // $("#eId").val(id);
+        // $("#eId").attr("value",id);
+        $("#signupForm2").attr("action","/plan/modify?eId="+id+"&eDate="+date+"&ePlan="+plan+"&oId="+oId);
     }
 </script>
 

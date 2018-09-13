@@ -18,6 +18,8 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Query(value = "select c_id from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
     List<Integer> queryCustomerIdNotInLossByUId(int uId);
 
+    Customer findByCName(String cName);
+
     @Modifying
     @Query(value = "select * from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
     List<Customer> queryCustomerNotInLossByUId(int uId);

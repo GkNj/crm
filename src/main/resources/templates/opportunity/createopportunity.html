@@ -388,7 +388,7 @@
 
                                 <div class="col-sm-10">
                                     <input type="text" name="sName" class="form-control error" value="" required=""
-                                           aria-required="true" aria-invalid="true">
+                                           aria-required="true" aria-invalid="true" th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}" readonly>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -402,30 +402,6 @@
                             </div>
                             <div class="hr-line-dashed"></div>
 
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">指派给</label>
-
-                                <div class="col-lg-10">
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <select class="form-control m-b" name="pUsername" disabled="">
-                                                <option value="1">张三</option>
-                                                <option value="2">李四</option>
-                                                <option value="3">王五</option>
-                                                <option value="4">赵六</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">指派时间</label>
-
-                                <div class="col-lg-10">
-                                    <input type="text" name="pDate" id="shijian2" class="form-control" value="" disabled="">
-                                </div>
-                            </div>
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
