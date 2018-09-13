@@ -1,5 +1,6 @@
 package com.nuc.sw.crm.config;
 
+import com.nuc.sw.crm.handler.CustomAccessDeniedHandler;
 import com.nuc.sw.crm.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -71,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 自动登录配置
         http.rememberMe();
 
-
+        http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 
 
