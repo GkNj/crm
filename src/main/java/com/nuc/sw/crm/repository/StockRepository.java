@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StockRepository extends JpaRepository<Stock, Integer> {
-    List<Stock> findAll();
+public interface StockRepository extends JpaRepository<Stock,Integer> {
+        List<Stock> findAll();
+
 
 }

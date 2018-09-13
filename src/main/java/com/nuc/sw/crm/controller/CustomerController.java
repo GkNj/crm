@@ -1,14 +1,17 @@
 package com.nuc.sw.crm.controller;
 
-import com.nuc.sw.crm.Param.LinkmanParam;
-import com.nuc.sw.crm.Param.TradeParam;
+import com.nuc.sw.crm.param.LinkmanParam;
+import com.nuc.sw.crm.param.TradeParam;
 import com.nuc.sw.crm.entity.*;
 import com.nuc.sw.crm.repository.CustomerRepository;
 import com.nuc.sw.crm.service.serviceImpl.CustomerServiceImpl;
 import com.nuc.sw.crm.vo.LossVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -21,9 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
+
+import java.text.ParseException;
+import java.util.List;
+
 
 
 @Component
@@ -35,11 +43,11 @@ public class CustomerController {
     @Autowired
     private CustomerRepository repository;
     @RequestMapping("/queryCustomerByUId")
-    public String queryCustomerByUId(ModelMap map){
+    public String queryCustomerByUId(ModelMap map) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         List<Customer> list = customerService.queryCustomerNotInLossByUId(Math.toIntExact(user.getId()));
-        map.addAttribute("list",list);
+        map.addAttribute("list", list);
         //System.out.println(list);
 
         return "customer/customerinfo";
@@ -47,9 +55,9 @@ public class CustomerController {
     }
 
     @RequestMapping("/queryCustomerByCId")
-    public String queryCustomerByCId(ModelMap map, HttpServletRequest request){
+    public String queryCustomerByCId(ModelMap map, HttpServletRequest request) {
 
-        int id1 = (Integer.parseInt(request.getParameter("cid"))) ;
+        int id1 = (Integer.parseInt(request.getParameter("cid")));
         Customer customer = customerService.queryCustomerByCid(id1);
         List<Linkman> list = customerService.queryLinkmenByCid(id1);
         List<Trade> list1 = customerService.queryTradesByCid(id1);
@@ -57,13 +65,13 @@ public class CustomerController {
         int sum2 = customerService.countOrdersByCId(id1);
         int sum1 = customerService.countTradesByCId(id1);
         int sum = customerService.countLinkmenByCId(id1);
-        map.addAttribute("customer",customer);
-        map.addAttribute("linkmen",list);
-        map.addAttribute("trade",list1);
-        map.addAttribute("orders",list2);
-        map.addAttribute("count2",sum2);
-        map.addAttribute("count1",sum1);
-        map.addAttribute("count",sum);
+        map.addAttribute("customer", customer);
+        map.addAttribute("linkmen", list);
+        map.addAttribute("trade", list1);
+        map.addAttribute("orders", list2);
+        map.addAttribute("count2", sum2);
+        map.addAttribute("count1", sum1);
+        map.addAttribute("count", sum);
         return "customer/linkman";
     }
 
@@ -71,17 +79,17 @@ public class CustomerController {
     public String addLinkman(LinkmanParam linkmanParam) {
         Linkman linkman = new Linkman();
         //System.out.println(linkmanParam);
-        BeanUtils.copyProperties(linkmanParam,linkman);
+        BeanUtils.copyProperties(linkmanParam, linkman);
         customerService.addLinkman(linkman);
-        return "redirect:queryCustomerByCId?cid="+linkmanParam.getcId();
+        return "redirect:queryCustomerByCId?cid=" + linkmanParam.getcId();
     }
 
     @RequestMapping("/addTrade")
     public String addTrade(TradeParam tradeParam) {
         Trade trade = new Trade();
-        BeanUtils.copyProperties(tradeParam,trade);
+        BeanUtils.copyProperties(tradeParam, trade);
         customerService.addTrade(trade);
-        return "redirect:queryCustomerByCId?cid="+tradeParam.getcId();
+        return "redirect:queryCustomerByCId?cid=" + tradeParam.getcId();
     }
 
     @RequestMapping("/deleteLinkman")
@@ -89,7 +97,7 @@ public class CustomerController {
         int lId = Integer.parseInt(request.getParameter("lId"));
         int cId = Integer.parseInt(request.getParameter("cId"));
         customerService.deleteLinkman(lId);
-        return "redirect:queryCustomerByCId?cid="+cId;
+        return "redirect:queryCustomerByCId?cid=" + cId;
     }
 
     @RequestMapping("/deleteTrade")
@@ -97,40 +105,41 @@ public class CustomerController {
         int tId = Integer.parseInt(request.getParameter("tId"));
         int cId = Integer.parseInt(request.getParameter("cId"));
         customerService.deleteTrade(tId);
-        return "redirect:queryCustomerByCId?cid="+cId;
+        return "redirect:queryCustomerByCId?cid=" + cId;
     }
 
     @RequestMapping(value = "/updateCustomer")
     public String updateCustomer(Customer customer) {
         customerService.updateCustomer(customer);
-        return "redirect:queryCustomerByCId?cid="+customer.getcId();
+        return "redirect:queryCustomerByCId?cid=" + customer.getcId();
     }
 
     @RequestMapping(value = "/updateLinkman")
     public String updateLinkman(Linkman linkman) {
         customerService.updateLinkman(linkman);
-        return "redirect:queryCustomerByCId?cid="+linkman.getcId();
+        return "redirect:queryCustomerByCId?cid=" + linkman.getcId();
     }
 
     @RequestMapping(value = "/updateTrade")
     public String updateTrade(Trade trade) {
         customerService.updateTrade(trade);
-        return "redirect:queryCustomerByCId?cid="+trade.getcId();
+        return "redirect:queryCustomerByCId?cid=" + trade.getcId();
     }
 
     @RequestMapping(value = "/queryProduct")
     @ResponseBody
-    public List<Product> queryProduct(int id){
+    public List<Product> queryProduct(int id) {
 //        System.out.println(id+"哈哈哈哈哈");
         List<Product> list3 = customerService.queryProduct(id);
 //        System.out.println("aaaaaa"+list3);
         double total = 0;
-        for(Product product:list3){
-            total = total+product.getpNum()*product.getpPrice();
+        for (Product product : list3) {
+            total = total + product.getpNum() * product.getpPrice();
         }
-        customerService.updatePrice(total,id);
+        customerService.updatePrice(total, id);
         return list3;
     }
+
 
     @Scheduled(cron = "0 0 14 ? * 6 ")
     public void orderDays() throws ParseException{
@@ -175,7 +184,6 @@ public class CustomerController {
                     customerService.saveLoss(loss);
                 }
             }
-        System.out.println("30miao");
     }
 
     @RequestMapping(value = "/queryLossByUId")
@@ -185,10 +193,10 @@ public class CustomerController {
         List<LossVo> lossVos = customerService.queryLoss(log_id);
         map.addAttribute("loss",lossVos);
         return "customer/customerlost";
-
     }
 
     @RequestMapping(value = "/updateMeasure")
+
     public String updateMeasure(HttpServletRequest request){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         int log_id = Math.toIntExact(user.getId());

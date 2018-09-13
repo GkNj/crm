@@ -125,9 +125,9 @@
                         </li>
                         <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="feedback.html">服务反馈</a>
+                        <li><a th:href="@{queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a th:href="@{ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -372,7 +372,9 @@
                         </td>
                         <td>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin" name="uId" value="2">
+                                <input type="text" class="form-control form_margin" name=""
+                                       th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.name}"/>
+                                <input type="hidden"  name="uId" th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">
                             </div>
                         </td>
                     </tr>

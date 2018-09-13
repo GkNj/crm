@@ -18,7 +18,7 @@
     <link href="../css/style.css" rel="stylesheet">
     <!-- Mainly scripts -->
     <script src="../js/jquery-2.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js?v=3.4.0"></script>
     <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
@@ -29,13 +29,12 @@
     <script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <!--<script src="../js/hplus.js?v=2.2.0"></script>-->
+    <script src="../js/hplus.js?v=2.2.0"></script>
     <script src="../js/plugins/pace/pace.min.js"></script>
-    <!--axios-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Page-Level Scripts -->
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $('.dataTables-example').dataTable();
 
@@ -59,9 +58,7 @@
             //     "height": "100%"
             // });
 
-
         });
-
         function fnClickAddRow() {
             $('#editable').dataTable().fnAddData([
                 "Custom row",
@@ -71,44 +68,44 @@
                 "New row"]);
 
         }
+
     </script>
 
-    <script>
 
-        function showModal(_id) {
-            var s_id = document.getElementById("s_id").value = _id
-            s_id.value;
 
+    <script type="text/javascript">
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/service/queryForUser", //此次url改为真正需要的url
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    $("#select").append(  //此处向select中循环绑定数据
+                        "<option value=" + item.id + ">" + item.name + "</option>");
+                });
+                console.log(data)
+                console.log(item)
+            },
+        });
+
+        var dis_id = 0
+
+        function sel(val) {
+            this.dis_id = val
+            console.log("val is ", val)
         }
 
-        function deleteTable() {
-            var s_id = document.getElementById("s_id").value;
-
-            console.log("s_id ", s_id)
-
-            var progress = document.getElementById("progress_del");
-            var err = document.getElementById("error_text")
-            progress.hidden = false
-            // ajax
-            axios.get('http://localhost:8080/service/delete', {
+        function dis(id) {
+            console.log("dis val is ", this.dis_id)
+            axios.get('http://localhost:8080/service/distribute', {
                 params: {
-                    id: s_id
+                    ID: dis_id,
+                    id: id
                 }
             })
                 .then(function (response) {
                     console.log(response);
-                    // 成功
-                    $("#myModal").modal({show: false});
-                    progress.hidden = true;
-                    // 刷新页面
-                    location.reload()
-
                 })
                 .catch(function (error) {
-                    // 失败
-                    err.value = error;
-                    err.hidden = false;
-                    progress.hidden = true;
                     console.log(error);
                 });
         }
@@ -187,13 +184,13 @@
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="distribute.html">服务分配</a>
+                        <li><a th:href="@{queryState}">服务分配</a>
                         </li>
-                        <li><a th:href="@{service/queryForHandle}">服务处理</a>
+                        <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="feedback.html">服务反馈</a>
+                        <li><a th:href="@{queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a th:href="@{ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -348,11 +345,6 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-8">
-                <div class="title-action">
-                    <a href="create.html" class="btn btn-primary">活动区域</a>
-                </div>
-            </div>
         </div>
 
 
@@ -367,21 +359,7 @@
                 <th>创建日期</th>
                 <th>分配给</th>
                 <th>操作</th>
-
             </tr>
-            <!--<div th:each="l:${list}">-->
-                <!--<div th:text="${l.sId}"></div>-->
-            <!--</div>-->
-            <!---->
-            <!--<div th:each="l:${list}">-->
-                <!--<div th:text="${l}"></div>-->
-                <!--<div th:each="a:${l}">-->
-                    <!--<div th:text="${a.sId}"></div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!--<tr th:text="${list[0][1]}"></tr>-->
             </thead>
             <tbody>
             <tr th:each="dis:${list}">
@@ -392,92 +370,16 @@
                 <td th:text="${dis.user.name}"></td>
                 <td th:text="${dis.sCreateDate}"></td>
                 <td>
-                    <select name="uId" id="select">
-                        <option value="小明">小明</option>
-                        <option value="小花">小花</option>
-                        <option value="大明">大明</option>
+                    <select name="id2" id="select" onchange="sel(this.value)">
+                        <option value="id2">--请选择--</option>
                     </select>
-                    <a th:href="@{/service/distribute(id=${dis.sId})}">
+                    <a href="javascript:void (0)" th:onclick="'dis(\''+${dis.sId}+'\',)'">
                         分配
                     </a>
-                </td>
-                <td> <span data-toggle="modal" data-target="#myModal" th:id="${dis.sId}"> <i
-                        class="fa fa-times lay"
-                        aria-hidden="true"
-                        th:onclick="'javascript:showModal('+${dis.sId}+')'">删除</i></span>
                 </td>
             </tr>
             </tbody>
         </table>
-        <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-        <!--<div class="modal-dialog">-->
-        <!--<div class="modal-content">-->
-        <!--<div class="modal-header">-->
-        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-        <!--<h4 class="modal-title" id="myModalLabel">删除</h4>-->
-        <!--</div>-->
-        <!--<div class="modal-body">确定删除吗？-->
-        <!--<input id="t_id" th:value="${list.sId}" hidden="hidden">-->
-        <!--<div class="progress progress-striped active" id="progress_del"-->
-        <!--hidden="hidden">-->
-        <!--<div style="width: 100%" aria-valuemax="100" aria-valuemin="0"-->
-        <!--aria-valuenow="90" role="progressbar"-->
-        <!--class="progress-bar progress-bar-success">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<br>-->
-
-        <!--<input type="text" readonly="readonly" hidden="hidden"-->
-        <!--id="error_text" class="has-error">-->
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
-        <!--<button type="button" class="btn btn-primary">确定</button>-->
-        <!--</div>-->
-        <!--<script>-->
-
-        <!--function showModal(_id) {-->
-        <!--var t_id = document.getElementById("t_id").value = _id-->
-        <!--t_id.value;-->
-
-        <!--}-->
-
-
-        <!--function deleteTable() {-->
-        <!--var t_id = document.getElementById("t_id").value;-->
-
-        <!--console.log("t_id ", t_id)-->
-
-        <!--var progress = document.getElementById("progress_del");-->
-        <!--var err = document.getElementById("error_text")-->
-        <!--progress.hidden = false-->
-        <!--// ajax-->
-        <!--axios.get('http://localhost:8080/service/delete', {-->
-        <!--params: {-->
-        <!--id: t_id-->
-        <!--}-->
-        <!--})-->
-        <!--.then(function (response) {-->
-        <!--console.log(response);-->
-        <!--// 成功-->
-        <!--$("#myModal").modal({show: false});-->
-        <!--progress.hidden = true;-->
-        <!--// 刷新页面-->
-        <!--location.reload()-->
-
-        <!--})-->
-        <!--.catch(function (error) {-->
-        <!--// 失败-->
-        <!--err.value = error;-->
-        <!--err.hidden = false;-->
-        <!--progress.hidden = true;-->
-        <!--console.log(error);-->
-        <!--});-->
-        <!--}-->
-        <!--</script>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
 
 
         <div class="footer">
@@ -491,61 +393,6 @@
     </div>
 </div>
 </div>
-
-<!-- Mainly scripts -->
-<script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<script src="../js/plugins/jeditable/jquery.jeditable.js"></script>
-
-<!-- Data Tables -->
-<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="../js/hplus.js?v=2.2.0"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
-
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function () {
-        $('.dataTables-example').dataTable();
-
-        /* Init DataTables */
-        var oTable = $('#editable').dataTable();
-
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        });
-
-
-    });
-
-    function fnClickAddRow() {
-        $('#editable').dataTable().fnAddData([
-            "Custom row",
-            "New row",
-            "New row",
-            "New row",
-            "New row"]);
-
-    }
-</script>
 
 
 </body>
