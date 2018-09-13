@@ -20,7 +20,10 @@ public interface ServiceRepository extends JpaRepository<Service, Integer> {
 
     List<Service> findServiceBySState(String state);
 
-
+    @Query(value = "select s_id,s_type,c_name from service,customer where service.c_id=customer.c_id;",nativeQuery =true )
+    List findAllSerice();
+    @Query(value = "select s_id,s_type,c_name from service,customer where service.c_id=customer.c_id and s_type=?;",nativeQuery =true )
+    List findServicesBySType(String sType);
     Service findServiceBySId(int id);
 
     int deleteServiceBySId(int id);
