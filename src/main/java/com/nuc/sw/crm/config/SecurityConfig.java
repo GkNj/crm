@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 高管
                 .antMatchers("/index").hasAnyRole("SA", "ROOT", "ADMIN")
                 // 系统管理员
-                .antMatchers("/basic/findAllStock").hasAnyRole("ROOT", "ADMIN")
+                .antMatchers("/basic/findAllStock", "/permission/**").hasAnyRole("ROOT", "ADMIN")
                 .antMatchers("/login", "/login.html", "/logout").permitAll();
 
         // 登录配置
@@ -72,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 自动登录配置
         http.rememberMe();
 
+        // 403处理
         http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());
     }
 
