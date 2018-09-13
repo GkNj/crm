@@ -50,13 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 客户经理
                 .antMatchers("/service/create.html", "/service/queryForHandle",
                         "/service/queryForFeedBack", "/service/ok", "queryCustomerByUId", "/queryLossByUId",
-                        "/opportunity/findAll", "/plan/findall", "/basic/findAllStock", "/basic/findAllDIctionary").hasAnyRole("AM", "ROOT", "ADMIN")
+                        "/opportunity/findAll", "/plan/findall", "/basic/findAllStock", "/basic/findAllProduct").hasAnyRole("AM", "ROOT", "ADMIN")
                 // 管理员
                 .antMatchers("/permission/list").hasAnyRole("ADMIN", "ROOT")
                 // 高管
-                .antMatchers("/index").hasAnyRole("SA", "ROOT", "ADMIN")
+                .antMatchers("/index","/classity.html","classity1.html","classity2.html").hasAnyRole("SA", "ROOT", "ADMIN")
                 // 系统管理员
-                .antMatchers("/basic/findAllStock", "/permission/**").hasAnyRole("ROOT", "ADMIN")
+                .antMatchers("/basic/findAllDictionary", "/permission/**").hasAnyRole("ROOT", "ADMIN")
                 .antMatchers("/login", "/login.html", "/logout").permitAll();
 
         // 登录配置
