@@ -1,14 +1,12 @@
 package com.nuc.sw.crm.controller;
 
-import com.nuc.sw.crm.Param.LinkmanParam;
-import com.nuc.sw.crm.Param.TradeParam;
+import com.nuc.sw.crm.param.LinkmanParam;
+import com.nuc.sw.crm.param.TradeParam;
 import com.nuc.sw.crm.entity.*;
 import com.nuc.sw.crm.service.serviceImpl.CustomerServiceImpl;
 import com.nuc.sw.crm.vo.LossVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -17,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Enumeration;
 import java.util.List;
 
 

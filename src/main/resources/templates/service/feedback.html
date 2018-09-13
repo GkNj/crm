@@ -84,6 +84,7 @@
         function DealDetail(id) {
             axios.get('http://localhost:8080/service/queryForDeal?id=' + id, {}).then(function (response) {
                     console.log(response.data);
+                    console.log(response.data[0].user.name);
                     var data = response.data;
                     // 默认显示
                     $("#sId").val(id);
@@ -96,7 +97,7 @@
                     $("#sState").attr("value", data[0].service.sState);
                     $("#dTime").val(data[0].dTime);
                     $("#hTime").val(data[0].service.hTime);
-                    $("#hTime").attr("value",data[0].service.hTime);
+                    $("#hTime").attr("value", data[0].service.hTime);
                     $("#dTime").attr("value", data[0].dTime);
                     $("#cTime").val(data[0].service.sCreateDate);
                     $("#cTime").attr(data[0].service.sCreateDate);
@@ -107,6 +108,9 @@
                     $("#User").val(data[0].service.user.name);
                     $("#User").attr("value", data[0].service.user.name);
                     $("#content").val(data[0].service.hContent);
+                    $("#content").attr("value", data[0].service.hContent);
+                    $("#dperson").val(data[0].user.name);
+                    $("#dperson").attr("value",data[0].user.name);
                 }
             )
         };
@@ -194,14 +198,15 @@
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a th:href="@{query}">服务分配</a>
+                        <li><a th:href="@{queryState}">服务分配</a>
                         </li>
-                        <li><a href="handle.html">服务处理</a>
+                        <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
-                        <li><a th:href="@{service/queryForFeedBack}">服务反馈</a>
+                        <li><a th:href="@{queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a th:href="@{ok}">服务归档</a>
                         </li>
+
                     </ul>
                 </li>
 
@@ -485,7 +490,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">分配给</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" readonly value="高凯" id="dUser">
+                                <input type="text" class="form-control" value="" readonly id="dperson">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -512,13 +517,6 @@
                             <div class="col-sm-10">
                                 <textarea type="text" class="form-control" readonly id="content" value="">
                                 </textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">处理人</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="hUser" disabled="" value="杨晓辉"
-                                       name="duserName">
                             </div>
                         </div>
 

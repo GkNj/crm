@@ -30,6 +30,15 @@ public class Service {
     private String hContent;
     private String hResult;
     private int hSatisficing;
+    private int dId;
+
+    public int getdId() {
+        return dId;
+    }
+
+    public void setdId(int dId) {
+        this.dId = dId;
+    }
 
     public String gethTime() {
         return hTime;
@@ -63,23 +72,6 @@ public class Service {
         this.hSatisficing = hSatisficing;
     }
 
-    @Override
-    public String toString() {
-        return "Service{" +
-                "sId=" + sId +
-                ", sType='" + sType + '\'' +
-                ", sDetail='" + sDetail + '\'' +
-                ", sState='" + sState + '\'' +
-                ", sRequest='" + sRequest + '\'' +
-                ", uId=" + uId +
-                ", sCreateDate='" + sCreateDate + '\'' +
-                ", cId=" + cId +
-                ", hTime='" + hTime + '\'' +
-                ", hContent='" + hContent + '\'' +
-                ", hResult='" + hResult + '\'' +
-                ", hSatisficing=" + hSatisficing +
-                '}';
-    }
 
     public int getsId() {
         return sId;
@@ -145,8 +137,7 @@ public class Service {
         this.cId = cId;
     }
 
-
-    public Service(String sType, String sDetail, String sState, String sRequest, int uId, String sCreateDate, int cId, String hTime, String hContent, String hResult, int hSatisficing) {
+    public Service(String sType, String sDetail, String sState, String sRequest, int uId, String sCreateDate, int cId, String hTime, String hContent, String hResult, int hSatisficing, int dId) {
         this.sType = sType;
         this.sDetail = sDetail;
         this.sState = sState;
@@ -158,6 +149,25 @@ public class Service {
         this.hContent = hContent;
         this.hResult = hResult;
         this.hSatisficing = hSatisficing;
+        this.dId = dId;
     }
 
+    @Override
+    public String toString() {
+        return "Service{" +
+                "sId=" + sId +
+                ", sType='" + sType + '\'' +
+                ", sDetail='" + sDetail + '\'' +
+                ", sState='" + sState + '\'' +
+                ", sRequest='" + sRequest + '\'' +
+                ", uId=" + uId +
+                ", sCreateDate='" + sCreateDate + '\'' +
+                ", cId=" + cId +
+                ", hTime='" + hTime + '\'' +
+                ", hContent='" + hContent + '\'' +
+                ", hResult='" + hResult + '\'' +
+                ", hSatisficing=" + hSatisficing +
+                ", dId=" + dId +
+                '}';
+    }
 }
