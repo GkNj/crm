@@ -110,8 +110,19 @@ class UserServiceImpl : UserDetailsService, UserService {
             result = "201"
         }
         return result
+    }
 
 
+    override fun updateUserInfo(user: User) {
+        val userInfo = userRepository.getOne(user.id)
+        userInfo.name = user.name
+        userInfo.sex = user.sex
+        userInfo.position = user.position
+        val role = roleRepository.findRoleByName(user.position)
+        val roles = listOf<Role>(role)
+        userInfo.roles = roles
+        logger.info("user roles is $userInfo")
+        userRepository.save(user)
     }
 }
 

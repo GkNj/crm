@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>客户贡献分析</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+
+</head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+
+                    <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                             </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
+                        </a>
+
+
+                    </div>
+                    <div class="logo-element">
+                        H+
+                    </div>
+
+                </li>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
+                        </li>
+                        <li><a th:href="@{/plan/findall}">客户开发计划</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
+                        </li>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                            <a th:href="@{service/queryState}">服务分配</a>
+                        </li>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')" class="active">
+
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="classify.html">客户贡献分析</a>
+                        </li>
+                        <li><a href="classify1.html">客户构成分析</a>
+                        </li>
+                        <li><a href="classify2.html">客户服务分析</a>
+
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
+                            class="label label-warning pull-right">16</span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="/basic/findAllDictionary">数据字典管理</a>
+                        </li>
+                        <li><a href="/basic/findAllProduct">查询产品信息</a>
+                        </li>
+
+                        <li><a href="/basic/findAllStock">查询库存</a>
+
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
+                            class="nav-label">权限管理</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="classify.html#"><i
+                            class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
+                                   id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
+                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <small class="pull-right">46小时前</small>
+                                        <strong>小四</strong> 项目已处理完结
+                                        <br>
+                                        <small class="text-muted">3天前 2014.11.8</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a4.jpg">
+                                    </a>
+                                    <div class="media-body ">
+                                        <small class="pull-right text-navy">25小时前</small>
+                                        <strong>国民岳父</strong> 这是一条测试信息
+                                        <br>
+                                        <small class="text-muted">昨天</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="mailbox.html">
+                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="mailbox.html">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
+                                        <span class="pull-right text-muted small">4分钟前</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="profile.html">
+                                    <div>
+                                        <i class="fa fa-qq fa-fw"></i> 3条新回复
+                                        <span class="pull-right text-muted small">12分钟钱</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="notifications.html">
+                                        <strong>查看所有 </strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 退出
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                <h2>数据统计</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">主页</a>
+                    </li>
+                    <li>
+                        <strong>分析客户构成</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    <a href="classify.html" class="btn btn-primary">活动区域</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">月</span>
+                        <h5>按等级分类</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="pie"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">月</span>
+                        <h5>按信誉度分类</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="pie1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">月</span>
+                        <h5>按满意度分类</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="pie2"></div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-lg-3">-->
+            <!--<div class="ibox float-e-margins">-->
+            <!--<div class="ibox-title">-->
+            <!--<span class="label label-danger pull-right">最近一个月</span>-->
+            <!--<h5>活跃用户</h5>-->
+            <!--</div>-->
+            <!--<div class="ibox-content">-->
+            <!--<h1 class="no-margins">80,600</h1>-->
+            <!--<div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>-->
+            <!--</div>-->
+            <!--<small>12月</small>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>客户信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="table_data_tables.html#">选项1</a>
+                                </li>
+                                <li><a href="table_data_tables.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table id="table" data-toolbar="#toolbar" data-id-field="cId" data-show-refresh="true"
+                               data-show-toggle="true" data-detail-view="true" class="table table-hover">
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div></div>
+        <div class="footer">
+            <div class="pull-right">
+                By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+            </div>
+            <div>
+                <strong>Copyright</strong> H+ &copy; 2014
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<script src="js/hplus.js?v=2.2.0"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- ECharts -->
+<script src="js/plugins/echarts/echarts-all.js"></script>
+
+
+
+</body>
+<script src="assets/jquery.min.js"></script>
+<script src="js/bootstrap.min.js?v=3.4.0"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+
+
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/hplus.js?v=2.2.0"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="assets/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="ga.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+<script>
+
+    $(function () {
+        var chartsDate;
+        axios.get('/statistic/getCharts')
+            .then(function(response) {
+                chartsDate=response.data;
+                console.log(chartsDate);
+                var res1=[];
+                var res2=[];
+                var res3=[];
+                var ctype= chartsDate.ctype;
+                console.log(ctype);
+                console.log(Object.keys(ctype));
+                //格式化饼形图数据
+                for ( var i in chartsDate.ctype){
+                    var obj = new Object()
+                    obj.name=i;
+                    obj.value=chartsDate.ctype[i];
+                    res1.push(obj);
+                }
+                for ( var i in chartsDate.credit){
+                    var obj = new Object()
+
+                    obj.name=i;
+                    obj.value=chartsDate.credit[i];
+                    res2.push(obj);
+                }
+                for ( var i in chartsDate.satisfaction){
+                    var obj = new Object()
+                    obj.name=i;
+                    obj.value=chartsDate.satisfaction[i];
+                    res3.push(obj);
+                }
+
+
+                var pieChart = echarts.init(document.getElementById("pie"));
+                var pieoption = {
+                    title: {
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            // data: [
+                            //     {value: 10, name: '普通客户'},
+                            //     {value: 5, name: '重点开发客户'},
+                            //     {value: 15, name: '大客户'},
+                            //     {value: 25, name: '合作伙伴'},
+                            //     {value: 20, name: '战略合作伙伴'},
+                            // ]
+                            data:res1
+                        }
+                    ]
+                };
+                pieChart.setOption(pieoption);
+                var pieChart1 = echarts.init(document.getElementById("pie1"));
+                var pieoption1 = {
+                    title: {
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            data:res2
+                        }
+                    ]
+                };
+                pieChart1.setOption(pieoption1);
+                var pieChart2 = echarts.init(document.getElementById("pie2"));
+                var pieoption2 = {
+                    title: {
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel']
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '面积模式',
+                            type: 'pie',
+                            radius: [20, 90],
+                            roseType: 'area',
+                            data: res3
+                        }
+                    ]
+                };
+                pieChart2.setOption(pieoption2);
+
+            });
+
+
+        function editRow(row) {
+            var recipient = '123';
+            var modal = $('#exampleModal')
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(JSON.stringify(row))
+
+        }
+
+        $('#exampleModal').on('hidden.bs.modal', function (e) {
+            console.log(e, "asdasd");
+        })
+        var $table = $('#table'),
+            $remove = $('#remove'),
+            selections = [];
+        // AJAX初始化表格
+
+        $table.bootstrapTable({
+            url: 'http://localhost:8080/statistic/findAll',//获得数据的url
+            pagination: true,//是否开启分页（*）
+            pageNumber: 1,//初始化加载第一页，默认第一页
+            pageSize: 10,//每页的记录行数（*）
+            pageList: [10, 25, 50, 100],//可供选择的每页的行数（*）
+            sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
+            showRefresh: true,//刷新按钮
+            search: true,//是否显示表格搜索，此搜索是客户端搜索，不会进服务端
+            // detailFormatter: "detailFormatter",
+            uniqueId: 'id',
+            columns: [
+                // {title:'delete',checkbox: true, align: 'center', valign: 'middle'},
+                {field: 'cId', title: '客户编号'},
+                {field: 'cName', title: ' 客户名称'},
+                {field: 'cClass', title: '客户等级',sortable : true},
+                {field: 'cCredit', title: '客户信誉度',sortable : true, formatter:creditForematter},
+
+                {field: 'cSatisfaction', title: '客户满意度', align: 'center',sortable : true},
+                // {
+                //     field: 'operate',
+                //     title: 'Item Operate',
+                //     align: 'center',
+                //     events: 'operateEvents2',
+                //     formatter: operateFormatter
+                // }
+            ]
+        })
+        setTimeout(function () {
+            $table.bootstrapTable('resetView');
+        }, 200);
+        $table.on('check.bs.table uncheck.bs.table ' +
+            'check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+
+            // save your data, here just save the current page
+            selections = getIdSelections();
+            // push or splice the selections if you want to save all data selections
+        });
+
+        $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+            // alert( $detail.html($detail));
+            console.log($detail);
+            var html = [];
+            $.each(row, function (key, value) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+            });
+            $detail.html(html);
+        });
+        $table.on('all.bs.table', function (e, name, args) {
+            console.log(name, args);
+        });
+
+        /**
+         * 多选框选择删除
+         */
+        $remove.click(function () {
+            var ids = getIdSelections();
+            // alert(ids)//ids是获取到的id接下来可以用ajax删除
+
+            //在页面显示中删除
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            });
+
+
+            $remove.prop('disabled', true);
+        });
+        function creditForematter(value, row, index) {
+            if (value==1)
+                return "★";
+            if (value==2)
+                return "★★";
+            if (value==3)
+                return "★★★";
+            if (value==4)
+                return "★★★★";
+            if (value==5)
+                return "★★★★★";
+
+        }
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="like" href="javascript:void(0)" title="Like" data-toggle="modal"  data-target="#exampleModal">',
+                '<i class="glyphicon glyphicon-heart"></i>',
+                '</a>  ',
+                '<a class="remove" href="javascript:void(0)" title="Remove">',
+                '<i class="glyphicon glyphicon-remove"></i>',
+                '</a>'
+            ].join('');
+        }
+
+        function detailFormatter(index, row) {
+            var html = [];
+            $.each(row, function (key, value) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+            });
+            return $detail.html.join('');
+        }
+
+        function getIdSelections() {
+            return $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id
+            });
+        }
+
+        window.operateEvents2 = {
+            'click .like': function (e, value, row, index) {
+                alert('You click like action, row: ' + JSON.stringify(row));
+                editRow(row);
+            },
+            'click .remove': function (e, value, row, index) {
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: [row.id]
+                });
+            }
+        }
+
+    })
+</script>
+</html>

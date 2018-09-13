@@ -319,7 +319,7 @@
                                         &nbsp;
 
                                         <i class="fas fa-wrench" data-toggle="modal" data-target="#myModal"
-                                           th:onclick="'javascript:transmit('+${user.id}+',\''+${user.name}+'\','+${user.username}+','+${user.sex}+',\''+${user.position}+'\')'"></i>
+                                           th:onclick="'javascript:transmit('+${user.id}+',\''+${user.name}+'\',\''+${user.username}+'\',\''+${user.sex}+'\',\''+${user.position}+'\')'"></i>
                                         &nbsp;
                                         &nbsp;
                                         &nbsp;
@@ -372,17 +372,17 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <form class="form-horizontal m-t" id="signupForm">
+                    <form class="form-horizontal m-t" id="signupForm" th:action="@{/permission/update}">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">编号：</label>
                             <div class="col-sm-8">
-                                <input id="id" name="firstname" class="form-control" type="text" readonly="readonly">
+                                <input id="id" name="id" class="form-control" type="text" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">名字：</label>
                             <div class="col-sm-8">
-                                <input id="name" name="lastname" class="form-control valid" type="text"
+                                <input id="name" name="name" class="form-control valid" type="text"
                                        aria-required="true" required="required"
                                        aria-invalid="false">
                             </div>
@@ -427,13 +427,15 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
                                 <button class="btn btn-primary" type="submit">确认</button>
+
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -560,6 +562,13 @@
 
                 console.log(error);
             });
+
+    }
+
+
+    fun
+    update()
+    {
 
     }
 
