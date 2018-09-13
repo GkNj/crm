@@ -314,11 +314,12 @@
                                     cId=${l.cId},lName=${l.lName},lPhone=${l.lPhone},pDate=${l.pDate},pId=${l.pId},pUsername=${l.pUsername},
                                     resource=${l.resource},sName=${l.sName},startDate=${l.startDate},state=${l.state},successPercent=${l.successPercent},
                                     summary=${l.summary})}"><i class="fa fa-pencil-square-o"
-                                            aria-hidden="true"></i>编辑</a>
+                                                               aria-hidden="true"></i>编辑</a>
                                     <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
-                                    <span data-toggle="modal" data-target="#myModal" th:id="${l.id}"> <i class="fa fa-times lay"
-                                                                                         aria-hidden="true"
-                                                                                         th:onclick="'javascript:showModal('+${l.id}+')'">删除</i></span>
+                                    <span data-toggle="modal" data-target="#myModal" th:id="${l.id}"> <i
+                                            class="fa fa-times lay"
+                                            aria-hidden="true"
+                                            th:onclick="'javascript:showModal('+${l.id}+')'">删除</i></span>
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -359,7 +360,7 @@
                                                 <script>
 
                                                     function showModal(_id) {
-                                                        var t_id = document.getElementById("t_id").value=_id
+                                                        var t_id = document.getElementById("t_id").value = _id
                                                         t_id.value;
 
                                                     }
@@ -368,7 +369,7 @@
                                                     function deleteTable() {
                                                         var t_id = document.getElementById("t_id").value;
 
-                                                        console.log("t_id ",t_id)
+                                                        console.log("t_id ", t_id)
 
                                                         var progress = document.getElementById("progress_del");
                                                         var err = document.getElementById("error_text")

@@ -16,7 +16,102 @@
     <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js?v=3.4.0"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    <script src="../../static/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+    <!-- Data Tables -->
+    <script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/hplus.js?v=2.2.0"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var nowDate = new Date();
+            var str = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + " " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds();
+            var sCreateDate = document.getElementById("sCreateDate")
+            sCreateDate.value = str;
+            console.log("create ", sCreateDate.value)
+            // document.getElementById("shijian1").value=str;
+        }
+
+        function DealDetail(id) {
+            axios.get('http://localhost:8080/service/queryForOk?id='+id, {
+
+
+            }).then(function (response) {
+
+                    var data = response.data;
+                    // 默认显示
+                    $("#sId").val(id);
+                    $("#sId").attr("value",id);
+                    $("#sType").val(data[0].service.sType);
+                    $("#sType").attr("value",data[0].service.sType);
+                    $("#sDetail").val(data[0].service.sDetail);
+                    $("#sDetail").attr("value",data[0].service.sDetail);
+                    $("#state").val(data[0].service.sState);
+                    $("#state").attr("value",data[0].service.sState);
+                    $("#dTime").val(data[0].dTime);
+                    $("#dTime").attr("value",data[0].dTime);
+                    $("#cTime").val(data[0].service.sCreateDate);
+                    $("#cTime").attr(data[0].service.sCreateDate);
+                    $("#request").val(data[0].service.sRequest);
+                    $("#request").attr("value",data[0].service.sRequest);
+                    $("#Customer").val(data[0].service.customer.cName);
+                    $("#Customer").attr("value",data[0].service.customer.cName);
+                }
+
+            )
+        };
+
+
+    </script>
     <style>
         .form_center {
             margin-left: 130px;
@@ -26,7 +121,6 @@
             margin: 10px;
         }
     </style>
-
 </head>
 
 <body>
@@ -272,39 +366,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
+            <tr th:each="s:${list}">
+                <td th:text="${s.sId}">1</td>
+                <td th:text="${s.customer.cName}">京东</td>
+                <td th:text="${s.sDetail}">合伙做生意</td>
+                <td th:text="${s.sType}">建议</td>
+                <td th:text="${s.user.name}">客户经理</td>
+                <td th:text="${s.sCreateDate}">2018/5/25</td>
+                <td th:text="${s.sState}">已归档</td>
+                <td><a data-toggle="modal" data-target="#myModal"href="javascript:void(0)" th:onclick="'DealDetail(\''+${s.sId}+'\',)'">
+                    <i class="fa fa-folder-open text-navy"></i>
+                </a>
                 </td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
-                </td>
-            </tr>
+
             </tbody>
         </table>
 

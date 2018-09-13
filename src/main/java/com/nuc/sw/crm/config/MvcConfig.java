@@ -18,6 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/opportunity/createplan.html");
         registry.addViewController("/opportunity/opportunitypoint.html");
         registry.addViewController("/service/create.html");
+        registry.addViewController("/service/handle.html");
 
         registry.addRedirectViewController("/index","/templates/index.html");
     }

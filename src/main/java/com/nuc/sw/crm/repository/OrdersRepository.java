@@ -22,4 +22,7 @@ public interface OrdersRepository extends JpaRepository<Orders,Integer> {
     @Query(value = "update orders set o_price=?1 where o_id =?2",nativeQuery = true)
     int updatePrice(double price,int oid);
 
+//    @Modifying
+//    @Query(value = "insert into loss")
+//    int addLost(String a,int cId,int rId);
 }

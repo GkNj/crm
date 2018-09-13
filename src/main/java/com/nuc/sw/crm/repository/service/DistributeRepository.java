@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface DistributeRepository extends JpaRepository<Distribute,Integer> {
 
-
+List<Distribute> findDistributeBySId(int id);
 
 
 

@@ -82,9 +82,18 @@
                     </div>
 
                 </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                            class="fa arrow"></span></a>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
@@ -93,34 +102,45 @@
                     </ul>
                 </li>
 
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                         </li>
-                        <li><a href="../customer/customerlost.html">客户流失管理</a>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a th:href="@{service/create.html}">服务创建</a>
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
                         </li>
-                        <li><a th:href="@{service/query}">服务分配</a>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                            <a th:href="@{service/queryState}">服务分配</a>
                         </li>
-                        <li><a href="handle.html">服务处理</a>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="feedback.html">服务反馈</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
 
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -134,7 +154,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
@@ -148,7 +168,7 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
                     <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
@@ -252,7 +272,7 @@
 
 
                     <li>
-                        <a href="login.html">
+                        <a th:href="@{/logout}">
                             <i class="fa fa-sign-out"></i> 退出
                         </a>
                     </li>
