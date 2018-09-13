@@ -28,12 +28,14 @@ public class IndexController {
         return "login";
     }
 
-//    @RequestMapping("opportunity/{path}")
-//    public String opportunity(@PathVariable("path")String path){
-//        System.out.println("执行");
-//
-//        return "opportunity/"+path;
-//
-//    }
+    /**
+     * 403 页面
+     *
+     * @return 403视图
+     */
+    @RequestMapping("/403")
+    public String _403() {
+        return "403";
+    }
 
 }
