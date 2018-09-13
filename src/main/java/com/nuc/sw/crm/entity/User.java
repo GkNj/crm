@@ -1,5 +1,6 @@
 package com.nuc.sw.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.List;
  * 登录用户实体
  */
 @Entity
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class User implements Serializable, UserDetails {
 
     /**
@@ -148,11 +150,34 @@ public class User implements Serializable, UserDetails {
     }
 
     public String getPosition() {
+//        switch (position) {
+//            case "ROOT":
+//                position = "超级管理员";
+//                break;
+//            case "ADMIN":
+//                position = "系统管理";
+//                break;
+//            case "AM":
+//                position = "客户经理";
+//                break;
+//            case "SA":
+//                position = "销售主管";
+//                break;
+//            case "SM":
+//                position = "高管";
+//                break;
+//            default:
+//                position = "未知职位";
+//                break;
+//        }
+
+
         return position;
     }
 
-    public void setPosition(String position) {
+    public String setPosition(String position) {
         this.position = position;
+        return position;
     }
 
     @Override
@@ -168,3 +193,4 @@ public class User implements Serializable, UserDetails {
                 '}';
     }
 }
+

@@ -3,13 +3,18 @@ package com.nuc.sw.crm.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Service {
+
+    public Service() {
+    }
 
     @Id
     @GeneratedValue
@@ -18,8 +23,44 @@ public class Service {
     private String sDetail;
     private String sState;
     private String sRequest;
+    private int uId;
+    private String sCreateDate;
+    private int cId;
+    private String hTime;
+    private String hContent;
+    private String hResult;
+    private int hSatisficing;
 
-    public Service() {
+    public String gethTime() {
+        return hTime;
+    }
+
+    public void sethTime(String hTime) {
+        this.hTime = hTime;
+    }
+
+    public String gethContent() {
+        return hContent;
+    }
+
+    public void sethContent(String hContent) {
+        this.hContent = hContent;
+    }
+
+    public String gethResult() {
+        return hResult;
+    }
+
+    public void sethResult(String hResult) {
+        this.hResult = hResult;
+    }
+
+    public int gethSatisficing() {
+        return hSatisficing;
+    }
+
+    public void sethSatisficing(int hSatisficing) {
+        this.hSatisficing = hSatisficing;
     }
 
     @Override
@@ -31,19 +72,13 @@ public class Service {
                 ", sState='" + sState + '\'' +
                 ", sRequest='" + sRequest + '\'' +
                 ", uId=" + uId +
-                ", sCreateDate=" + sCreateDate +
+                ", sCreateDate='" + sCreateDate + '\'' +
                 ", cId=" + cId +
+                ", hTime='" + hTime + '\'' +
+                ", hContent='" + hContent + '\'' +
+                ", hResult='" + hResult + '\'' +
+                ", hSatisficing=" + hSatisficing +
                 '}';
-    }
-
-    public Service(String sType, String sDetail, String sState, String sRequest, int uId, Date sCreateDate, int cId) {
-        this.sType = sType;
-        this.sDetail = sDetail;
-        this.sState = sState;
-        this.sRequest = sRequest;
-        this.uId = uId;
-        this.sCreateDate = sCreateDate;
-        this.cId = cId;
     }
 
     public int getsId() {
@@ -94,11 +129,11 @@ public class Service {
         this.uId = uId;
     }
 
-    public Date getsCreateDate() {
+    public String getsCreateDate() {
         return sCreateDate;
     }
 
-    public void setsCreateDate(Date sCreateDate) {
+    public void setsCreateDate(String sCreateDate) {
         this.sCreateDate = sCreateDate;
     }
 
@@ -110,11 +145,19 @@ public class Service {
         this.cId = cId;
     }
 
-    private int uId;
-    private Date sCreateDate;
-    private int cId;
 
-
-
+    public Service(String sType, String sDetail, String sState, String sRequest, int uId, String sCreateDate, int cId, String hTime, String hContent, String hResult, int hSatisficing) {
+        this.sType = sType;
+        this.sDetail = sDetail;
+        this.sState = sState;
+        this.sRequest = sRequest;
+        this.uId = uId;
+        this.sCreateDate = sCreateDate;
+        this.cId = cId;
+        this.hTime = hTime;
+        this.hContent = hContent;
+        this.hResult = hResult;
+        this.hSatisficing = hSatisficing;
+    }
 
 }

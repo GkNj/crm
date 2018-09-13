@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -11,18 +11,18 @@
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
-    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- Morris -->
-    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 
     <!-- Gritter -->
-    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="../js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=2.2.0" rel="stylesheet">
 
 </head>
 
@@ -34,7 +34,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="../static/img/profile_small.jpg" />
+                                <img alt="image" class="img-circle" src="../img/profile_small.jpg" />
                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Beaut-zihan</strong>
@@ -64,9 +64,9 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="opptunitymanage.html">营销机会管理</a>
+                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="createplan.html">客户开发计划</a>
+                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -75,9 +75,9 @@
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/customer/customerinfo.html">客户信息管理</a>
+                        <li><a href="../customer/customerinfo.html">客户信息管理</a>
                         </li>
-                        <li><a href="../templates/customer/customerlost.html">客户流失管理</a>
+                        <li><a href="../customer/customerlost.html">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
@@ -85,15 +85,15 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/service/create.html">服务创建</a>
+                        <li><a href="../service/create.html">服务创建</a>
                         </li>
-                        <li><a href="../templates/service/distribute.html">服务分配</a>
+                        <li><a href="../service/distribute.html">服务分配</a>
                         </li>
-                        <li><a href="../templates/service/handle.html">服务处理</a>
+                        <li><a href="../service/handle.html">服务处理</a>
                         </li>
-                        <li><a href="../templates/service/feedback.html">服务反馈</a>
+                        <li><a href="../service/feedback.html">服务反馈</a>
                         </li>
-                        <li><a href="../templates/service/ok.html">服务归档</a>
+                        <li><a href="../service/ok.html">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -102,13 +102,13 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="classify.html">客户贡献分析</a>
+                        <li><a href="../classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="classify.html">客户构成分析</a>
+                        <li><a href="../classify.html">客户构成分析</a>
                         </li>
-                        <li><a href="classify.html">客户服务分析</a>
+                        <li><a href="../classify.html">客户服务分析</a>
                         </li>
-                        <li><a href="classify.html">客户流失分析</a>
+                        <li><a href="../classify.html">客户流失分析</a>
                         </li>
                     </ul>
                 </li>
@@ -126,7 +126,7 @@
                 </li>
 
                 <li >
-                    <a href="../templates/permission/permission.html"><i class="fa fa-cogs"></i> <span
+                    <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
             </ul>
@@ -137,7 +137,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="classify.html#"><i
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="../classify.html#"><i
                             class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
@@ -159,7 +159,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a7.jpg">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
@@ -173,7 +173,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a4.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
@@ -251,7 +251,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="title-action">
-                    <a href="classify.html" class="btn btn-primary">活动区域</a>
+                    <a href="../classify.html" class="btn btn-primary">活动区域</a>
                 </div>
             </div>
         </div>
@@ -280,110 +280,35 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div class="dataTables_wrapper form-inline">
-                                        <table class="table table-hover">
+                                        <table class="table table-striped table-bordered table-hover dataTables-example" id="editable">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>字典类型</th>
                                                 <th>数据名称</th>
-                                                <th>字典排序值</th>
-                                                <th>父id</th>
-                                                <th>可否编辑(0否1是)</th>
+                                                <th>所属字典类型</th>
+                                                <th>可否编辑</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>国家</td>
-                                                <td>国家</td>
-                                                <td>1</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>
-                                                    <a class="like" href="javascript:void(0)" title="Like"
+                                            <tr th:each="dictionary: ${dictionaryList}">
+                                                <td th:text="${dictionary.id}">#</td>
+                                                <td th:text="${dictionary.typeKey}">字典类型</td>
+                                                <td th:text="${dictionary.typeValue}">数据名称</td>
+                                                <td th:text="${dictionary.parentID}">所属字典类型id</td>
+                                                <td th:text="${dictionary.editable}">可否编辑(0否1是)</td>
+                                                <td th:if="${dictionary.editable==1}"></th:if>
+                                                  <a class="like" href="javascript:void(0)" title="Like" th:onclick="'selectNumber(\''+${dictionary.id}+'\',\''+${dictionary.typeKey}+'\',\''+${dictionary.typeValue}+'\',\''+${dictionary.parentID}+'\',\''+${dictionary.editable}+'\');'"
                                                        data-toggle="modal" data-target="#myModal1"><i
                                                             class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a class="like" href="javascript:void(0)" title="Like"><i
-                                                            class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>客户等级</td>
-                                                <td>客户等级</td>
-                                                <td>2</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>
-                                                    <a class="like" href="javascript:void(0)" title="Like"
-                                                       data-toggle="modal" data-target="#myModal1"><i
-                                                            class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a class="like" href="javascript:void(0)" title="Like"><i
-                                                            class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>服务类型</td>
-                                                <td>服务类型</td>
-                                                <td>3</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>
-                                                    <a class="like" href="javascript:void(0)" title="Like"
-                                                       data-toggle="modal" data-target="#myModal1"><i
-                                                            class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a class="like" href="javascript:void(0)" title="Like"><i
-                                                            class="fa fa-trash-o"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>用户类型</td>
-                                                <td>用户类型</td>
-                                                <td>4</td>
-                                                <td>0</td>
-                                                <td>1</td>
-                                                <td>
-                                                    <a class="like" href="javascript:void(0)" title="Like"
-                                                       data-toggle="modal" data-target="#myModal1"><i
-                                                            class="fa fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <a class="like" href="javascript:void(0)" title="Like"><i
-                                                            class="fa fa-trash-o"></i></a></td>
+                                                    <a th:href="'/basic/deleteDictionary?id='+${dictionary.id}" class="like" href="javascript:void(0)" title="Like" th:onclick="'deleteNumber(\''+${dictionary.id}+'\');'"><i
+                                                            class="fa fa-trash-o"></i></a>
+                                                </td>
+                                                <td th:if="${dictionary.editable==0}"></th:if></td>
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="dataTables_info" id="DataTables_Table_0_info" role="alert"
-                                                     aria-live="polite" aria-relevant="all" >显示 1 到 10 项，共 57 项
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6" >
-                                                <div class="dataTables_paginate paging_simple_numbers" style="hight:37px"
-                                                     id="DataTables_Table_0_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button previous disabled"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"
-                                                            id="DataTables_Table_0_previous"><a href="#">上一页</a></li>
-                                                        <li class="paginate_button active"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"><a href="#">1</a>
-                                                        </li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">2</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">3</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">4</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">5</a></li>
-                                                        <li class="paginate_button " aria-controls="DataTables_Table_0"
-                                                            tabindex="0"><a href="#">6</a></li>
-                                                        <li class="paginate_button next"
-                                                            aria-controls="DataTables_Table_0" tabindex="0"
-                                                            id="DataTables_Table_0_next"><a href="#">下一页</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -404,40 +329,36 @@
                                                 </div>
                                             </div>
 
+                                            <form class="bs-example bs-example-form" action="/basic/addDictionary">
                                             <div class="modal-body">
                                                 <div class="row">
-                                                    <form class="bs-example bs-example-form">
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 字典类型</h4></div>
                                                             <div class="col-lg-8">
-                                                                <select class="dd-handle" style=" height: 30px;
+                                                                <select onfocus="selectFocus(this)" id="select" class="dd-handle pre-scrollable" style="
                                                                                  width:176px;
                                                                               border: 1px solid #e7eaec;
                                                                               background: #f5f5f5;
                                                                                 -webkit-border-radius: 3px;
                                                                               border-radius: 3px;
                                                                               box-sizing: border-box;
-                                                                                -moz-box-sizing: border-box;">
-                                                                    <option value="------选啥类型-----"/>
-                                                                    <option value="1" class="dd-handle">aaaa</option>
-                                                                    <option value="2" class="dd-handle">aaaa</option>
-                                                                    <option value="3" class="dd-handle">aaaa</option>
-                                                                    <option value="4" class="dd-handle">aaaa</option>
+                                                                                -moz-box-sizing: border-box;" name="parentID">
+                                                                    <option onclick="selectClick(this)" th:each="dictionary:${dictionaryList}" th:value="${dictionary.id}" class="dd-handle" ><intput th:text="${dictionary.typeKey}"/></option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-lg-4" style="text-align: center"><h4>
+                                                            <div class="col-lg-4" style="text-align: center" ><h4>
                                                                 数据条目</h4></div>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="dd-handle"/></div>
+                                                                <input type="text" class="dd-handle" name="typeKey"/></div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 数据名称</h4></div>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="dd-handle"/></div>
+                                                                <input type="text" class="dd-handle" name="typeValue"/></div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
@@ -445,27 +366,25 @@
                                                             <div class="col-lg-7">
                                                                 <div data-toggle="buttons" class="btn-group">
                                                                     <label class="btn btn-sm btn-white">
-                                                                        <input type="radio" id="option1" name="options"
+                                                                        <input type="radio" id="option1" name="editable"
                                                                                value="1">可以编辑</label>
                                                                     <label class="btn btn-sm btn-white active">
-                                                                        <input type="radio" id="option2" name="options"
+                                                                        <input type="radio" id="option2" name="editable"
                                                                                value="0">不可编辑</label>
                                                                 </div>
                                                             </div>
 
 
                                                         </div>
-                                                    </form>
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-white" data-dismiss="modal">关闭
                                                 </button>
-                                                <button type="button" class="btn btn-primary">保存</button>
+                                                <button type="submit" class="btn btn-primary">保存</button>
                                             </div>
-
-
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -485,27 +404,22 @@
                                                             class="sr-only">Close</span>&nbsp;&nbsp;&nbsp;</button>
                                                 </div>
                                             </div>
-
+                                            <form class="bs-example bs-example-form" action="/basic/updateDictionary" id="form1">
                                             <div class="modal-body">
                                                 <div class="row">
-                                                    <form class="bs-example bs-example-form">
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 字典类型</h4></div>
                                                             <div class="col-lg-8">
-                                                                <select class="dd-handle" style=" height: 30px;
+                                                                <select onfocus="selectFocus(this)" id="select1" class="dd-handle pre-scrollable" style="
                                                                                  width:176px;
                                                                               border: 1px solid #e7eaec;
                                                                               background: #f5f5f5;
                                                                                 -webkit-border-radius: 3px;
                                                                               border-radius: 3px;
                                                                               box-sizing: border-box;
-                                                                                -moz-box-sizing: border-box;">
-                                                                    <option value="------选啥类型-----"/>
-                                                                    <option value="1" class="dd-handle">aaaa</option>
-                                                                    <option value="2" class="dd-handle">aaaa</option>
-                                                                    <option value="3" class="dd-handle">aaaa</option>
-                                                                    <option value="4" class="dd-handle">aaaa</option>
+                                                                                -moz-box-sizing: border-box;" name="parentID" >
+                                                                    <option onclick="selectClick(this)" th:each="dictionary:${dictionaryList}" th:value="${dictionary.id}" class="dd-handle"><intput th:text="${dictionary.typeKey}"/></option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -513,40 +427,43 @@
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 数据条目</h4></div>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="dd-handle"/></div>
+                                                                <input id="m_typeKey" type="text" class="dd-handle" value="" name="typeKey"/></div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 数据名称</h4></div>
                                                             <div class="col-lg-8">
-                                                                <input type="text" class="dd-handle"/></div>
+                                                                <input type="text" id="m_typeValue" class="dd-handle" value="" name="typeValue"/></div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-4" style="text-align: center"><h4>
                                                                 否可编辑</h4></div>
                                                             <div class="col-lg-7">
                                                                 <div data-toggle="buttons" class="btn-group">
-                                                                    <label class="btn btn-sm btn-white active">
-                                                                        <input type="radio" id="option3" name="options"
-                                                                               value="1">可以编辑</label>
+                                                                    <label class="btn btn-sm btn-white active ">
+                                                                        <input type="radio" id="option3" name="editable"
+                                                                               value="1"  checked>可以编辑</label>
                                                                     <label class="btn btn-sm btn-white">
-                                                                        <input type="radio" id="option4" name="options"
+                                                                        <input type="radio" id="option4" name="editable"
                                                                                value="0">不可编辑</label>
                                                                 </div>
                                                             </div>
 
 
                                                         </div>
-                                                    </form>
+                                                    <div class="row">
+                                                        <input value="" id="m_id" name="id" hidden>
+                                                    </div>
+
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-white" data-dismiss="modal">关闭
                                                 </button>
-                                                <button type="button" class="btn btn-primary">保存</button>
+                                                <button type="submit" class="btn btn-primary">保存</button>
                                             </div>
-
+                                            </form>
 
                                         </div>
                                     </div>
@@ -566,68 +483,83 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/bootstrap.min.js?v=3.4.0"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="js/hplus.js?v=2.2.0"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="../js/hplus.js?v=2.2.0"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 <!-- Flot -->
-<script src="js/plugins/flot/jquery.flot.js"></script>
-<script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-<script src="js/plugins/flot/jquery.flot.spline.js"></script>
-<script src="js/plugins/flot/jquery.flot.resize.js"></script>
-<script src="js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="../js/plugins/flot/jquery.flot.js"></script>
+<script src="../js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="../js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="../js/plugins/flot/jquery.flot.pie.js"></script>
 
 <!-- Peity -->
-<script src="js/plugins/peity/jquery.peity.min.js"></script>
-<script src="js/demo/peity-demo.js"></script>
+<script src="../js/plugins/peity/jquery.peity.min.js"></script>
+<script src="../js/demo/peity-demo.js"></script>
 
 <!-- jQuery UI -->
-<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
 <!-- GITTER -->
-<script src="js/plugins/gritter/jquery.gritter.min.js"></script>
+<script src="../js/plugins/gritter/jquery.gritter.min.js"></script>
 
 <!-- EayPIE -->
-<script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+<script src="../js/plugins/easypiechart/jquery.easypiechart.js"></script>
 
 <!-- Sparkline -->
-<script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="../js/plugins/sparkline/jquery.sparkline.min.js"></script>
 
 <!-- Sparkline demo data  -->
-<script src="js/demo/sparkline-demo.js"></script>
+<script src="../js/demo/sparkline-demo.js"></script>
 
+<!-- Data Tables -->
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('.chart').easyPieChart({
-            barColor: '#f8ac59',
-            //                scaleColor: false,
-            scaleLength: 5,
-            lineWidth: 4,
-            size: 80
-        });
+        $('.dataTables-example').dataTable();
 
-        $('.chart2').easyPieChart({
-            barColor: '#1c84c6',
-            //                scaleColor: false,
-            scaleLength: 5,
-            lineWidth: 4,
-            size: 80
-        });
-        $('.chart3').easyPieChart({
-            barColor: '#23c6c8',
-            //                scaleColor: false,
-            scaleLength: 5,
-            lineWidth: 4,
-            size: 80
-        });
+        // 点击添加size属性
+        window.selectFocus = function (that) {
+            $(that).attr("size", "5");
+        }
+        //点击删除size属性
+        window.selectClick = function (that) {
+            $(that).parent().removeAttr("size");
+            $(that).parent().blur();
+            $(that).parent().children("[selected='selected']").removeAttrs("selected");
+            $(that).attr("selected", "");
 
+        }
 
+        function selectNumber(id, key, value, pid, edit) {
+            //默认选中
+            var num = $("#select1").find("option");
+            for (var j = 0; j < num.length; j++) {
+                if ($(num[j]).val() == (pid)) {
+                    num[j].selected = true;
+                    break;
+                }
+            }
+            //默认显示
+            $("#m_typeKey").val(key);
+            $("#m_typeKey").attr("value", key);
+            $("#m_typeValue").val(value);
+            $("#m_typeValue").attr("value", value);
+            $("#m_id").val(id);
+
+        }
+
+        function deleteNumber(id) {
+            alert(id)
+        }
     });
 </script>
 

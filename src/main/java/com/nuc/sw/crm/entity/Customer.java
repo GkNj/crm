@@ -1,11 +1,14 @@
 package com.nuc.sw.crm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Customer {
     @Id
     @GeneratedValue
@@ -13,7 +16,9 @@ public class Customer {
     private String cName;
     private String cAddress;
     private String cClass;
+    @Column(name="c_satisfaction",columnDefinition = "int default -1")
     private int cSatisfaction;
+    @Column(name="c_credit",columnDefinition = "int default -1")
     private int cCredit;
     private String cPost;
     private String cWebsite;

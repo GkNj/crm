@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author 杨晓辉 2018-08-30 15:52
@@ -18,8 +18,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-//    @Autowired
-//    private UserServiceImpl userService;
+    @Autowired
+    private UserServiceImpl userService;
 
 
     /**
@@ -65,15 +65,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 数据加密设置
-     * 暂时不加密
+     * 采用 BCrypt 加密
      *
      * @return 加密后密码
      */
     @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    public static BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-
 
     /**
      * 不拦截资源
@@ -96,8 +95,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("root").password("root").roles("ROOT");
+//        auth.inMemoryAuthentication().withUser("root").password("$2a$10$1Mh01qeGRtBSHX0ERnRspOipzy4FFT0z.fPkG2ogIQwTGXnIL1bHu").roles("ROOT").and()
 
-//        auth.userDetailsService(userService);
+        auth.userDetailsService(userService);
     }
 }

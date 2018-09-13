@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
 
     <meta charset="utf-8">
@@ -11,21 +10,54 @@
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <link href="../../static/css/animate.css" rel="stylesheet">
-    <link href="../../static/css/style.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    <!-- Custom and plugin javascript -->
+    <script src="../js/hplus.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
-        .form_center{
+        .form_center {
             margin-left: 130px;
         }
-        .form_margin{
+
+        .form_margin {
             margin: 10px;
         }
     </style>
 
+    <script type="text/javascript">
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/service/queryForCustomer", //此次url改为真正需要的url
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    $("#select").append(  //此处向select中循环绑定数据
+                        "<option value=" + item.cId + ">" + item.cName + "</option>");
+                });
+                console.log(data)
+            },
+        });
+
+        window.onload = function () {
+            var nowDate = new Date();
+            var str = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + " " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds();
+            var sCreateDate = document.getElementById("sCreateDate")
+            sCreateDate.value = str;
+            console.log("create ", sCreateDate.value)
+            // document.getElementById("shijian1").value=str;
+        }
+
+    </script>
 </head>
 
 <body>
@@ -36,7 +68,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../../static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -62,18 +94,20 @@
                     </div>
 
                 </li>
-                <li >
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/opptunitymanage.html">营销机会管理</a>
+                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="../../static/createplan.html">客户开发计划</a>
+                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="../customer/customerinfo.html">客户信息管理</a>
                         </li>
@@ -82,13 +116,14 @@
                     </ul>
                 </li>
                 <li class="active">
-                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="distribute.html">服务分配</a>
+                        <li><a th:href="@{queryState}">服务分配</a>
                         </li>
-                        <li><a href="handle.html">服务处理</a>
+                        <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
                         <li><a href="feedback.html">服务反馈</a>
                         </li>
@@ -119,11 +154,11 @@
                         </li>
                         <li><a href="../../static/product.html">查询产品信息</a>
                         </li>
-                        <li><a href="../../static/stock.html">查询库存</a>
+                        <li><a href="../basic/stock.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
-                <li >
+                <li>
                     <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
@@ -157,7 +192,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a7.jpg">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
@@ -171,7 +206,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a4.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
@@ -247,23 +282,25 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-8">
-                <div class="title-action">
-                    <a href="create.html" class="btn btn-primary">活动区域</a>
-                </div>
-            </div>
+            <!--<div class="col-sm-8">-->
+            <!--<div class="title-action">-->
+            <!--<a href="create.html" class="btn btn-primary">活动区域</a>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
 
-            <form method="post" class="form-horizontal"  th:action="@{/create/add}">
-                <table class="table-striped ">
-                <div class="form-group" style="text-align: center" >
+
+        <form method="post" class="form-horizontal" th:action="@{/service/add}">
+
+            <table class="table-striped ">
+                <div class="form-group" style="text-align: center">
                     <tr class="active">
                         <td style="width: 400px;">
                             <label class="col-sm-3 control-label form_center">编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号</label>
                         </td>
                         <td style="width: 550px">
                             <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin"  name="sId">
+                                <input type="text" class="form-control form_margin" name="sId">
                             </div>
                         </td>
                     </tr>
@@ -276,9 +313,9 @@
                         <td>
                             <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
                                 <select class="form-control m-b" name="sType">
-                                    <option>投诉</option>
-                                    <option>建议</option>
-                                    <option>咨询</option>
+                                    <option value="投诉">投诉</option>
+                                    <option value="建议">建议</option>
+                                    <option value="咨询">咨询</option>
                                 </select>
                             </div>
                         </td>
@@ -301,10 +338,8 @@
                         </td>
                         <td>
                             <div class="col-sm-5" style="margin-left:10px;margin-top: 20px">
-                                <select class="form-control m-b" name="cId">
-                                    <option>京东</option>
-                                    <option>阿里巴巴</option>
-                                    <option>微软</option>
+                                <select class="form-control m-b" name="cId" id="select">
+                                    <option value="cId">--请选择--</option>
                                 </select>
                             </div>
                         </td>
@@ -312,7 +347,7 @@
                     <!--<div class="hr-line-dashed"></div>-->
                     <tr>
                         <td>
-                            <label class="col-lg-3 control-label form_center" >状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
+                            <label class="col-lg-3 control-label form_center">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
                         </td>
                         <td>
                             <div class="col-lg-5">
@@ -337,7 +372,7 @@
                         </td>
                         <td>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin" name="cId">
+                                <input type="text" class="form-control form_margin" name="uId" value="2">
                             </div>
                         </td>
                     </tr>
@@ -346,8 +381,11 @@
                         <td>
                             <label class="col-sm-3 control-label form_center">创建时间</label></td>
                         <td>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control form_margin" name="sCreateDate">
+                            <div class="col-sm-10">
+                                <input type="text" name="sCreateDate" class="form-control error" id="sCreateDate" value="1111"
+                                       required="" aria-required="true" aria-invalid="true">
+
+
                             </div>
                         </td>
                     </tr>
@@ -357,14 +395,14 @@
 
                         <td style="position: absolute;left:300px">
 
-                                <button class="btn btn-success" style="margin-left: 180px" type="submit">保存内容</button>
-                                <button class="btn btn-info" style="margin-left: 20px" type="submit">取消</button>
+                            <button class="btn btn-success" style="margin-left: 180px" type="submit">保存内容</button>
+                            <button class="btn btn-info" style="margin-left: 20px" type="submit">取消</button>
 
                         </td>
                     </tr>
                 </div>
-                </table>
-            </form>
+            </table>
+        </form>
 
         <div class="footer">
             <div class="pull-right">
@@ -376,18 +414,6 @@
         </div>
     </div>
 </div>
-
-
-
-<!-- Mainly scripts -->
-<script src="../../static/js/jquery-2.1.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js"></script>
-<script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="../../static/js/hplus.js"></script>
-<script src="../../static/js/plugins/pace/pace.min.js"></script>
 
 
 </body>

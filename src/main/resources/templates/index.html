@@ -2,7 +2,9 @@
 
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 <head>
 
@@ -21,21 +23,14 @@
     <!-- Gritter -->
     <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
+
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=2.2.0" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
           crossorigin="anonymous">
 
-    <!--<script type="text/css">-->
-    <!--#111{-->
 
-    <!--background-position: center;-->
-    <!--background-image: url("../static/img/chinamobile.png");-->
-    <!--background-repeat: no-repeat;-->
-    <!--}-->
-
-    <!--</script>-->
 </head>
 
 <body>
@@ -46,14 +41,28 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="../static/img/profile_small.jpg"/>
-                            </span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                             </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                                    </span> <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
                                 </span>
                         </a>
+
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="form_avatar.html">修改头像</a>
                             </li>
@@ -77,9 +86,9 @@
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../static/createopportunity.html">营销机会管理</a>
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
-                        <li><a href="../static/createplan.html">客户开发计划</a>
+                        <li><a th:href="@{/plan/findall}">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -88,9 +97,9 @@
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/customer/customerinfo.html">客户信息管理</a>
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                         </li>
-                        <li><a href="../templates/customer/customerlost.html">客户流失管理</a>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
@@ -98,15 +107,15 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../templates/service/create.html">服务创建</a>
+                        <li><a th:href="@{service/create.html}">服务创建</a>
                         </li>
-                        <li><a href="../templates/service/distribute.html">服务分配</a>
+                        <li><a th:href="@{service/queryState}">服务分配</a>
                         </li>
-                        <li><a href="../templates/service/feedback.html">服务处理</a>
+                        <li><a th:href="@{service/queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="../templates/service/handle.html">服务反馈</a>
+                        <li><a th:href="@{service/queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="../templates/service/ok.html">服务归档</a>
+                        <li><a th:href="@{service/ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -115,13 +124,13 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../static/classify.html">客户贡献分析</a>
+                        <li><a href="../../static/classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="../static/classify.html">客户构成分析</a>
+                        <li><a href="../../static/classify.html">客户构成分析</a>
                         </li>
-                        <li><a href="../static/classify.html">客户服务分析</a>
+                        <li><a href="../../static/classify.html">客户服务分析</a>
                         </li>
-                        <li><a href="../static/classify.html">客户流失分析</a>
+                        <li><a href="../../static/classify.html">客户流失分析</a>
                         </li>
                     </ul>
                 </li>
@@ -129,17 +138,19 @@
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../static/dictionary.html">数据字典管理</a>
+                        <li><a href="../../static/dictionary.html">数据字典管理</a>
                         </li>
-                        <li><a href="../static/product.html">查询产品信息</a>
+                        <li><a href="../../static/product.html">查询产品信息</a>
                         </li>
-                        <li><a href="../static/stock.html">查询库存</a>
+
+                        <li><a href="basic/stock.html">查询库存</a>
+
                         </li>
                     </ul>
                 </li>
-
                 <li>
-                    <a th:href="@{permission/permission}"><i class="fa fa-cogs"></i> <span class="nav-label">权限管理</span></a>
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
+                            class="nav-label">权限管理</span></a>
                 </li>
             </ul>
         </div>
@@ -249,28 +260,10 @@
 
             </nav>
         </div>
-        <!--<div class="row wrapper border-bottom white-bg page-heading">-->
-        <!--<div class="col-sm-4">-->
-        <!--<h2>标题</h2>-->
-        <!--<ol class="breadcrumb">-->
-        <!--<li>-->
-        <!--<a href="index.html">主页</a>-->
-        <!--</li>-->
-        <!--<li>-->
-        <!--<strong>包屑导航</strong>-->
-        <!--</li>-->
-        <!--</ol>-->
-        <!--</div>-->
-        <!--<div class="col-sm-8">-->
-        <!--<div class="title-action">-->
-        <!--<a href="empty_page.html" class="btn btn-primary">活动区域</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+
 
         <div id="111">
-            <img src="index.jpg" alt="" style="width: 1120px;height: 1050px">
-
+            <img src="img/index.jpg" alt="" style="width: 1120px;height: 1050px">
         </div>
 
 

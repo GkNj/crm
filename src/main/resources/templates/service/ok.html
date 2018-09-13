@@ -11,12 +11,107 @@
     <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="../../static/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="../../static/css/animate.css" rel="stylesheet">
-    <link href="../../static/css/style.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js?v=3.4.0"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    <script src="../../static/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+    <!-- Data Tables -->
+    <script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/hplus.js?v=2.2.0"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var nowDate = new Date();
+            var str = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + " " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds();
+            var sCreateDate = document.getElementById("sCreateDate")
+            sCreateDate.value = str;
+            console.log("create ", sCreateDate.value)
+            // document.getElementById("shijian1").value=str;
+        }
+
+        function DealDetail(id) {
+            axios.get('http://localhost:8080/service/queryForOk?id='+id, {
+
+
+            }).then(function (response) {
+
+                    var data = response.data;
+                    // 默认显示
+                    $("#sId").val(id);
+                    $("#sId").attr("value",id);
+                    $("#sType").val(data[0].service.sType);
+                    $("#sType").attr("value",data[0].service.sType);
+                    $("#sDetail").val(data[0].service.sDetail);
+                    $("#sDetail").attr("value",data[0].service.sDetail);
+                    $("#state").val(data[0].service.sState);
+                    $("#state").attr("value",data[0].service.sState);
+                    $("#dTime").val(data[0].dTime);
+                    $("#dTime").attr("value",data[0].dTime);
+                    $("#cTime").val(data[0].service.sCreateDate);
+                    $("#cTime").attr(data[0].service.sCreateDate);
+                    $("#request").val(data[0].service.sRequest);
+                    $("#request").attr("value",data[0].service.sRequest);
+                    $("#Customer").val(data[0].service.customer.cName);
+                    $("#Customer").attr("value",data[0].service.customer.cName);
+                }
+
+            )
+        };
+
+
+    </script>
     <style>
         .form_center {
             margin-left: 130px;
@@ -26,7 +121,6 @@
             margin: 10px;
         }
     </style>
-
 </head>
 
 <body>
@@ -37,7 +131,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="../../static/img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
@@ -66,9 +160,9 @@
                 <li >
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/opptunitymanage.html">营销机会管理</a>
+                        <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
-                        <li><a href="../../static/createplan.html">客户开发计划</a>
+                        <li><a href="../opportunity/createplan.html">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -87,7 +181,7 @@
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a href="distribute.html">服务分配</a>
+                        <li><a th:href="@{service/query}">服务分配</a>
                         </li>
                         <li><a href="handle.html">服务处理</a>
                         </li>
@@ -120,7 +214,7 @@
                         </li>
                         <li><a href="../../static/product.html">查询产品信息</a>
                         </li>
-                        <li><a href="../../static/stock.html">查询库存</a>
+                        <li><a href="../basic/stock.html">查询库存</a>
                         </li>
                     </ul>
                 </li>
@@ -158,7 +252,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a7.jpg">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
@@ -172,7 +266,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../static/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="../img/a4.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
@@ -272,39 +366,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
+            <tr th:each="s:${list}">
+                <td th:text="${s.sId}">1</td>
+                <td th:text="${s.customer.cName}">京东</td>
+                <td th:text="${s.sDetail}">合伙做生意</td>
+                <td th:text="${s.sType}">建议</td>
+                <td th:text="${s.user.name}">客户经理</td>
+                <td th:text="${s.sCreateDate}">2018/5/25</td>
+                <td th:text="${s.sState}">已归档</td>
+                <td><a data-toggle="modal" data-target="#myModal"href="javascript:void(0)" th:onclick="'DealDetail(\''+${s.sId}+'\',)'">
+                    <i class="fa fa-folder-open text-navy"></i>
+                </a>
                 </td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>京东</td>
-                <td>合伙做生意</td>
-                <td class="text-navy">建议</td>
-                <td>客户经理</td>
-                <td>2018/5/25</td>
-                <td>已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"><i class="fa fa-folder-open text-navy"></i></a>
-                </td>
-            </tr>
+
             </tbody>
         </table>
 
@@ -507,20 +582,20 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="../../static/js/jquery-2.1.1.min.js"></script>
-<script src="../../static/js/bootstrap.min.js?v=3.4.0"></script>
-<script src="../../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js?v=3.4.0"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
 <script src="../../static/js/plugins/jeditable/jquery.jeditable.js"></script>
 
 <!-- Data Tables -->
-<script src="../../static/js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="../../static/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="../../static/js/hplus.js?v=2.2.0"></script>
-<script src="../../static/js/plugins/pace/pace.min.js"></script>
+<script src="../js/hplus.js?v=2.2.0"></script>
+<script src="../js/plugins/pace/pace.min.js"></script>
 
 <!-- Page-Level Scripts -->
 <script>

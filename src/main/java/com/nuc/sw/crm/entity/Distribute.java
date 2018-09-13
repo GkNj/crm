@@ -4,10 +4,10 @@ package com.nuc.sw.crm.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+
 
 @Entity
-public class distribute {
+public class Distribute {
 
     @Id
     @GeneratedValue
@@ -19,26 +19,12 @@ public class distribute {
     /**
      * 分配时间
      */
-    private Date dTime;
+    private String dTime;
 
-    public distribute() {
-    }
-
-    @Override
-    public String toString() {
-        return "distribute{" +
-                "dId=" + dId +
-                ", uId=" + uId +
-                ", dTime=" + dTime +
-                ", sId=" + sId +
-                '}';
-    }
-
-    public distribute(int uId, Date dTime, int sId) {
-        this.uId = uId;
-        this.dTime = dTime;
-        this.sId = sId;
-    }
+    /**
+     * 服务的编号
+     */
+    private int sId;
 
     public int getdId() {
         return dId;
@@ -56,11 +42,11 @@ public class distribute {
         this.uId = uId;
     }
 
-    public Date getdTime() {
+    public String getdTime() {
         return dTime;
     }
 
-    public void setdTime(Date dTime) {
+    public void setdTime(String dTime) {
         this.dTime = dTime;
     }
 
@@ -72,8 +58,22 @@ public class distribute {
         this.sId = sId;
     }
 
-    /**
-     * 服务的编号
-     */
-    private int sId;
+    public Distribute(int uId, String dTime, int sId) {
+        this.uId = uId;
+        this.dTime = dTime;
+        this.sId = sId;
+    }
+
+    @Override
+    public String toString() {
+        return "Distribute{" +
+                "dId=" + dId +
+                ", uId=" + uId +
+                ", dTime='" + dTime + '\'' +
+                ", sId=" + sId +
+                '}';
+    }
+
+    public Distribute() {
+    }
 }

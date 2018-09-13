@@ -16,6 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     List<Customer> findCustomersByUId(int uId);
 
     @Modifying
+
     @Query(value = "update customer set c_address =?1,c_class =?2,c_credit =?3,c_satisfaction =?4,c_email =?5,c_post =?6,c_website =?7 where c_id =?8",nativeQuery = true)
     void updateCustomerByCId(String address,String cClass,int credit,int satisfaction,String email,String post,String website,int id);
     @Query(value = "select s_type, count(*) from service group by s_type ",nativeQuery = true)
@@ -26,4 +27,10 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Query(value = "select orders.c_id cId,c_name cName,sum(o_price) sum from orders,customer where orders.c_id=customer.c_id and o_date=?1 group by orders.c_id " ,nativeQuery = true)
     List findContributionByYear(String data);
 
+    @Query(value = "select c_id from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
+    List<Integer> queryCustomerIdNotInLossByUId(int uId);
+
+    @Modifying
+    @Query(value = "select * from customer where c_id not in(select c_id from loss) and u_id = ?1",nativeQuery = true)
+    List<Customer> queryCustomerNotInLossByUId(int uId);
 }
