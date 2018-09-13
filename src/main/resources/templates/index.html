@@ -63,19 +63,7 @@
                                 </span>
                         </a>
 
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="logo-element">
                         H+
@@ -144,26 +132,24 @@
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/classify.html">客户贡献分析</a>
+                        <li><a href="classify.html">客户贡献分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户构成分析</a>
+                        <li><a href="classify1.html">客户构成分析</a>
                         </li>
-                        <li><a href="../../static/classify.html">客户服务分析</a>
-                        </li>
-                        <li><a href="../../static/classify.html">客户流失分析</a>
-                        </li>
+                        <li><a href="classify2.html">客户服务分析</a>
+
                     </ul>
                 </li>
                 <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../../static/dictionary.html">数据字典管理</a>
+                        <li><a href="/basic/findAllDictionary">数据字典管理</a>
                         </li>
-                        <li><a href="../../static/product.html">查询产品信息</a>
+                        <li><a href="/basic/findAllProduct">查询产品信息</a>
                         </li>
 
-                        <li><a href="basic/stock.html">查询库存</a>
+                        <li><a href="/basic/findAllStock">查询库存</a>
 
                         </li>
                     </ul>
@@ -180,7 +166,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="empty_page.html#"><i
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                             class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
@@ -229,7 +215,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="mailbox.html">
+                                    <a href="#">
                                         <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
@@ -242,7 +228,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="mailbox.html">
+                                <a href="#">
                                     <div>
                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                                         <span class="pull-right text-muted small">4分钟前</span>
@@ -251,7 +237,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="profile.html">
+                                <a href="#">
                                     <div>
                                         <i class="fa fa-qq fa-fw"></i> 3条新回复
                                         <span class="pull-right text-muted small">12分钟钱</span>
@@ -261,7 +247,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="notifications.html">
+                                    <a href="#">
                                         <strong>查看所有 </strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
