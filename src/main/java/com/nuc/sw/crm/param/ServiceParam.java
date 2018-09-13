@@ -1,4 +1,4 @@
-package com.nuc.sw.crm.Param;
+package com.nuc.sw.crm.param;
 
 
 import javax.validation.constraints.NotNull;
