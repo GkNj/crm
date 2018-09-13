@@ -11,6 +11,21 @@ public class ServiceVO {
     private String sState;
     private String sRequest;
     private User user;
+    private String sCreateDate;
+    private Customer customer;
+    private String hTime;
+    private String hContent;
+    private String hResult;
+    private int hSatisficing;
+    private User huser;
+
+    public User getHuser() {
+        return huser;
+    }
+
+    public void setHuser(User huser) {
+        this.huser = huser;
+    }
 
     public String gethTime() {
         return hTime;
@@ -43,13 +58,6 @@ public class ServiceVO {
     public void sethSatisficing(int hSatisficing) {
         this.hSatisficing = hSatisficing;
     }
-
-    private String sCreateDate;
-    private Customer customer;
-    private String hTime;
-    private String hContent;
-    private String hResult;
-    private int hSatisficing;
 
     public int getsId() {
         return sId;
@@ -115,7 +123,11 @@ public class ServiceVO {
         this.customer = customer;
     }
 
-    public ServiceVO(int sId, String sType, String sDetail, String sState, String sRequest, User user, String sCreateDate, Customer customer, String hTime, String hContent, String hResult, int hSatisficing) {
+
+    public ServiceVO() {
+    }
+
+    public ServiceVO(int sId, String sType, String sDetail, String sState, String sRequest, User user, String sCreateDate, Customer customer, String hTime, String hContent, String hResult, int hSatisficing, User huser) {
         this.sId = sId;
         this.sType = sType;
         this.sDetail = sDetail;
@@ -128,6 +140,7 @@ public class ServiceVO {
         this.hContent = hContent;
         this.hResult = hResult;
         this.hSatisficing = hSatisficing;
+        this.huser = huser;
     }
 
     @Override
@@ -145,9 +158,7 @@ public class ServiceVO {
                 ", hContent='" + hContent + '\'' +
                 ", hResult='" + hResult + '\'' +
                 ", hSatisficing=" + hSatisficing +
+                ", huser=" + huser +
                 '}';
-    }
-
-    public ServiceVO() {
     }
 }

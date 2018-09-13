@@ -51,23 +51,19 @@ public class ServeServiceImpl implements ServeService {
             BeanUtils.copyProperties(i, distributeVo);
             com.nuc.sw.crm.entity.Service service = serviceRepository.getOne(i.getsId());
             BeanUtils.copyProperties(serviceRepository.getOne(i.getsId()),serviceVO);
-            serviceVO.setUser(userRepository.getOne((long) i.getuId()));
+            serviceVO.setUser(userRepository.getOne((long) service.getuId()));
+            serviceVO.setUser(userRepository.getOne((long) service.getdId()));
             serviceVO.setCustomer(customerRepository.getOne(service.getcId()));
             distributeVo.setService(serviceVO);
             distributeVo.setUser(userRepository.getOne((long) i.getuId()));
             return distributeVo;
         });
         List<DistributeVo> list = serviceVOStream.collect(Collectors.toList());
-
         return list;
+
     }
 
-    @Override
-    public List<DistributeVo> queryHandle(int id) {
-        List<Distribute> distributes = distributeRepository.findDistributeBySId(id);
-        List list = DistributeQuery(distributes);
-        return list;
-    }
+
 
     @Override
     public List<ServiceVO> query() {
@@ -94,6 +90,12 @@ public class ServeServiceImpl implements ServeService {
         return list;
     }
 
+    @Override
+    public List<DistributeVo> queryHandle(int id) {
+        List<Distribute> distributes = distributeRepository.findDistributeBySId(id);
+        List list = DistributeQuery(distributes);
+        return list;
+    }
     @Override
     public List<ServiceVO> queryState() {
         List<com.nuc.sw.crm.entity.Service> services = serviceRepository.findServiceBySState("新创建");

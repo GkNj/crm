@@ -1,8 +1,5 @@
-package com.nuc.sw.crm.Param;
+package com.nuc.sw.crm.param;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 public class TradeParam {

@@ -82,31 +82,54 @@
         }
 
         function DealDetail(id) {
-            axios.get('http://localhost:8080/service/queryForOk?id='+id, {
-
-
-            }).then(function (response) {
+            axios.get('http://localhost:8080/service/queryForOk?id=' + id, {}).then(function (response) {
 
                     var data = response.data;
+                    if (data[0].service.hSatisficing = 5) {
+                        $("#satis").val("⭐⭐⭐⭐⭐");
+                    }
+                    if (data[0].service.hSatisficing = 4) {
+                        $("#satis").val("⭐⭐⭐⭐");
+                    }
+                    if (data[0].service.hSatisficing = 3) {
+                        $("#satis").val("⭐⭐⭐");
+                    }
+                    if (data[0].service.hSatisficing = 2) {
+                        $("#satis").val("⭐⭐");
+                    }
+                    if (data[0].service.hSatisficing = 1) {
+                        $("#satis").val("⭐");
+                    }
                     // 默认显示
                     $("#sId").val(id);
-                    $("#sId").attr("value",id);
+                    $("#sId").attr("value", id);
                     $("#sType").val(data[0].service.sType);
-                    $("#sType").attr("value",data[0].service.sType);
+                    $("#sType").attr("value", data[0].service.sType);
                     $("#sDetail").val(data[0].service.sDetail);
-                    $("#sDetail").attr("value",data[0].service.sDetail);
+                    $("#sDetail").attr("value", data[0].service.sDetail);
                     $("#state").val(data[0].service.sState);
-                    $("#state").attr("value",data[0].service.sState);
+                    $("#state").attr("value", data[0].service.sState);
                     $("#dTime").val(data[0].dTime);
-                    $("#dTime").attr("value",data[0].dTime);
+                    $("#dTime").attr("value", data[0].dTime);
                     $("#cTime").val(data[0].service.sCreateDate);
                     $("#cTime").attr(data[0].service.sCreateDate);
                     $("#request").val(data[0].service.sRequest);
-                    $("#request").attr("value",data[0].service.sRequest);
+                    $("#request").attr("value", data[0].service.sRequest);
                     $("#Customer").val(data[0].service.customer.cName);
-                    $("#Customer").attr("value",data[0].service.customer.cName);
+                    $("#Customer").attr("value", data[0].service.customer.cName);
+                    // $("#satis").val(data[0].service.hSatisficing);
+                    // $("#satis").attr("value", data[0].service.hSatisficing);
+                    $("#hResult").val(data[0].service.hResult);
+                    $("#hResult").attr("value", data[0].service.hResult);
+                    $("#hTime").val(data[0].service.hTime);
+                    $("#hTime").attr("value", data[0].service.hTime);
+                    $("#duser").val(data[0].user.name);
+                    $("#duser").attr("value", data[0].user.name);
+                    $("#user").val(data[0].service.user.name);
+                    $("#user").attr("value", data[0].service.user.name);
+                    $("#hcontent").val(data[0].service.hContent);
+                    $("#hcontent").attr("value", data[0].service.hContent);
                 }
-
             )
         };
 
@@ -157,8 +180,9 @@
                     </div>
 
                 </li>
-                <li >
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span class="fa arrow"></span></a>
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="../opportunity/opportunitymanage.html">营销机会管理</a>
                         </li>
@@ -168,7 +192,8 @@
                 </li>
 
                 <li>
-                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="../customer/customerinfo.html">客户信息管理</a>
                         </li>
@@ -177,17 +202,18 @@
                     </ul>
                 </li>
                 <li class="active">
-                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span class="fa arrow"></span></a>
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="create.html">服务创建</a>
                         </li>
-                        <li><a th:href="@{service/query}">服务分配</a>
+                        <li><a th:href="@{queryState}">服务分配</a>
                         </li>
-                        <li><a href="handle.html">服务处理</a>
+                        <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="feedback.html">服务反馈</a>
+                        <li><a th:href="@{queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a th:href="@{ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -218,7 +244,7 @@
                         </li>
                     </ul>
                 </li>
-                <li >
+                <li>
                     <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
                 </li>
@@ -242,7 +268,7 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
                         <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i
-                                class="fa fa-home"></i></a>欢迎使用H+后台主题</span>
+                                class="fa fa-home"></i></a>欢迎来到客户管理系统</span>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
@@ -342,14 +368,7 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-8">
-                <div class="title-action">
-                    <a href="create.html" class="btn btn-primary">活动区域</a>
-                </div>
-            </div>
         </div>
-
-
 
 
         <table class="table table-striped table-bordered table-hover " id="editable">
@@ -374,7 +393,8 @@
                 <td th:text="${s.user.name}">客户经理</td>
                 <td th:text="${s.sCreateDate}">2018/5/25</td>
                 <td th:text="${s.sState}">已归档</td>
-                <td><a data-toggle="modal" data-target="#myModal"href="javascript:void(0)" th:onclick="'DealDetail(\''+${s.sId}+'\',)'">
+                <td><a data-toggle="modal" data-target="#myModal" href="javascript:void(0)"
+                       th:onclick="'DealDetail(\''+${s.sId}+'\',)'">
                     <i class="fa fa-folder-open text-navy"></i>
                 </a>
                 </td>
@@ -397,7 +417,7 @@
                             <label class="col-sm-2 control-label">编号</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="1">
+                                <input type="text" class="form-control" disabled="" value="" id="sId">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -409,13 +429,13 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="咨询">
+                                <input type="text" class="form-control" disabled="" value="" id="sType">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">概要</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="这是一个概要">
+                                <input type="text" class="form-control" disabled="" value="" id="sDetail">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -426,7 +446,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input id="username" name="username" class="form-control" disabled="" value="太阳药业">
+                                <input name="username" class="form-control" disabled="" value="" id="Customer">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -436,7 +456,7 @@
                             <label class="col-sm-2 control-label">状态</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="已分配">
+                                <input type="text" class="form-control" disabled="" value="" id="state">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -445,7 +465,7 @@
                             <label class="col-sm-2 control-label">服务请求</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="收音机订单运费如何承担？">
+                                <input type="text" class="form-control" disabled="" value="" id="request">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -456,7 +476,7 @@
                                 创建人
                             </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="小明">
+                                <input type="text" class="form-control" disabled="" value="" id="user">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -468,7 +488,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="2018/2/22">
+                                <input type="text" class="form-control" disabled="" value="" id="sCreateDate">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -476,7 +496,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">分配给</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nowdate" disabled="" value="旺财">
+                                <input type="text" class="form-control" disabled="" value="" id="duser">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -488,7 +508,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="2018/2/22">
+                                <input type="text" class="form-control" disabled="" value="" id="dTime">
                             </div>
                         </div>
 
@@ -501,18 +521,12 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <textarea type="text" class="form-control" >
+                                <textarea type="text" class="form-control" id="hcontent" value="">
+
 
                                 </textarea>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">处理人</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" disabled="" value="旺财" name="userName">
-                            </div>
-                        </div>
-
                         <div class="hr-line-dashed"></div>
 
                         <div class="form-group">
@@ -522,25 +536,14 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="2018/2/22">
+                                <input type="text" class="form-control" disabled="" value="" id="hTime">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">
-                                <span class="red" style="color: red"> *</span>
-                                服务处理
-                            </label>
-
-                            <div class="col-sm-10">
-                                <textarea type="text" class="form-control" disabled="" >打电话给刘经理，根据相关制度修改
-                                </textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-2 control-label">处理结果</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="" disabled="" value="同意这么干" name="userName">
+                                <input type="text" class="form-control" id="hResult" disabled="" value="" name="">
                             </div>
                         </div>
 
@@ -553,7 +556,7 @@
                             </label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" disabled="" value="⭐⭐⭐⭐">
+                                <input type="text" class="form-control" disabled="" value="" id="satis">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -581,60 +584,6 @@
 </div>
 </div>
 
-<!-- Mainly scripts -->
-<script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/bootstrap.min.js?v=3.4.0"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<script src="../../static/js/plugins/jeditable/jquery.jeditable.js"></script>
-
-<!-- Data Tables -->
-<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
-<!-- Custom and plugin javascript -->
-<script src="../js/hplus.js?v=2.2.0"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
-
-<!-- Page-Level Scripts -->
-<script>
-    $(document).ready(function () {
-        $('.dataTables-example').dataTable();
-
-        /* Init DataTables */
-        var oTable = $('#editable').dataTable();
-
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        });
-
-
-    });
-
-    function fnClickAddRow() {
-        $('#editable').dataTable().fnAddData([
-            "Custom row",
-            "New row",
-            "New row",
-            "New row",
-            "New row"]);
-
-    }
-</script>
 
 </body>
 

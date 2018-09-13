@@ -105,6 +105,8 @@
                     $("#request").attr("value",data[0].service.sRequest);
                     $("#Customer").val(data[0].service.customer.cName);
                     $("#Customer").attr("value",data[0].service.customer.cName);
+                    $("#cuser").val(data[0].service.user.name);
+                    $("#cuser").attr("value",data[0].service.user.name);
                 }
 
             )
@@ -187,11 +189,11 @@
                         </li>
                         <li><a th:href="@{queryState}">服务分配</a>
                         </li>
-                        <li><a th:href="@{service/queryForHandle}">服务处理</a>
+                        <li><a th:href="@{queryForHandle}">服务处理</a>
                         </li>
                         <li><a th:href="@{queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="ok.html">服务归档</a>
+                        <li><a th:href="@{ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
@@ -429,7 +431,12 @@
                             </div>
 
                             <div class="hr-line-dashed"></div>
-
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">创建人</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" readonly value="" name="s_Detail" id="cuser">
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">状态</label>
@@ -492,7 +499,9 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">处理人</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="" readonly value="高凯" name="">
+                                    <input type="text" class="form-control form_margin" name=""
+                                           th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.name}"/>
+                                    <input type="hidden"  name="uId" th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.id}">
                                 </div>
                             </div>
 
