@@ -30,7 +30,13 @@ interface UserService {
 
     /**
      * 检查是否重名
-     * @param 用户名
+     * @param username 用户名
      */
     fun checkUsername(username: String): String
+
+    /**
+     * 更新user
+     * @param user 用户
+     */
+    fun updateUserInfo(user: User)
 }

@@ -41,7 +41,7 @@ class PermissionController {
     fun addUser(user: User, map: ModelMap): String {
 
         logger.info("user is " + user.toString())
-        var roleId: Long = 0
+        var roleId: Long
         logger.info("user position ${user.position}")
         roleId = when (user.position) {
             "ROOT" -> {
@@ -60,7 +60,7 @@ class PermissionController {
         logger.info("user role id is $roleId")
         val role = Role()
         role.id = roleId
-        val user = userService.saveUser(user, role)
+        userService.saveUser(user, role)
 
         return "forward:/${baseUrl}list"
 
@@ -78,4 +78,12 @@ class PermissionController {
     }
 
 
+    @RequestMapping("/update")
+    fun updateUser(user: User): String {
+        logger.info("update user is $user")
+
+        userService.updateUserInfo(user)
+
+        return "forward:/${baseUrl}list"
+    }
 }
