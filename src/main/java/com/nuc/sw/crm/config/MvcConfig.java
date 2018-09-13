@@ -10,6 +10,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index.html");
+        registry.addViewController("/customer/linkman.html");
+
         registry.addViewController("/dictionary/addDictionary.html");
         registry.addViewController("/opportunity/opportunityeditor.html");
         registry.addViewController("/opportunity/createopportunity.html");

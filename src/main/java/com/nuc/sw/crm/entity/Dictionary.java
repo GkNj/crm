@@ -8,13 +8,15 @@ import javax.persistence.*;
 public class Dictionary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     @Column(name = "type_key")
     private String typeKey;
     @Column(name = "type_value")
     private String typeValue;
-//    @Column(name = "index_num")
-//    private int indexNub;
+
+    @Column(name = "index_num")
+    private int indexNub;
     @Column(name = "p_id")
     private int parentID;
     @Column(name = "editable")
@@ -44,6 +46,15 @@ public class Dictionary {
         this.typeValue = typeValue;
     }
 
+
+    public int getIndexNub() {
+        return indexNub;
+    }
+
+    public void setIndexNub(int indexNub) {
+        this.indexNub = indexNub;
+    }
+
 //    public int getIndexNub() {
 //        return indexNub;
 //    }
@@ -51,6 +62,7 @@ public class Dictionary {
 //    public void setIndexNub(int indexNub) {
 //        this.indexNub = indexNub;
 //    }
+
 
     public int getParentID() {
         return parentID;
@@ -73,12 +85,9 @@ public class Dictionary {
         return "Dictionary{" +
                 "id=" + id +
                 ", typeKey='" + typeKey + '\'' +
-                ", typeValue='" + typeValue + '\'' +
-//                ", indexNub=" + indexNub +
+                ", typeValue='" + typeValue + '\'' +       
                 ", parentID=" + parentID +
                 ", editable=" + editable +
                 '}';
     }
-
-
 }
