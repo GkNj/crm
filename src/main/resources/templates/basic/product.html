@@ -38,7 +38,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                            <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                                 <span class="clear">
@@ -82,7 +82,7 @@
                     <ul class="nav nav-second-level">
                         <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
-                        <li><a th:href="@{/plan/findall}">客户开发计划</a>
+                        <li><a th:href="@{/opportunity/findByPId}">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
@@ -141,9 +141,12 @@
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="/basic/findAllDictionary">数据字典管理</a>
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                            <a href="/basic/findAllDictionary">数据字典管理</a>
                         </li>
-                        <li><a href="/basic/findAllProduct">查询产品信息</a>
+
+                        <li>
+                            <a href="/basic/findAllProduct">查询产品信息</a>
                         </li>
 
                         <li><a href="/basic/findAllStock">查询库存</a>

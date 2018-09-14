@@ -52,7 +52,7 @@ public class ServeServiceImpl implements ServeService {
             com.nuc.sw.crm.entity.Service service = serviceRepository.getOne(i.getsId());
             BeanUtils.copyProperties(serviceRepository.getOne(i.getsId()),serviceVO);
             serviceVO.setUser(userRepository.getOne((long) service.getuId()));
-            serviceVO.setUser(userRepository.getOne((long) service.getdId()));
+//            serviceVO.setUser(userRepository.getOne((long) service.getdId()));
             serviceVO.setCustomer(customerRepository.getOne(service.getcId()));
             distributeVo.setService(serviceVO);
             distributeVo.setUser(userRepository.getOne((long) i.getuId()));

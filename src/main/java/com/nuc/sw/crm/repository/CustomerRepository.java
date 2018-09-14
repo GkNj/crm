@@ -1,11 +1,9 @@
 package com.nuc.sw.crm.repository;
 
-import com.nuc.sw.crm.entity.Contribution;
 import com.nuc.sw.crm.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,4 +38,6 @@ public interface CustomerRepository extends JpaRepository<Customer,Integer> {
     @Modifying
     @Query(value = "update customer set c_picture=?1 where c_id  = ?2",nativeQuery = true)
     int updatePic(String Pic,int id);
+
+    Customer findByCName(String cName);
 }

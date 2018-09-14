@@ -15,10 +15,11 @@ public class Customer {
     private int cId;
     private String cName;
     private String cAddress;
+    @Column(columnDefinition = "普通客户")
     private String cClass;
-    @Column(name="c_satisfaction",columnDefinition = "int default -1")
+    @Column(name="c_satisfaction",columnDefinition = "int default 0")
     private int cSatisfaction;
-    @Column(name="c_credit",columnDefinition = "int default -1")
+    @Column(name="c_credit",columnDefinition = "int default 0")
     private int cCredit;
     private String cPost;
     private String cWebsite;

@@ -230,7 +230,7 @@ public class CustomerController {
         if (!file.isEmpty()) {
             try {
                 BufferedOutputStream out = new BufferedOutputStream(
-                        new FileOutputStream(new File("f:\\JavaSE\\crm\\src\\main\\resources\\static\\img\\"+id+str1+".jpg")));//保存图片到目录下
+                        new FileOutputStream(new File("D:\\demo\\three\\three\\crm\\src\\main\\resources\\static\\img\\"+id+str1+".jpg")));//保存图片到目录下
                 out.write(file.getBytes());
                 out.flush();
                 out.close();

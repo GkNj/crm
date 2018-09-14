@@ -45,17 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // AM 客户经理 SM 销售主管 SA 高管
         http.authorizeRequests()
                 .antMatchers("/", "/index").hasAnyRole("ROOT", "ADMIN", "SM", "AM", "SA")
+
+                .antMatchers("/opportunity/**","/plan/**").hasAnyRole("AM","SA","ROOT")
                 // 高管
-                .antMatchers("/service/queryState").hasAnyRole("SM", "ROOT", "ADMIN")
+//                .antMatchers("/service/queryState").hasAnyRole("SM", "ROOT", "ADMIN")
                 // 客户经理
                 .antMatchers("/service/create.html", "/service/queryForHandle",
                         "/service/queryForFeedBack", "/service/ok", "queryCustomerByUId", "/queryLossByUId",
-                        "/opportunity/findAll", "/plan/findall", "/basic/findAllStock", "/basic/findAllProduct").hasAnyRole("AM", "ROOT", "ADMIN")
+                       "/basic/findAllStock", "/basic/findAllProduct").hasAnyRole("AM", "ROOT", "ADMIN")
                 // 管理员
                 .antMatchers("/permission/list").hasAnyRole("ADMIN", "ROOT")
 
                 //  销售主管
-                .antMatchers("/index","/classity.html","classity1.html","classity2.html","/opportunity/**","/plan/**", "/opportunity/findAll", "/plan/findall").hasAnyRole("SA", "ROOT", "ADMIN")
+                .antMatchers("/service/queryState","/classity.html","classity1.html","classity2.html").hasAnyRole("SA", "ROOT", "ADMIN")
                 // 系统管理员
                 .antMatchers("/basic/findAllDictionary", "/permission/**").hasAnyRole("ROOT", "ADMIN")
                 .antMatchers("/login", "/login.html", "/logout").permitAll();

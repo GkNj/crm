@@ -2,14 +2,13 @@ package com.nuc.sw.crm.service.serviceImpl;
 
 import com.nuc.sw.crm.entity.Opportunity;
 import com.nuc.sw.crm.entity.User;
-import com.nuc.sw.crm.repository.OpprotunityRepository;
+import com.nuc.sw.crm.repository.OpportunityRepository;
+import com.nuc.sw.crm.repository.PlanRepository;
 import com.nuc.sw.crm.repository.UserRepository;
 import com.nuc.sw.crm.service.OpportunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,52 +17,58 @@ import java.util.List;
 @Service
 public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
-    private OpprotunityRepository opprotunityRepository;
+    private OpportunityRepository opportunityRepository;
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PlanRepository planRepository;
 
     @Override
     public void createOpportunity(Opportunity opportunity) {
-        opportunity.setState("未分配");
-        opportunity.setpUsername("张三");
-        opportunity.setpId("1");
-        opportunity.setpDate("234");
-        opprotunityRepository.save(opportunity);
+        opportunity.setState("未开发");
+        opportunityRepository.save(opportunity);
     }
 
     @Override
     public Opportunity modifyOpportunity(Opportunity opportunity) {
-        opportunity.setState("未分配");
-        opportunity.setpUsername("无");
-        opportunity.setpId("无");
-        opportunity.setpDate("无");
-        return opprotunityRepository.save(opportunity);
+        opportunity.setState("未开发");
+        return opportunityRepository.save(opportunity);
     }
 
     public void pointOpportunity(Opportunity opportunity){
-        opportunity.setState("已指派");
+        opportunity.setState("开发中");
         User user=userRepository.getOne(Long.valueOf(opportunity.getpId()));
+
         opportunity.setpUsername(user.getName());
-        opprotunityRepository.save(opportunity);
+        opportunityRepository.save(opportunity);
+
+
+
     }
     @Override
     public void deleteOpportunity(int id) {
         Opportunity opportunity = new Opportunity();
         opportunity.setId(id);
-        opprotunityRepository.delete(opportunity);
+        opportunityRepository.delete(opportunity);
     }
 
     @Override
     public List<Opportunity> findAllOpportunity() {
-        List<Opportunity> list = opprotunityRepository.findOpportunitiesByState("未分配");
+        List<Opportunity> list = opportunityRepository.findOpportunitiesByState("未开发");
         return list;
     }
 
+
     @Override
     public Opportunity findById(int id) {
-        Opportunity opportunity = opprotunityRepository.findOpportunityById(id);
+        Opportunity opportunity = opportunityRepository.findOpportunityById(id);
         return opportunity;
+    }
+
+    public  Opportunity findByPId(int pid){
+        Opportunity opportunity = opportunityRepository.findOpportunityByPId(pid);
+        return  opportunity;
     }
 
     @Override

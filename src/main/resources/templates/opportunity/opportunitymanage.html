@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
 
@@ -42,104 +43,123 @@
                             <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
                         </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
+
+
                     </div>
                     <div class="logo-element">
                         H+
                     </div>
 
                 </li>
-                <li class="active">
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                            class="fa arrow"></span></a>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')" class="active">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
                         </li>
-
-                        <li><a href="createplan.html">客户开发计划</a>
-
+                        <li><a th:href="@{/opportunity/findByPId}">客户开发计划</a>
                         </li>
                     </ul>
                 </li>
 
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
                         </li>
-                        <li><a href="../customer/customerlost.html">客户流失管理</a>
-
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
                     <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="../service/create.html">服务创建</a>
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
                         </li>
-                        <li><a href="../service/distribute.html">服务分配</a>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                            <a th:href="@{service/queryState}">服务分配</a>
                         </li>
-                        <li><a href="../service/handle.html">服务处理</a>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
                         </li>
-                        <li><a href="../service/feedback.html">服务反馈</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
                         </li>
-                        <li><a href="../service/ok.html">服务归档</a>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
+
+                <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+
+                    <a href="../index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li><a href="../classify.html">客户贡献分析</a>
+                        </li>
+                        <li><a href="../classify1.html">客户构成分析</a>
+                        </li>
+                        <li><a href="../classify2.html">客户服务分析</a>
 
-                        <li><a href="create.html">客户贡献分析</a>
-                        </li>
-                        <li><a href="graph_flot.html">客户构成分析</a>
-                        </li>
-                        <li><a href="graph_morris.html">客户服务分析</a>
-                        </li>
-                        <li><a href="graph_rickshaw.html">客户流失分析</a>
-
-                        </li>
                     </ul>
                 </li>
-                <li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
                             class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level">
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                            <a href="/basic/findAllDictionary">数据字典管理</a>
+                        </li>
 
-                        <li><a href="../dictionary.html">数据字典管理</a>
+                        <li>
+                            <a href="/basic/findAllProduct">查询产品信息</a>
                         </li>
-                        <li><a href="../product.html">查询产品信息</a>
-                        </li>
-                        <li><a href="../basic/stock.html">查询库存</a>
+
+                        <li><a href="/basic/findAllStock">查询库存</a>
+
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
                             class="nav-label">权限管理</span></a>
-
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -314,12 +334,11 @@
                                     cId=${l.cId},lName=${l.lName},lPhone=${l.lPhone},pDate=${l.pDate},pId=${l.pId},pUsername=${l.pUsername},
                                     resource=${l.resource},sName=${l.sName},startDate=${l.startDate},state=${l.state},successPercent=${l.successPercent},
                                     summary=${l.summary})}"><i class="fa fa-pencil-square-o"
-                                                               aria-hidden="true"></i>编辑</a>
+                                            aria-hidden="true"></i>编辑</a>
                                     <!--<a href="#" class="lay"><i class="fa fa-times " aria-hidden="true"></i>删除</a>-->
-                                    <span data-toggle="modal" data-target="#myModal" th:id="${l.id}"> <i
-                                            class="fa fa-times lay"
-                                            aria-hidden="true"
-                                            th:onclick="'javascript:showModal('+${l.id}+')'">删除</i></span>
+                                    <span data-toggle="modal" data-target="#myModal" th:id="${l.id}"> <i class="fa fa-times lay"
+                                                                                         aria-hidden="true"
+                                                                                         th:onclick="'javascript:showModal('+${l.id}+')'">删除</i></span>
                                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
                                          aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -360,7 +379,7 @@
                                                 <script>
 
                                                     function showModal(_id) {
-                                                        var t_id = document.getElementById("t_id").value = _id
+                                                        var t_id = document.getElementById("t_id").value=_id
                                                         t_id.value;
 
                                                     }
@@ -369,7 +388,7 @@
                                                     function deleteTable() {
                                                         var t_id = document.getElementById("t_id").value;
 
-                                                        console.log("t_id ", t_id)
+                                                        console.log("t_id ",t_id)
 
                                                         var progress = document.getElementById("progress_del");
                                                         var err = document.getElementById("error_text")

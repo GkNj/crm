@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
 
 
 <head>
@@ -24,125 +26,137 @@
 
 <body>
 <div id="wrapper">
-  <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
-      <ul class="nav" id="side-menu">
-        <li class="nav-header">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
 
-          <div class="dropdown profile-element"> <span>
+                    <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="../img/profile_small.jpg"/>
                              </span>
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
-                                        class="font-bold">Beaut-zihan</strong>
-                             </span>  <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
-            </a>
-            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-              <li><a href="form_avatar.html">修改头像</a>
-              </li>
-              <li><a href="profile.html">个人资料</a>
-              </li>
-              <li><a href="contacts.html">联系我们</a>
-              </li>
-              <li><a href="mailbox.html">信箱</a>
-              </li>
-              <li class="divider"></li>
-              <li><a href="login.html">安全退出</a>
-              </li>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">
+                                            <span sec:authentication="name"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="text-muted text-xs block">
+                                    <!--<span sec:authentication="name"></span>-->
+                                    <span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>
+                                    <span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>
+
+                                    <b class="caret"></b>
+                                    </span>
+                                </span>
+                        </a>
+
+
+                    </div>
+                    <div class="logo-element">
+                        H+
+                    </div>
+
+                </li>
+
+                <!--<span sec:authentication="name"></span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ROOT')">超级管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_ADMIN')">系统管理员</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_AM')">客户经理</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SA')">销售主管</span>-->
+                <!--<span sec:authorize="hasAnyRole('ROLE_SM')">高管</span>-->
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')" class="active">
+
+                    <a href="index.html"><i class="fa fa-th-large"></i>
+                        <span class="nav-label">营销管理</span> <span
+                                class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
+                        </li>
+                        <li><a th:href="@{/opportunity/findByPId}">客户开发计划</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                    <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a th:href="@{/queryCustomerByUId}">客户信息管理</a>
+                        </li>
+                        <li><a th:href="@{/queryLossByUId}">客户流失管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+
+                    <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                            <a th:href="@{service/create.html}">服务创建</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_SA','ROLE_ROOT','ROLE_ADMIN')">
+                            <a th:href="@{service/queryState}">服务分配</a>
+                        </li>
+
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForHandle}">服务处理</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/queryForFeedBack}">服务反馈</a>
+                        </li>
+                        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_ROOT','ROLE_ADMIN')">
+
+                            <a th:href="@{service/ok}">服务归档</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+
+                    <a href="../index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="../classify.html">客户贡献分析</a>
+                        </li>
+                        <li><a href="../classify1.html">客户构成分析</a>
+                        </li>
+                        <li><a href="../classify2.html">客户服务分析</a>
+
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
+                            class="label label-warning pull-right">16</span></a>
+                    <ul class="nav nav-second-level">
+                        <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                            <a href="/basic/findAllDictionary">数据字典管理</a>
+                        </li>
+
+                        <li>
+                            <a href="/basic/findAllProduct">查询产品信息</a>
+                        </li>
+
+                        <li><a href="/basic/findAllStock">查询库存</a>
+
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN')">
+                    <a th:href="@{/permission/list}"><i class="fa fa-cogs"></i> <span
+                            class="nav-label">权限管理</span></a>
+                </li>
             </ul>
-          </div>
-          <div class="logo-element">
-            H+
-          </div>
+        </div>
+    </nav>
 
-        </li>
-        <li class="active">
-          <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">营销管理</span> <span
-                  class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-            <li><a th:href="@{/opportunity/findAll}">营销机会管理</a>
-            </li>
-
-            <li><a href="createplan.html">客户开发计划</a>
-
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="index.html#"><i class="fa fa fa-globe"></i> <span class="nav-label">客户管理</span><span
-                  class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-
-            <li><a href="../customer/customerinfo.html">客户信息管理</a>
-            </li>
-            <li><a href="../customer/customerlost.html">客户流失管理</a>
-
-
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">服务管理</span><span
-                  class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-
-            <li><a href="../service/create.html">服务创建</a>
-            </li>
-            <li><a href="../service/distribute.html">服务分配</a>
-            </li>
-            <li><a href="../service/handle.html">服务处理</a>
-            </li>
-            <li><a href="../service/feedback.html">服务反馈</a>
-            </li>
-            <li><a href="../service/ok.html">服务归档</a>
-
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
-                  class="fa arrow"></span></a>
-          <ul class="nav nav-second-level">
-
-            <li><a href="../../static/classify.html">客户贡献分析</a>
-            </li>
-            <li><a href="../../static/classify.html">客户构成分析</a>
-            </li>
-            <li><a href="../../static/classify.html">客户服务分析</a>
-            </li>
-            <li><a href="../../static/classify.html">客户流失分析</a>
-
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">基础数据</span><span
-                  class="label label-warning pull-right">16</span></a>
-          <ul class="nav nav-second-level">
-
-            <li><a href="../../static/dictionary.html">数据字典管理</a>
-            </li>
-            <li><a href="../../static/product.html">查询产品信息</a>
-            </li>
-            <li><a href="../basic/stock.html">查询库存</a>
-
-            </li>
-          </ul>
-        </li>
-        <li>
-
-          <a href="../permission/permission.html"><i class="fa fa-cogs"></i> <span
-                  class="nav-label">权限管理</span></a>
-
-        </li>
-
-      </ul>
-    </div>
-  </nav>
-
-  <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg dashbard-1">
     <div class="row border-bottom">
       <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -273,12 +287,12 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
                 <i class="fa fa-wrench"></i>
               </a>
-              <ul class="dropdown-menu dropdown-user">
-                <li><a href="form_basic.html#">选项1</a>
-                </li>
-                <li><a href="form_basic.html#">选项2</a>
-                </li>
-              </ul>
+              <!--<ul class="dropdown-menu dropdown-user">-->
+                <!--<li><a href="form_basic.html#">选项1</a>-->
+                <!--</li>-->
+                <!--<li><a href="form_basic.html#">选项2</a>-->
+                <!--</li>-->
+              <!--</ul>-->
               <a class="close-link">
                 <i class="fa fa-times"></i>
               </a>
@@ -290,7 +304,8 @@
                 <label class="col-sm-2 control-label">编号</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="num" class="form-control" value="11" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="num" class="form-control" th:value="${opportunity.id}" readonly>
                 </div>
               </div>
 
@@ -300,7 +315,8 @@
                 <label class="col-sm-2 control-label">机会来源</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="resource" class="form-control" value="333" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="resource" class="form-control" th:value="${opportunity.resource}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -312,8 +328,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="successPercent" class="form-control error" value="333"
-                         disabled="" required="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.opportunity"*/-->
+                  <input type="text" name="successPercent" class="form-control error" th:value="${opportunity.successPercent}"
+                         readonly  required="" aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -324,8 +341,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input id="username" name="username" class="form-control" value="222" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input id="username" name="username" class="form-control"  required="" th:value="${opportunity.username}"
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -336,8 +354,9 @@
                   概要
                 </label>
                 <div class="col-sm-10">
-                  <input type="text" name="summary" class="form-control error" value="555" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="summary" class="form-control error" th:value="${opportunity.summary}" required=""
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -346,7 +365,8 @@
                 <label class="col-sm-2 control-label">联系人</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="lName" class="form-control" value="666" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="lName" class="form-control" th:value="${opportunity.lName}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -355,7 +375,8 @@
                 <label class="col-sm-2 control-label">联系人电话</label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="lPhone" class="form-control" value="13243546" disabled="">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="lPhone" class="form-control" th:value="${opportunity.lPhone}" readonly>
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -367,10 +388,11 @@
                 </label>
 
                 <div class="col-sm-10">
+                                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
                                     <textarea id="cComment" cols="50" rows="4" name="cComment"
-                                              class="form-control error"
-                                              disabled="" required="" aria-required="true"
-                                              aria-invalid="true">666666</textarea>
+                                              class="form-control error" th:text="${opportunity.cComment}"
+                                              readonly required="" aria-required="true"
+                                              aria-invalid="true"></textarea>
 
                 </div>
               </div>
@@ -383,8 +405,9 @@
                 </label>
 
                 <div class="col-sm-10">
-                  <input type="text" name="sName" class="form-control error" value="7898" required=""
-                         disabled="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="sName" class="form-control error" th:value="${opportunity.sName}" required=""
+                         readonly aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
@@ -392,35 +415,19 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">创建时间</label>
                 <div class="col-sm-10">
-                  <input type="text" name="startDate" class="form-control error" id="shijian3"
-                         disabled="" required="" aria-required="true" aria-invalid="true">
+                    <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="startDate" class="form-control error" readonly th:value="${opportunity.startDate}" required="" aria-required="true" aria-invalid="true">
                 </div>
               </div>
               <div class="hr-line-dashed"></div>
 
               <div class="form-group">
-                <label class="col-lg-2 control-label">指派给</label>
-
-                <div class="col-lg-10">
-                  <div class="form-group">
-                    <div class="col-sm-10">
-                      <select class="form-control m-b" name="pUsername" disabled="">
-                        <option value="1">张三</option>
-                        <option value="2">李四</option>
-                        <option value="3">王五</option>
-                        <option value="4">赵六</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
                 <label class="col-lg-2 control-label">指派时间</label>
 
                 <div class="col-lg-10">
-                  <input type="text" name="pDate" disabled="" id="shijian2" class="form-control"
-                         value="">
+                  <!--/*@thymesVar id="opportunity" type="com.nuc.sw.crm.entity.Opportunity"*/-->
+                  <input type="text" name="pDate" readonly  class="form-control"
+                         th:value="${opportunity.pDate}">
                 </div>
               </div>
             </form>
@@ -451,9 +458,9 @@
                 <i class="fa fa-wrench"></i>
               </a>
               <ul class="dropdown-menu dropdown-user">
-                <li><a href="table_data_tables.html#">开发成功</a>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')"><a th:href="'../plan/success?oId='+${opportunity.id}">开发成功</a>
                 </li>
-                <li><a href="table_data_tables.html#">终止开发</a>
+                <li sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')"><a th:href="'../plan/fail?oId='+${opportunity.id}">终止开发</a>
                 </li>
               </ul>
               <a class="close-link">
@@ -462,7 +469,7 @@
             </div>
           </div>
           <div class="ibox-content">
-            <table class="table table-hover ">
+            <table class="table table-hover " id="editable">
               <thead>
                 <tr>
                   <th>日期</th>
@@ -477,9 +484,9 @@
                     <td th:text="${plan.eDate}"></td>
                     <td th:text="${plan.ePlan}"></td>
                     <td th:text="${plan.eEffect}"></td>
-                    <td>
+                    <td sec:authorize="hasAnyRole('ROLE_ROOT','ROLE_ADMIN','ROLE_AM')">
                       <button type="button" class="btn btn-primary" data-toggle="modal"
-                              data-target="#myModal2" th:onclick="'edit(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\');'">编辑
+                              data-target="#myModal2" th:onclick="'edit(\''+${plan.eId}+'\',\''+${plan.eDate}+'\',\''+${plan.ePlan}+'\',\''+${opportunity.id}+'\');'">编辑
                       </button>
                     </td>
                     <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
@@ -535,14 +542,7 @@
                     </div>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>日期</th>
-                  <th>计划项</th>
-                  <th>执行效果</th>
-                  <td></td>
-                </tr>
-              </tfoot>
+
             </table>
             <div class="">
               <div class="text-center">
@@ -563,7 +563,7 @@
                     </div>
                     <div class="modal-body">
                       <form method="post" class="form-horizontal  m-t" id="signupForm"
-                            action="/plan/add">
+                            th:action="'/plan/add?o_id='+${opportunity.id}">
                         <div class="form-group">
                           <label class="col-sm-2 control-label">
                             <span class="red" style="color: red"> *</span>
@@ -639,21 +639,21 @@
         var oTable = $('#editable').dataTable();
 
         /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        });
+        // oTable.$('td').editable('../example_ajax.php', {
+        //     "callback": function (sValue, y) {
+        //         var aPos = oTable.fnGetPosition(this);
+        //         oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+        //     },
+        //     "submitdata": function (value, settings) {
+        //         return {
+        //             "row_id": this.parentNode.getAttribute('id'),
+        //             "column": oTable.fnGetPosition(this)[2]
+        //         };
+        //     },
+        //
+        //     "width": "90%",
+        //     "height": "100%"
+        // });
 
 
     });
@@ -708,15 +708,16 @@
 </script>
 
 <script>
-    function edit(id,date,plan,effect) {
-        $("#eDate1").val(date);
-        $("#eDate1").attr("value",date);
-        $("#ePlan").val(plan);
-        $("#ePlan").attr("value",plan);
-        $("#eEffect").val(effect);
-        $("#eEffect").attr("value",effect);
-        $("#eId").val(id);
-        $("#eId").attr("value",id);
+    function edit(id,date,plan,oId) {
+        // $("#eDate1").val(date);
+        // $("#eDate1").attr("value",date);
+        // $("#ePlan").val(plan);
+        // $("#ePlan").attr("value",plan);
+        // $("#eEffect").val(effect);
+        // $("#eEffect").attr("value",effect);
+        // $("#eId").val(id);
+        // $("#eId").attr("value",id);
+        $("#signupForm2").attr("action","/plan/modify?eId="+id+"&eDate="+date+"&ePlan="+plan+"&oId="+oId);
     }
 </script>
 

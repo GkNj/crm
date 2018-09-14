@@ -20,7 +20,7 @@ public class Opportunity {
 
     private String resource;
     //机会状态
-
+    @Column(columnDefinition = "未开发")//开发中  开发失败  开发成功
     private String state;
     //客户id
 
@@ -63,10 +63,11 @@ public class Opportunity {
     //指派人id
 
 //    @Column(nullable = false)
-    private String pId;
+    private int pId;
     //指派时间
 
     private String pDate;
+
 
     public String getpDate() {
         return pDate;
@@ -191,14 +192,15 @@ public class Opportunity {
         this.pUsername = pUsername;
     }
 
-    public String getpId() {
+
+
+    public int getpId() {
         return pId;
     }
 
-    public void setpId(String pId) {
+    public void setpId(int pId) {
         this.pId = pId;
     }
-
 
     @Override
     public String toString() {
