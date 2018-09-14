@@ -14,9 +14,6 @@ public class Dictionary {
     private String typeKey;
     @Column(name = "type_value")
     private String typeValue;
-
-    @Column(name = "index_num")
-    private int indexNub;
     @Column(name = "p_id")
     private int parentID;
     @Column(name = "editable")
@@ -47,13 +44,6 @@ public class Dictionary {
     }
 
 
-    public int getIndexNub() {
-        return indexNub;
-    }
-
-    public void setIndexNub(int indexNub) {
-        this.indexNub = indexNub;
-    }
 
 //    public int getIndexNub() {
 //        return indexNub;
