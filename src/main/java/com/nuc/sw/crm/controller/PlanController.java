@@ -82,6 +82,7 @@ public class PlanController {
 
         Customer customer = new Customer();
         customer.setcName(o.getUsername());
+        customer.setcClass("普通客户");
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();

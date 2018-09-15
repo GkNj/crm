@@ -116,7 +116,7 @@
           </ul>
         </li>
 
-        <li sec:authorize="hasAnyRole('ROLE_AM','ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
+        <li sec:authorize="hasAnyRole('ROLE_SM','ROLE_ROOT','ROLE_ADMIN')">
 
           <a href="../index.html#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">统计报表</span><span
                   class="fa arrow"></span></a>
@@ -252,7 +252,7 @@
 
 
           <li>
-            <a href="login.html">
+            <a th:href="@{/logout}">
               <i class="fa fa-sign-out"></i> 退出
             </a>
           </li>
